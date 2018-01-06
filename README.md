@@ -1,5 +1,4 @@
 # Eth-Runner
-============
 
 Runs ethminer on all available Nvidia and AMD GPUs. This was tested on a system containing the following specs:
 - ASUS B250 Mining Expert
