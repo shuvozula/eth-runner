@@ -1,17 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-ETHMINER_PATH=/home/shuvo/.ethminer/bin
-ACCOUNT_PATH=../.account
+my_dir="$(dirname $0)"
 
-if [ ! -d $ETHMINER_PATH ]; then
-  echo "No ethminer found at ${ETHMINER_PATH}!"
+# If running using start.sh
+if [ ! -f $my_dir/../init.sh ]; then
+  echo "init.sh not found!!!"
   exit 1
+else
+  . $my_dir/../init.sh
 fi
 
-if [ ! -f $ACCOUNT_PATH ]; then
-  echo "No .account file found!! Create one with your <account-hash>.<account-nickname>"
-  exit 1
-fi
 
 ps -eaf | grep ethminer | grep 'cuda-parallel-hash' | grep -v -e 'grep' > /dev/null
 if [ $? -eq 0 ]; then
@@ -22,8 +20,6 @@ else
   # For fetching list of Nvidia GPUs from headless Ubuntu server
   GPUS=$(sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 nvidia-settings -c :0 -q gpus)
   GPUS=$(echo $GPUS | grep -o "\[[0-9]*\]" | grep -o "[0-9]*" | tr '\n' ' ')
-
-  ACCOUNT=$(cat ../.account)
 
   # Use the Cuda drivers for mining
   nohup $ETHMINER_PATH/ethminer \

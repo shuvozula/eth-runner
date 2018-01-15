@@ -21,10 +21,10 @@ fi
 
 # Check whether specified time today or tomorrow
 DESIRED=$((`date +%s -d "$1"`))
-#NOW=$((`date +%s`))
-#if [ $DESIRED -lt $NOW ]; then
-#    DESIRED=$((`date +%s -d "$1"` + 24*60*60))
-#fi
+NOW=$((`date +%s`))
+if [ $DESIRED -lt $NOW ]; then
+   DESIRED=$((`date +%s -d "$1"` + 24*60*60))
+fi
 
 # Kill rtcwake if already running
 #sudo killall rtcwake
@@ -53,4 +53,4 @@ sleep 2
 
 # and a fresh console
 clear
-echo "Good evening BEEOOOTTCCHHHH!"
+echo "Lets make some monnaaayyy!!!"

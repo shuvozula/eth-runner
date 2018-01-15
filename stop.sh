@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Kill the miners by their PIDs
 echo "Killing all Ethminers....."

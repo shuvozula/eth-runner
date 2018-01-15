@@ -1,32 +1,28 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-ETHMINER_PATH=/home/shuvo/.ethminer/bin
-ACCOUNT_PATH=../.account
-OPENCL_PLATFORM_ID=0
+AMD_OPENCL_PLATFORM_ID=0
 
-if [ ! -d $ETHMINER_PATH ]; then
-  echo "No ethminer found at ${ETHMINER_PATH}!"
+my_dir="$(dirname $0)"
+
+# If running using start.sh
+if [ ! -f $my_dir/../init.sh ]; then
+  echo "init.sh not found!!!"
   exit 1
+else
+  . $my_dir/../init.sh
 fi
 
-if [ ! -f $ACCOUNT_PATH ]; then
-  echo "No .account file found!! Create one with your <account-hash>.<account-nickname>"
-  exit 1
-fi
 
 ps -eaf | grep ethminer | grep 'opencl-platform 0' | grep -v -e 'grep' > /dev/null
-
 if [ $? -eq 0 ]; then
   echo "Ethminer-ATI is already running."
 else
   echo "Launching Ethminer-ATI...."
 
-  ACCOUNT=$(cat ../.account)
-
   nohup $ETHMINER_PATH/ethminer \
     --farm-recheck 15000 \
     -SC 2 \
-    --opencl-platform $OPENCL_PLATFORM_ID \
+    --opencl-platform $AMD_OPENCL_PLATFORM_ID \
     -RH \
     -G \
     -S us2.ethermine.org:4444 \
