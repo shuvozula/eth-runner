@@ -2,6 +2,8 @@
 
 AMD_OPENCL_PLATFORM_ID=0
 
+# ----------------------- Do not edit below this line --------------------------
+
 my_dir="$(dirname $0)"
 
 # If running using start.sh

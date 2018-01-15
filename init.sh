@@ -1,8 +1,11 @@
 #!/bin/bash
 
-my_dir="$(dirname $0)"
+# Provide the absolute path to the ethminer bin/ directory, eg: /etc/ethminer/bin/
+ETHMINER_PATH=
 
-ETHMINER_PATH=/home/shuvo/.ethminer/bin
+# ----------------------- Do not edit below this line --------------------------
+
+my_dir="$(dirname $0)"
 ACCOUNT_PATH="$my_dir/../.account"
 
 if [ ! -d $ETHMINER_PATH ]; then
