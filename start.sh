@@ -5,11 +5,14 @@ my_dir="$(dirname $0)"
 echo "Enabling Nvidia cards...."
 sudo sh $my_dir/nvidia/enable_nvidia.sh
 
+sleep 2
+
 echo "Tuning Nvidia cards...."
 sudo sh $my_dir/nvidia/tune_nvidia.sh
 
-# sleep for 2 seconds to give time to the Nvidia drivers to calibrate
-sleep 5
+# sleep for a bit to give time to the Nvidia drivers to calibrate
+echo "Pausing...."
+sleep 2
 
 echo "Starting the Ethminers...."
 sudo sh $my_dir/amd/run_amd.sh
