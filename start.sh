@@ -2,6 +2,9 @@
 
 my_dir="$(dirname $0)"
 
+start_pause=30
+echo "Sleeping for $start_pause seconds before starting mining...."
+
 echo "Enabling Nvidia cards...."
 sudo sh $my_dir/nvidia/enable_nvidia.sh
 
