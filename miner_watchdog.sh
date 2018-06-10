@@ -20,7 +20,7 @@ do
 			sh $my_dir/stop.sh
 			sleep 20;
 		
-			SLEEP_FOR=15 # seconds
+			SLEEP_FOR=15 # minutes
 			SLEEP_FOR_SECS=$(($SLEEP_FOR*60))
 			WAKEUP_IN_SECS=$(date +%H:%M -d "+$SLEEP_FOR_SECS seconds")
 			echo "Going to sleep for $SLEEP_FOR minutes..., waking up at $WAKEUP_IN_SECS."
