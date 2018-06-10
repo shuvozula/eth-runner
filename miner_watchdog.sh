@@ -22,9 +22,9 @@ do
 		
 			SLEEP_FOR=15 # minutes
 			SLEEP_FOR_SECS=$(($SLEEP_FOR*60))
-			WAKEUP_IN_SECS=$(date +%H:%M -d "+$SLEEP_FOR_SECS seconds")
-			echo "Going to sleep for $SLEEP_FOR minutes..., waking up at $WAKEUP_IN_SECS."
-			sh $my_dir/switchoff_until.sh $WAKEUP_IN_SECS
+			WAKEUP_IN=$(date +%H:%M -d "+$SLEEP_FOR_SECS seconds")
+			echo "Going to sleep for $SLEEP_FOR minutes..., waking up at $WAKEUP_IN."
+			sh $my_dir/switchoff_until.sh $WAKEUP_IN
 			exit 0
 		fi
 		sleep 10;
