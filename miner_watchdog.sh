@@ -13,9 +13,6 @@ while :
 do
 	for device_wattage in $watchCmd
 	do
-		# currentPowerUsage=$(eval ${watchCmd})
-		# echo "Current power usage is $currentPowerUsage"
-		# if [ "$currentPowerUsage" -lt "$limit" ]
 		if [ "$device_wattage" -lt "$limit" ]
 		then
 			echo "`date`: Current power usage is $currentPowerUsage < $limit killing miner" | tee -a watchdogLog.log
