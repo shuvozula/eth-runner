@@ -11,7 +11,7 @@ sleep $startIn;
 echo "Watchdog started!"
 while :
 do
-    for device_wattage in $watchCmd
+    for device_wattage in $(eval ${watchCmd})
     do
         if [ "$device_wattage" -lt "$limit" ]
         then
