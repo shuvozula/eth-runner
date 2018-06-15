@@ -20,11 +20,12 @@ do
             sh $my_dir/stop.sh
             sleep 20;
         
-            SLEEP_FOR=15 # minutes
+            SLEEP_FOR=5 # minutes
             SLEEP_FOR_SECS=$(($SLEEP_FOR*60))
             WAKEUP_IN=$(date +%H:%M -d "+$SLEEP_FOR_SECS seconds")
             echo "Going to sleep for $SLEEP_FOR minutes..., waking up at $WAKEUP_IN."
             sh $my_dir/switchoff_until.sh $WAKEUP_IN
+            sleep 5
             exit 0
         fi
         sleep 10;
