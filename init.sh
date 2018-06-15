@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Provide the absolute path to the ethminer bin/ directory, eg: /etc/ethminer/bin/
-ETHMINER_PATH=/home/shuvo/.ethminer/bin/
+ETHMINER_PATH=
 
 # ----------------------- Do not edit below this line --------------------------
 
