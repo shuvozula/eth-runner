@@ -24,4 +24,7 @@ sudo sh $my_dir/nvidia/run_nvidia.sh
 
 # start watchdog
 echo "Starting watchdog...."
-sudo sh $my_dir/miner_watchdog.sh & echo $! /var/log/miner_watchdog.pid
+sudo sh $my_dir/miner_watchdog.sh &
+sleep 2
+watchdogpid=$(ps -eaf | grep "[m]iner_watchdog" | awk {'print$2'})
+echo $watchdogpid > /var/log/miner_watchdog.pid
