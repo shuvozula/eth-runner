@@ -21,3 +21,7 @@ echo "Starting the Ethminers...."
 sudo sh $my_dir/amd/run_amd.sh
 sleep 30
 sudo sh $my_dir/nvidia/run_nvidia.sh
+
+# start watchdog
+echo "Starting watchdog...."
+sh $my_dir/miner_watchdog.sh & echo $! /var/log/miner_watchdog.pid
