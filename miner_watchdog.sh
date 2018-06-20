@@ -15,9 +15,9 @@ do
     do
         if [ "$device_wattage" -lt "$limit" ]
         then
-            echo "`date`: Current power usage is $currentPowerUsage < $limit killing miner" | tee -a watchdogLog.log
+            echo "`date`: Current power usage is $currentPowerUsage < $limit killing miner"
         
-            sh $my_dir/stop.sh
+            sh $my_dir/stop_miners.sh
             sleep 20;
         
             SLEEP_FOR=5 # minutes
