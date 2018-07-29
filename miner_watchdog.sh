@@ -2,12 +2,13 @@
 
 my_dir="$(dirname $0)"
 
-powerLimit=55  # watts
-watchPower="/usr/bin/nvidia-smi -q -d POWER | grep \"Power Draw\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
+# Minimum power consumed by Nvidia device (Watts), below which something suspicious is happening and miners need to be rebooted
+powerLimit=55
 
+# Maximum heat limit per Nvidia device allowed
 heatLimit=78  # Farenheit
-watchHeat="/usr/bin/nvidia-smi -q -d TEMPERATURE | grep \"GPU Current Temp\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
 
+# Watchdog start-delay timer in seconds
 startIn=120
 
 
@@ -25,32 +26,36 @@ stop_miners() {
   exit 0
 }
 
+check_wattage() {
+  watchPower="/usr/bin/nvidia-smi -q -d POWER | grep \"Power Draw\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
+  for device_wattage in $(eval ${watchPower}); do
+    if [ "$device_wattage" -lt "$powerLimit" ]; then
+      echo "`date`: Current power usage is $device_wattage < $powerLimit,so killing miners for 5 mins..."
+      stop_miners 5
+    fi
+  done
+}
 
-echo "Watchdog: Starting in $startIn seconds..."
-sleep $startIn;
-echo "Watchdog started!"
+check_heat() {
+  watchHeat="/usr/bin/nvidia-smi -q -d TEMPERATURE | grep \"GPU Current Temp\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
+  for device_heat in $(eval ${watchHeat}); do
+    if [ "$device_heat" -gt "$heatLimit" ]; then
+      echo "`date`: Current heat from GPUs is $device_heat > $heatLimit, so killing miners for 20 mins..."
+      stop_miners 20
+    fi
+  done
+}
 
-while :
-do
-    for device_wattage in $(eval ${watchPower})
-    do
-        if [ "$device_wattage" -lt "$powerLimit" ]
-        then
-            echo "`date`: Current power usage is $device_wattage < $powerLimit,so killing miners for 5 mins..."
-            
-	    stop_miners 5
-        fi
-    done
-    
-    for device_heat in $(eval ${watchHeat})
-    do
-        if [ "$device_heat" -gt "$heatLimit" ]
-        then
-            echo "`date`: Current heat from GPUs is $device_heat > $heatLimit, so killing miners for 20 mins..."
-       
-            stop_miners 20
-        fi
-    done
+start_watchdog() {
+  echo "Watchdog: Starting in $startIn seconds..."
+  sleep $startIn;
+  echo "Watchdog started!"
+
+  # repeatedly check for wattage consumption and heat production
+  while :
+  do
+    check_wattage
+    check_heat
     sleep 10
-done
-
+  done
+}
