@@ -28,3 +28,20 @@ sudo sh $my_dir/miner_watchdog.sh &
 sleep 2
 watchdogpid=$(ps -eaf | grep "[m]iner_watchdog" | awk {'print$2'})
 echo $watchdogpid > /var/log/miner_watchdog.pid
+
+for arg in "$@"; do
+	case arg in
+		'--start-clean') 
+				echo "Cleaning up old containers..."
+				docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+			  ;;
+
+  	'--metrics' ) 
+				echo "Starting metrics services"
+			  if [ -z $(which docker) ]; then
+			  	echo "No Docker installed!"
+			  fi
+				metrics/start_metrics.sh
+				;;
+	esac
+done
