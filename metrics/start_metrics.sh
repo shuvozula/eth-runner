@@ -18,12 +18,12 @@ else
     -p 8125:8125/udp \
     samuelebistoletti/docker-statsd-influxdb-grafana:latest
 
-  echo "Creating DB: $METRICS_DB"
-  curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE $METRICS_DB"
-fi
+  echo "Sleeping for 10 secs for InfluxDB to startup..."
+  sleep 10
 
-echo "Sleeping for 10 secs for InfluxDB to startup..."
-sleep 10
+  echo "Creating DB: $METRICS_DB"
+  curl -i -XPOST http://localhost:8086/query --data-urlencode "q=CREATE DATABASE ${METRICS_DB}"
+fi
 
 upload_wattage_metrics() {
   watchPower="/usr/bin/nvidia-smi -q -d POWER | grep \"Power Draw\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
