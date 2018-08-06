@@ -30,8 +30,8 @@ upload_wattage_metrics() {
   i=0
   host="http://localhost:8086/write?db=${METRICS_DB}"
   for device_wattage in $(eval ${watchPower}); do
-    data_binary="gpu${i}heat,host=minar,gpu=${i} power=${device_wattage}"
-    echo $data_binary | curl -i -XPOST $host --data-binary @-
+    data_binary="gpu${i}power,host=minar,gpu=${i} power=${device_wattage}"
+    echo $data_binary | curl -s -i -XPOST $host --data-binary @-
     ((i++))
   done
 }
@@ -42,7 +42,7 @@ upload_heat_metrics() {
   host="http://localhost:8086/write?db=${METRICS_DB}"
   for device_heatage in $(eval ${watchHeat}); do
     data_binary="gpu${i}heat,host=minar,gpu=${i} heat=${device_heatage}"
-    echo $data_binary | curl -i -XPOST $host --data-binary @-
+    echo $data_binary | curl -s -i -XPOST $host --data-binary @-
     ((i++))
   done
 }
