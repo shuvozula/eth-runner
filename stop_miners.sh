@@ -4,4 +4,3 @@
 echo "Killing all Ethminers....."
 sudo kill -9 $(cat /var/log/ati_miner.pid)
 sudo kill -9 $(cat /var/log/nvidia_miner.pid)
-
