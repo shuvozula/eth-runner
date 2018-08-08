@@ -31,4 +31,3 @@ else
   echo "Applying overclock settings...."
   sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 nvidia-settings ${OVERCLOCK_ARGS}
 fi
-

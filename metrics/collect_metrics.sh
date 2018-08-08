@@ -1,5 +1,6 @@
 #!/bin/bash
 
+PAUSE=5  # seconds
 METRICS_DB=ethmetrics
 HOST="http://localhost:8086/write?db=${METRICS_DB}"
 GPUS=$(sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 nvidia-settings -c :0 -q gpus)
@@ -37,11 +38,11 @@ start_collecting_metrics() {
   echo "Starting data collection..."
   while :
   do
-    date=$(date +%s%N)  # nanoseconds since epoch
-    upload_wattage_metrics $date
-    upload_heat_metrics $date
-    upload_fan_metrics $date
-    sleep 1
+    nanoseconds=$(date +%s%N)  # nanoseconds since epoch
+    upload_wattage_metrics $nanoseconds
+    upload_heat_metrics $nanoseconds
+    upload_fan_metrics $nanoseconds
+    sleep $PAUSE
   done
 }
 
