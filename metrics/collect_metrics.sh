@@ -25,8 +25,8 @@ upload_heat_metrics() {
 }
 
 upload_fan_metrics() {
-  watchFanCmd="/usr/bin/nvidia-smi -i ${gpu_index} -q | grep \"Fan Speed\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
   for gpu_index in $(echo $GPUS | grep -o "\[[0-9]*\]" | grep -o "[0-9]*"); do
+    watchFanCmd="/usr/bin/nvidia-smi -i ${gpu_index} -q | grep \"Fan Speed\" | sed 's/[^0-9,.]*//g' | cut -d . -f 1"
     fanData=$(eval ${watchFanCmd})
     data_binary="gpu${gpu_index}fanspeed,host=minar,gpu=${gpu_index} fanspeed=${fanData} $1"
     echo $data_binary | curl -s -i -XPOST $HOST --data-binary @- 2>&1 >/dev/null
