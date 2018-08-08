@@ -47,6 +47,7 @@ start_collecting_metrics() {
 }
 
 # record the PID
+
 sudo echo $$ > /var/log/metrics_collection.pid
 
 # start the madness

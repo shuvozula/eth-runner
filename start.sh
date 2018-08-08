@@ -43,7 +43,7 @@ for arg in "$@"; do
           exit 1
         fi
         sudo sh metrics/start_metrics_server.sh
-        sudo sh metrics/collect_metrics.sh
+        sudo sh metrics/collect_metrics.sh &
         ;;
   esac
 done
