@@ -1,5 +1,7 @@
 #!/bin/bash
 
+my_dir="$(dirname $0)"
+
 PAUSE=5  # seconds
 METRICS_DB=ethmetrics
 HOST="http://localhost:8086/write?db=${METRICS_DB}"
@@ -11,7 +13,7 @@ upload_wattage_metrics() {
   for device_wattage in $(eval ${watchPower}); do
     data_binary="gpu${i}power,host=minar,gpu=${i} power=${device_wattage} $1"
     echo $data_binary | curl -s -i -XPOST $HOST --data-binary @- 2>&1 >/dev/null
-    ((i++))
+    i=$((i + 1))
   done
 }
 
@@ -21,7 +23,7 @@ upload_heat_metrics() {
   for device_heatage in $(eval ${watchHeat}); do
     data_binary="gpu${i}heat,host=minar,gpu=${i} heat=${device_heatage} $1"
     echo $data_binary | curl -s -i -XPOST $HOST --data-binary @- 2>&1 >/dev/null
-    ((i++))
+    i=$((i + 1))
   done
 }
 
