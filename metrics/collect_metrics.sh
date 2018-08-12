@@ -2,6 +2,9 @@
 
 my_dir="$(dirname $0)"
 
+
+# Watchdog start-delay timer in seconds
+START_IN=180
 PAUSE=5  # seconds
 METRICS_DB=ethmetrics
 HOST="http://localhost:8086/write?db=${METRICS_DB}"
@@ -37,6 +40,8 @@ upload_fan_metrics() {
 }
 
 start_collecting_metrics() {
+  echo "Data-Collector: Starting in $START_IN seconds..."
+  sleep $START_IN;
   echo "Starting data collection..."
   while :
   do
