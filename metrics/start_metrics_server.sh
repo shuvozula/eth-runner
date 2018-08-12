@@ -3,7 +3,8 @@
 METRICS_SERVER_NAME=eth-metrics-influx
 METRICS_DB=ethmetrics
 
-if [[ $(docker ps -a | grep $METRICS_SERVER_NAME) ]]; then
+if [ "$(docker ps -a | grep $METRICS_SERVER_NAME)" ]; then
+  echo "Starting container...."
   docker start $METRICS_SERVER_NAME
 else
   echo "Creating container...."
