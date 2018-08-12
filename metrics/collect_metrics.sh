@@ -41,7 +41,7 @@ start_collecting_metrics() {
     upload_wattage_metrics $date
     upload_heat_metrics $date
     upload_fan_metrics $date
-    sleep 1
+    sleep 5
   done
 }
 

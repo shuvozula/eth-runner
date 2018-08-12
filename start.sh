@@ -31,7 +31,7 @@ echo $watchdogpid > /var/log/miner_watchdog.pid
 
 for arg in "$@"; do
 	case "$arg" in
-		'--start-clean') 
+    '--start-clean') 
         echo "Cleaning up old containers..."
         docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
         ;;
