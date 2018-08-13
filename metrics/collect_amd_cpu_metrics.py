@@ -5,10 +5,10 @@ import sensors
 
 
 class LmSensorsMetrics(object):
-"""
-Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
-AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
-"""
+  """
+  Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
+  AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
+  """
   __METRICS_DB = 'ethmetrics'
   _influxdb_client
 
@@ -37,9 +37,9 @@ AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
         sensors.cleanup()
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
-  """
-  Collects AMD GPU metrics that are available via lm-sensors, such as heat and fan rpm.
-  """  
+    """
+    Collects AMD GPU metrics that are available via lm-sensors, such as heat and fan rpm.
+    """  
     json_body = []
     for feature in chip:
       data = {
