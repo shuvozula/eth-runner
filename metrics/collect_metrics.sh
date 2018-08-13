@@ -1,8 +1,5 @@
 #!/bin/bash
 
-my_dir="$(dirname $0)"
-
-
 # Watchdog start-delay timer in seconds
 START_IN=180
 PAUSE=5  # seconds
