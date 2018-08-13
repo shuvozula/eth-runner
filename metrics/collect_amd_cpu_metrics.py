@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import datetime
 from influxdb import InfluxDBClient
 import sensors
 
@@ -10,14 +11,13 @@ class LmSensorsMetrics(object):
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
   __METRICS_DB = 'ethmetrics'
-  _influxdb_client
+  _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', __METRICS_DB)
 
   def __init__(self):
     """
     Initilialize PySensors(lm-sensors) and InfluxDB clent
     """
     sensors.init()
-    _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', __METRICS_DB)
 
   def start_collection(self):
     """
@@ -26,15 +26,12 @@ class LmSensorsMetrics(object):
     print "Collecting AMD and CPU metrics...."
     while True:
       amdgpu_count = 0
-      try:
-        for chip in sensors.iter_detected_chips():
-          if chip.prefix == 'amdgpu':
-            self._collect_amd_gpu_metrics(chip, amdgpu_count)
-            amdgpu_count += 1
-          elif chip.prefix == 'coretemp':
-            self._collect_cpu_metrics(chip)
-      finally:
-        sensors.cleanup()
+      for chip in sensors.iter_detected_chips():
+        if chip.prefix == 'amdgpu':
+          self._collect_amd_gpu_metrics(chip, amdgpu_count)
+          amdgpu_count += 1
+        elif chip.prefix == 'coretemp':
+          self._collect_cpu_metrics(chip)
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
     """
@@ -43,39 +40,43 @@ class LmSensorsMetrics(object):
     json_body = []
     for feature in chip:
       data = {
-        "measurement": "amd_{%d}_{%s}".format(amdgpu_count, feature.label.replace(' ', '_')),
+        "measurement": "amd_%s_%s" % (amdgpu_count, feature.label.replace(' ', '_')),
         "tags": {
           "host": "minar",
           "gpu": amdgpu_count
         },
-        "time": "{:%Y-%m-%dT%H:%M:%S}Z".format(datetime.datetime.now())
+        # "time": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "fields": {
-          "value": feature.get_value()
+          "gpu": feature.get_value()
         }
       }
       json_body.append(data)
-    _influxdb_client.write_points(json_body)
+    self._influxdb_client.write_points(json_body)
 
   def _collect_cpu_metrics(self, chip):
     """
     Collects CPU heat from each core, as available from lm-sensors
     """
+    json_body = []
     for feature in chip:
       if feature.label.startswith('Core'):
         data = {
-          "measurement": "cpu_{%s}".format(feature.label.replace(' ', '_')),
+          "measurement": "cpu_%s" % (feature.label.replace(' ', '_')),
           "tags": {
             "host": "minar",
-            "cpu": amdgpu_count
+            "cpu": feature.label.replace(' ', '_')
           },
-          "time": "{:%Y-%m-%dT%H:%M:%S}Z".format(datetime.datetime.now())
+          # "time": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
           "fields": {
-            "value": feature.get_value()
+            "cpu": feature.get_value()
           }
         }
         json_body.append(data)
-    _influxdb_client.write_points(json_body)
+    self._influxdb_client.write_points(json_body)
 
 
 if __name__ == "__main__":
-  LmSensorsMetrics().start_collection()
+  try:
+    LmSensorsMetrics().start_collection()
+  finally:
+    sensors.cleanup()
