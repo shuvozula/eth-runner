@@ -26,7 +26,7 @@
       "datasource": "influxdb",
       "fill": 0,
       "gridPos": {
-        "h": 11,
+        "h": 8,
         "w": 8,
         "x": 0,
         "y": 0
@@ -53,7 +53,7 @@
         {}
       ],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
@@ -212,7 +212,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "All Power",
+      "title": "NVIDIA All Power (8)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -228,6 +228,7 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:2058",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -236,6 +237,7 @@
           "show": true
         },
         {
+          "$$hashKey": "object:2059",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -257,7 +259,7 @@
       "datasource": "influxdb",
       "fill": 0,
       "gridPos": {
-        "h": 11,
+        "h": 8,
         "w": 8,
         "x": 8,
         "y": 0
@@ -286,6 +288,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:2292",
           "groupBy": [],
           "measurement": "gpu0heat",
           "orderByTime": "ASC",
@@ -305,6 +308,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2293",
           "groupBy": [],
           "measurement": "gpu1heat",
           "orderByTime": "ASC",
@@ -324,6 +328,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2294",
           "groupBy": [],
           "measurement": "gpu2heat",
           "orderByTime": "ASC",
@@ -343,6 +348,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2295",
           "groupBy": [],
           "measurement": "gpu3heat",
           "orderByTime": "ASC",
@@ -362,6 +368,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2296",
           "groupBy": [],
           "measurement": "gpu4heat",
           "orderByTime": "ASC",
@@ -381,6 +388,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2297",
           "groupBy": [],
           "measurement": "gpu5heat",
           "orderByTime": "ASC",
@@ -400,6 +408,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2298",
           "groupBy": [],
           "measurement": "gpu6heat",
           "orderByTime": "ASC",
@@ -419,6 +428,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2299",
           "groupBy": [],
           "measurement": "gpu7heat",
           "orderByTime": "ASC",
@@ -436,15 +446,95 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "$$hashKey": "object:2348",
+          "groupBy": [],
+          "measurement": "amd_0_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:2373",
+          "groupBy": [],
+          "measurement": "amd_1_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:2398",
+          "groupBy": [],
+          "measurement": "amd_2_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:2423",
+          "groupBy": [],
+          "measurement": "amd_3_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "All Heat",
+      "title": "All Heat (NVIDIA + AMD = 12)",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -486,7 +576,7 @@
       "datasource": "influxdb",
       "fill": 0,
       "gridPos": {
-        "h": 11,
+        "h": 8,
         "w": 8,
         "x": 16,
         "y": 0
@@ -515,6 +605,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:2187",
           "groupBy": [],
           "measurement": "gpu0fanspeed",
           "orderByTime": "ASC",
@@ -534,6 +625,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2188",
           "groupBy": [],
           "measurement": "gpu1fanspeed",
           "orderByTime": "ASC",
@@ -553,6 +645,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2189",
           "groupBy": [],
           "measurement": "gpu2fanspeed",
           "orderByTime": "ASC",
@@ -572,6 +665,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2190",
           "groupBy": [],
           "measurement": "gpu3fanspeed",
           "orderByTime": "ASC",
@@ -591,6 +685,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2191",
           "groupBy": [],
           "measurement": "gpu4fanspeed",
           "orderByTime": "ASC",
@@ -610,6 +705,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2192",
           "groupBy": [],
           "measurement": "gpu5fanspeed",
           "orderByTime": "ASC",
@@ -629,6 +725,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2193",
           "groupBy": [],
           "measurement": "gpu6fanspeed",
           "orderByTime": "ASC",
@@ -648,6 +745,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2194",
           "groupBy": [],
           "measurement": "gpu7fanspeed",
           "orderByTime": "ASC",
@@ -670,7 +768,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "All Fans",
+      "title": "All NVIDIA Fans (8) (unit=%)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -715,10 +813,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 6,
         "x": 0,
-        "y": 11
+        "y": 8
       },
       "id": 2,
       "legend": {
@@ -744,6 +842,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:2485",
           "groupBy": [],
           "measurement": "gpu0power",
           "orderByTime": "ASC",
@@ -763,6 +862,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2486",
           "groupBy": [],
           "measurement": "gpu0heat",
           "orderByTime": "ASC",
@@ -782,6 +882,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2487",
           "groupBy": [],
           "measurement": "gpu0fanspeed",
           "orderByTime": "ASC",
@@ -804,7 +905,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 0",
+      "title": "NVIDIA GPU 0",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -820,7 +921,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:9126",
           "decimals": null,
           "format": "short",
           "label": "",
@@ -830,7 +930,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:9127",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -852,10 +951,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 6,
         "x": 6,
-        "y": 11
+        "y": 8
       },
       "id": 3,
       "legend": {
@@ -881,7 +980,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:9180",
           "groupBy": [],
           "measurement": "gpu1power",
           "orderByTime": "ASC",
@@ -901,7 +999,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9181",
           "groupBy": [],
           "measurement": "gpu1heat",
           "orderByTime": "ASC",
@@ -921,7 +1018,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9182",
           "groupBy": [],
           "measurement": "gpu1fanspeed",
           "orderByTime": "ASC",
@@ -944,7 +1040,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 1",
+      "title": "NVIDIA GPU 1",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -960,7 +1056,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:9258",
           "decimals": null,
           "format": "short",
           "label": null,
@@ -970,7 +1065,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:9259",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -992,10 +1086,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 6,
         "x": 12,
-        "y": 11
+        "y": 8
       },
       "id": 4,
       "legend": {
@@ -1021,7 +1115,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:9312",
+          "$$hashKey": "object:2634",
           "groupBy": [],
           "measurement": "gpu2power",
           "orderByTime": "ASC",
@@ -1041,7 +1135,7 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9313",
+          "$$hashKey": "object:2635",
           "groupBy": [],
           "measurement": "gpu2heat",
           "orderByTime": "ASC",
@@ -1061,7 +1155,7 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9314",
+          "$$hashKey": "object:2636",
           "groupBy": [],
           "measurement": "gpu2fanspeed",
           "orderByTime": "ASC",
@@ -1084,7 +1178,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 2",
+      "title": "NVIDIA GPU 2",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1100,7 +1194,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:9390",
           "decimals": null,
           "format": "short",
           "label": "",
@@ -1110,7 +1203,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:9391",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1132,10 +1224,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 9,
+        "h": 7,
         "w": 6,
         "x": 18,
-        "y": 11
+        "y": 8
       },
       "id": 5,
       "legend": {
@@ -1161,7 +1253,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:9444",
           "groupBy": [],
           "measurement": "gpu3power",
           "orderByTime": "ASC",
@@ -1181,7 +1272,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9445",
           "groupBy": [],
           "measurement": "gpu3heat",
           "orderByTime": "ASC",
@@ -1201,7 +1291,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9446",
           "groupBy": [],
           "measurement": "gpu3fanspeed",
           "orderByTime": "ASC",
@@ -1224,7 +1313,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 3",
+      "title": "NVIDIA  GPU 3",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1240,7 +1329,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:9522",
           "decimals": null,
           "format": "short",
           "label": null,
@@ -1250,7 +1338,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:9523",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1272,10 +1359,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 6,
         "x": 0,
-        "y": 20
+        "y": 15
       },
       "id": 6,
       "legend": {
@@ -1301,6 +1388,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:2781",
           "groupBy": [],
           "measurement": "gpu4power",
           "orderByTime": "ASC",
@@ -1320,6 +1408,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2782",
           "groupBy": [],
           "measurement": "gpu4heat",
           "orderByTime": "ASC",
@@ -1339,6 +1428,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:2783",
           "groupBy": [],
           "measurement": "gpu4fanspeed",
           "orderByTime": "ASC",
@@ -1361,7 +1451,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 4",
+      "title": "NVIDIA GPU 4",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1377,7 +1467,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:8943",
           "decimals": null,
           "format": "short",
           "label": null,
@@ -1387,7 +1476,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:8944",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1409,10 +1497,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 6,
         "x": 6,
-        "y": 20
+        "y": 15
       },
       "id": 7,
       "legend": {
@@ -1438,7 +1526,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:8813",
           "groupBy": [],
           "measurement": "gpu5power",
           "orderByTime": "ASC",
@@ -1458,7 +1545,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:8814",
           "groupBy": [],
           "measurement": "gpu5heat",
           "orderByTime": "ASC",
@@ -1478,7 +1564,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:8815",
           "groupBy": [],
           "measurement": "gpu5fanspeed",
           "orderByTime": "ASC",
@@ -1501,7 +1586,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 5",
+      "title": "NVIDIA GPU 5",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1517,7 +1602,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:8891",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1526,7 +1610,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:8892",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1548,10 +1631,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 6,
         "x": 12,
-        "y": 20
+        "y": 15
       },
       "id": 8,
       "legend": {
@@ -1577,7 +1660,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:8998",
+          "$$hashKey": "object:2928",
           "groupBy": [],
           "measurement": "gpu6power",
           "orderByTime": "ASC",
@@ -1597,7 +1680,7 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:8999",
+          "$$hashKey": "object:2929",
           "groupBy": [],
           "measurement": "gpu6heat",
           "orderByTime": "ASC",
@@ -1617,7 +1700,7 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9000",
+          "$$hashKey": "object:2930",
           "groupBy": [],
           "measurement": "gpu6fanspeed",
           "orderByTime": "ASC",
@@ -1640,7 +1723,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 6",
+      "title": "NVIDIA GPU 6",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1656,7 +1739,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:9076",
           "decimals": null,
           "format": "short",
           "label": null,
@@ -1666,7 +1748,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:9077",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1688,10 +1769,10 @@
       "datasource": "influxdb",
       "fill": 1,
       "gridPos": {
-        "h": 10,
+        "h": 7,
         "w": 6,
         "x": 18,
-        "y": 20
+        "y": 15
       },
       "id": 10,
       "legend": {
@@ -1717,7 +1798,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:9739",
           "groupBy": [],
           "measurement": "gpu7power",
           "orderByTime": "ASC",
@@ -1737,7 +1817,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9740",
           "groupBy": [],
           "measurement": "gpu7heat",
           "orderByTime": "ASC",
@@ -1757,7 +1836,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:9741",
           "groupBy": [],
           "measurement": "gpu7fanspeed",
           "orderByTime": "ASC",
@@ -1780,7 +1858,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "GPU 7",
+      "title": "NVIDIA GPU 7",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1796,7 +1874,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:9817",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1805,7 +1882,476 @@
           "show": true
         },
         {
-          "$$hashKey": "object:9818",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "influxdb",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 0,
+        "y": 22
+      },
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:1008",
+          "groupBy": [],
+          "measurement": "amd_0_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:1245",
+          "groupBy": [],
+          "measurement": "amd_0_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AMD0",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:1747",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:1748",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 6,
+        "y": 22
+      },
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:1008",
+          "groupBy": [],
+          "measurement": "amd_1_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:1245",
+          "groupBy": [],
+          "measurement": "amd_1_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AMD1",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 12,
+        "y": 22
+      },
+      "id": 16,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:1008",
+          "groupBy": [],
+          "measurement": "amd_2_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:1245",
+          "groupBy": [],
+          "measurement": "amd_2_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AMD2",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 6,
+        "x": 18,
+        "y": 22
+      },
+      "id": 17,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:1008",
+          "groupBy": [],
+          "measurement": "amd_3_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "$$hashKey": "object:1245",
+          "groupBy": [],
+          "measurement": "amd_3_temp1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "AMD3",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -1859,5 +2405,5 @@
   "timezone": "",
   "title": "Miner Stats",
   "uid": "4-pN6Dciz",
-  "version": 5
+  "version": 9
 }

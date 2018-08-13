@@ -10,6 +10,7 @@ class LmSensorsMetrics(object):
   Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
+  __EPOC_SLEEP_SECONDS = 5
   __METRICS_DB = 'ethmetrics'
   _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', __METRICS_DB)
 
@@ -32,6 +33,7 @@ class LmSensorsMetrics(object):
           amdgpu_count += 1
         elif chip.prefix == 'coretemp':
           self._collect_cpu_metrics(chip)
+      time.sleep(self.__EPOC_SLEEP_SECONDS)
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
     """
