@@ -42,6 +42,8 @@ The `start.sh`, `stop.sh` and `switchoff_until.sh` scripts can be used with cron
 
 ## Metrics
 
-A prepackaged Grafana + InfluxDB + StatsD Docker container is used help store and display eth-runner metrics. The `start*` scripts in the `metrics/` directory collect the metrics via the underlying drivers such as `nvidia-smi` and `lm-sensors` (PySensors). A Snapshot of the sample Grafana dashboard looks like below:
+A prepackaged Grafana + InfluxDB + StatsD Docker container is used help store and display eth-runner metrics. The `start*` scripts in the `metrics/` directory collect the metrics via the underlying drivers such as `nvidia-smi` and `lm-sensors` (PySensors). For more details on Metrics, check the Readme [here](metrics/README.md).
+
+A Snapshot of the sample Grafana dashboard looks like below:
 
 ![Grafana Miner Stats](/img/grafana_metrics.png)
