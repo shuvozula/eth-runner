@@ -4,7 +4,6 @@ Runs ethminer with all available Nvidia and AMD GPUs. This was tested on a syste
 - ASUS B250 Mining Expert
 - 8 x GTX 1070 / 8GB GPUs
 - 4 x AMD RX580 / 8GB GPUs.
-- I7 core
 - 32GB RAM
 - 1TB Samsung SSD (for fast read/write)
 
@@ -40,3 +39,9 @@ The `start.sh`, `stop.sh` and `switchoff_until.sh` scripts can be used with cron
 00 07 * * * sudo /path/to/eth-runner/stop.sh
 02 07 * * * sudo /path/to/eth-runner/shutdown.sh
 ```
+
+## Metrics
+
+A prepackaged Grafana + InfluxDB + StatsD Docker container is used help store and display eth-runner metrics. The `start*` scripts in the `metrics/` directory collect the metrics via the underlying drivers such as `nvidia-smi` and `lm-sensors` (PySensors). A Snapshot of the sample Grafana dashboard looks like below:
+
+![Grafana Miner Stats](/img/grafana_metrics.png)
