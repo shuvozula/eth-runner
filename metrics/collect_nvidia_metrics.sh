@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Watchdog start-delay timer in seconds
-START_IN=180
+START_IN=10
 PAUSE=5  # seconds
 METRICS_DB=ethmetrics
 HOST="http://localhost:8086/write?db=${METRICS_DB}"
