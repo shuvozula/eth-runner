@@ -51,7 +51,7 @@ start_collecting_metrics() {
 }
 
 # record the PID
-sudo echo $$ > /var/log/metrics_collection.pid
+sudo echo $$ > /var/log/nvidia_metrics_collector.pid
 
 # start the madness
 start_collecting_metrics

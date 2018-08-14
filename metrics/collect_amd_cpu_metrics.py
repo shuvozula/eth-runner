@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-import time, datetime
+import os
+import time
+import datetime
 from influxdb import InfluxDBClient
 import sensors
 
@@ -24,6 +26,9 @@ class LmSensorsMetrics(object):
     """
     Starts the data collection
     """
+    with open('/var/log/amd_cpu_metrics_collectors.pid', 'w') as f:
+      f.write(os.getpid())
+
     print "Collecting AMD and CPU metrics...."
     while True:
       amdgpu_count = 0

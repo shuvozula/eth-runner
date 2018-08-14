@@ -3,7 +3,9 @@
 METRICS_SERVER_NAME=eth-metrics-influx
 
 # stop the metrics collection script
-sudo kill -9 $(cat /var/log/metrics_collection.pid)
+echo "Stopping metrics collectors..."
+sudo kill -9 $(cat /var/log/nvidia_metrics_collector.pid)
+sudo kill -9 $(cat /var/log/amd_cpu_metrics_collectors.pid)
 
 # stop the metrics containers
 if [ "$(docker ps -a | grep $METRICS_SERVER_NAME)" ]; then
