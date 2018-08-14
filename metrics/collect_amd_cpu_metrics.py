@@ -41,6 +41,10 @@ class LmSensorsMetrics(object):
     """  
     json_body = []
     for feature in chip:
+      if feature.label.startswith('fan'):
+        val = float(feature.get_value()) / 3200.0
+      else:
+        val = feature.get_value()
       data = {
         "measurement": "amd_%s_%s" % (amdgpu_count, feature.label.replace(' ', '_')),
         "tags": {
@@ -48,7 +52,7 @@ class LmSensorsMetrics(object):
           "gpu": amdgpu_count
         },
         "fields": {
-          "gpu": feature.get_value()
+          "gpu": val
         }
       }
       json_body.append(data)
