@@ -30,7 +30,7 @@ watchdogpid=$(ps -eaf | grep "[m]iner_watchdog" | awk {'print$2'})
 echo $watchdogpid > /var/log/miner_watchdog.pid
 
 for arg in "$@"; do
-	case "$arg" in
+  case "$arg" in
     '--start-clean') 
         echo "Cleaning up old containers..."
         docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
