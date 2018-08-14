@@ -47,7 +47,6 @@ class LmSensorsMetrics(object):
           "host": "minar",
           "gpu": amdgpu_count
         },
-        # "time": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
         "fields": {
           "gpu": feature.get_value()
         }
@@ -68,7 +67,6 @@ class LmSensorsMetrics(object):
             "host": "minar",
             "cpu": feature.label.replace(' ', '_')
           },
-          # "time": datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ"),
           "fields": {
             "cpu": feature.get_value()
           }
