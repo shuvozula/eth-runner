@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import datetime
+import time, datetime
 from influxdb import InfluxDBClient
 import sensors
 
