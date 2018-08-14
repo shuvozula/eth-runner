@@ -27,7 +27,7 @@ class LmSensorsMetrics(object):
     Starts the data collection
     """
     with open('/var/log/amd_cpu_metrics_collectors.pid', 'w') as f:
-      f.write(os.getpid())
+      f.write(str(os.getpid()))
 
     print "Collecting AMD and CPU metrics...."
     while True:
@@ -47,7 +47,7 @@ class LmSensorsMetrics(object):
     json_body = []
     for feature in chip:
       if feature.label.startswith('fan'):
-        val = float(feature.get_value()) / 3200.0
+        val = float(feature.get_value()) * 100.0 / 3200.0
       else:
         val = feature.get_value()
       data = {
