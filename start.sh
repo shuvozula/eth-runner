@@ -43,7 +43,8 @@ for arg in "$@"; do
           exit 1
         fi
         sudo sh $my_dir/metrics/start_metrics_server.sh
-        sudo sh $my_dir/metrics/collect_metrics.sh &
+        sudo sh $my_dir/metrics/collect_nvidia_metrics.sh &
+        sudo python $my_dir/metrics/collect_amd_cpu_metrics.py &
         ;;
   esac
 done
