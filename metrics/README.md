@@ -4,19 +4,20 @@
 * Docker
 
 ## Start metrics server and data collection
-The `start_metrics.sh` script gets executed if the `--metrics` argument is passed to the start script, like so: `../start.sh --metrics`. Otherwise, it can be executed independently or on another box, however your layout is.
-
-The `start_metrics.sh` script does the following:
-- starts the InfluxDB + Grafana + Telegraf(StatsD) docker container
-- collects the Nvidia GPU Watts and Heat readings and `curl`s the data to InfluxDB.
+When starting the miners, passing the `--metrics` argument to `start.sh` when running will do the following:
+- The `start_metrics_server.sh` will get called, which starts the InfluxDB + Grafana + Telegraf(StatsD) docker container called `eth-metrics-influx`.
+- The `collect_nvidia_metrics.sh` shell runs and uses nvidia-smi to collect NVIDIA GPU metrics and uploads it to InfluxDB in a background process.
+- The `collect_amd_cpu_metrics.py` Python script runs to collect `lm-sensors` data, which identifies AMD hardware and CPU hardware and their sensors, and uploads to InfluxDB.
 
 ## Setup Grafana
-Login to Grafana using the following credentials:
+Go to `http://<miner-ip-address>:3003` (substitute `<miner-ip-address>` with the IP of your Miner machine, since the Docker container is running in there. Otherwise, change it to where Grafana is being hosted by `start_metrics_server.sh`)and use the following login for Grafana:
 ```
 username: root
 password: root
 ```
-The InfluxDB datasource is not initially setup, so navigate to create a new datasource, select InfluxDB as the type and then use the database name `ethmetrics`, no login required. The data will then be uploaded by `start_metrics.sh` once it starts running.
+The InfluxDB datasource is not initially setup within Grafana. So, navigate to create a new datasource, select InfluxDB as the type and then use the database name `ethmetrics`, no login required.
 
 ### Creating dashboards
-The dashboard is initially not setup as well, so that's a manual effort of creating one's own custom dashboards, or.... use the `sample_grafana_metrics_dashboard.json` provided and import into Grafana to use it as a starting point for your own dashboards.
+The dashboard is initially not setup as well, so that's a manual effort of creating one's own custom dashboards, or.... use the `sample_grafana_metrics_dashboard.json` provided and import into Grafana to use it as a starting point for your own dashboard.
+
+Enjoy!
