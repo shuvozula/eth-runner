@@ -6,7 +6,7 @@
 ## Start metrics server and data collection
 When starting the miners, passing the `--metrics` argument to `start.sh` when running will do the following:
 - The `start_metrics_server.sh` will get called, which starts the InfluxDB + Grafana + Telegraf(StatsD) docker container called `eth-metrics-influx`.
-- The `collect_nvidia_metrics.sh` shell runs and uses nvidia-smi to collect NVIDIA GPU metrics and uploads it to InfluxDB in a background process.
+- The `collect_nvidia_metrics.sh` shell script runs and uses nvidia-smi to collect NVIDIA GPU metrics and uploads it to InfluxDB in a background process.
 - The `collect_amd_cpu_metrics.py` Python script runs to collect `lm-sensors` data, which identifies AMD hardware and CPU hardware and their sensors, and uploads to InfluxDB.
 
 ## Setup Grafana
