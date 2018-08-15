@@ -61,6 +61,7 @@ class LmSensorsMetrics(object):
         }
       }
       json_body.append(data)
+      time.sleep(0.5)
     self._influxdb_client.write_points(json_body)
 
   def _collect_cpu_metrics(self, chip):
@@ -81,6 +82,7 @@ class LmSensorsMetrics(object):
           }
         }
         json_body.append(data)
+        time.sleep(0.5)
     self._influxdb_client.write_points(json_body)
 
 

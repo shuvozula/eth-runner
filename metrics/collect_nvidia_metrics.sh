@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Watchdog start-delay timer in seconds
-START_IN=10
+START_IN=60
 PAUSE=5  # seconds
 METRICS_DB=ethmetrics
 HOST="http://localhost:8086/write?db=${METRICS_DB}"
@@ -14,6 +14,7 @@ upload_wattage_metrics() {
     data_binary="gpu${i}power,host=minar,gpu=${i} power=${device_wattage} $1"
     echo $data_binary | curl -s -i -XPOST $HOST --data-binary @- 2>&1 >/dev/null
     i=$((i + 1))
+    sleep 0.5
   done
 }
 
@@ -24,6 +25,7 @@ upload_heat_metrics() {
     data_binary="gpu${i}heat,host=minar,gpu=${i} heat=${device_heatage} $1"
     echo $data_binary | curl -s -i -XPOST $HOST --data-binary @- 2>&1 >/dev/null
     i=$((i + 1))
+    sleep 0.5
   done
 }
 
@@ -33,6 +35,7 @@ upload_fan_metrics() {
     fanData=$(eval ${watchFanCmd})
     data_binary="gpu${gpu_index}fanspeed,host=minar,gpu=${gpu_index} fanspeed=${fanData} $1"
     echo $data_binary | curl -s -i -XPOST $HOST --data-binary @- 2>&1 >/dev/null
+    sleep 0.5
   done
 }
 
