@@ -9,7 +9,10 @@ from pynvml import (
   nvmlDeviceGetPowerUsage, 
   nvmlDeviceGetFanSpeed, 
   nvmlDeviceGetTemperature,
+  NVML_TEMPERATURE_GPU,
 )
+
+import os
 import time
 
 
@@ -19,7 +22,7 @@ class NvidiaMetrics(object):
   available via pynvml. Power usage, Temperature and Fan-Speed are reported for each
   GPU to InfluxDB
   """
-  _EPOC_SLEEP_SECONDS = 5
+  _EPOCH_SLEEP_SECONDS = 5
   _METRICS_DB = 'ethmetrics'
   _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', _METRICS_DB)
 
@@ -28,17 +31,17 @@ class NvidiaMetrics(object):
     Initialize NVML and create a .pid file
     """
     nvmlInit()
-    with open('/var/log/nvidia_metrics_collector.pid') as f:
+    with open('/var/log/nvidia_metrics_collector.pid', 'w') as f:
       f.write(str(os.getpid()))
 
   def __enter__(self):
     return self
 
-  def __exit__(self):
+  def __exit__(self, exc_type, exc_val, exc_tb):
     """
     Cleans up the NVML internal state to all GPUs
     """
-    nvmlShutDown()    
+    nvmlShutdown()    
 
   def start_collection(self):
     """
@@ -68,7 +71,7 @@ class NvidiaMetrics(object):
         json_body.append(data)
         time.sleep(0.5)
       self._influxdb_client.write_points(json_body)
-      time.sleep(_EPOC_SLEEP_SECONDS)
+      time.sleep(self._EPOCH_SLEEP_SECONDS)
 
 
 if __name__ == "__main__":
