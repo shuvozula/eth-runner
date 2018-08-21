@@ -45,7 +45,7 @@ for arg in "$@"; do
         sudo sh $my_dir/metrics/start_metrics_server.sh
         echo 'waiting for metrics server to wake up...'
         sleep 10
-        sudo sh $my_dir/metrics/collect_nvidia_metrics.sh &
+        sudo sh $my_dir/metrics/collect_nvidia_metrics.py &
         sudo python $my_dir/metrics/collect_amd_cpu_metrics.py &
         ;;
   esac
