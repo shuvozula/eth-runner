@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
-import os
-import time
-import datetime
 from influxdb import InfluxDBClient
+
+import datetime
+import os
 import sensors
+import time
 
 
 class LmSensorsMetrics(object):
@@ -12,23 +13,28 @@ class LmSensorsMetrics(object):
   Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
-  __EPOC_SLEEP_SECONDS = 5
-  __METRICS_DB = 'ethmetrics'
-  _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', __METRICS_DB)
+  _EPOCH_SLEEP_SECONDS = 5
+  _METRICS_DB = 'ethmetrics'
+  _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', _METRICS_DB)
 
   def __init__(self):
     """
     Initilialize PySensors(lm-sensors) and InfluxDB clent
     """
     sensors.init()
+    with open('/var/log/amd_cpu_metrics_collector.pid', 'w') as f:
+      f.write(str(os.getpid()))
+
+  def __enter__(self):
+    return self
+
+  def __exit__(self, exc_type, exc_val, exc_tb):
+    sensors.cleanup()
 
   def start_collection(self):
     """
     Starts the data collection
     """
-    with open('/var/log/amd_cpu_metrics_collectors.pid', 'w') as f:
-      f.write(str(os.getpid()))
-
     print "Collecting AMD and CPU metrics...."
     while True:
       amdgpu_count = 0
@@ -38,7 +44,7 @@ class LmSensorsMetrics(object):
           amdgpu_count += 1
         elif chip.prefix == 'coretemp':
           self._collect_cpu_metrics(chip)
-      time.sleep(self.__EPOC_SLEEP_SECONDS)
+      time.sleep(self._EPOCH_SLEEP_SECONDS)
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
     """
@@ -87,7 +93,5 @@ class LmSensorsMetrics(object):
 
 
 if __name__ == "__main__":
-  try:
-    LmSensorsMetrics().start_collection()
-  finally:
-    sensors.cleanup()
+  with LmSensorsMetrics() as collector:
+    collector.start_collection()
