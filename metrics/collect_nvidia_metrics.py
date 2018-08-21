@@ -1,9 +1,15 @@
 #!/usr/bin/env python
 
 from influxdb import InfluxDBClient
-from pynvml import nvmlInit, nvmlShutdown, nvmlDeviceGetCount, nvmlDeviceGetHandleByIndex, 
-                   nvmlDeviceGetPowerUsage, nvmlDeviceGetFanSpeed, nvmlDeviceGetTemperature
-
+from pynvml import (
+  nvmlInit, 
+  nvmlShutdown, 
+  nvmlDeviceGetCount, 
+  nvmlDeviceGetHandleByIndex,
+  nvmlDeviceGetPowerUsage, 
+  nvmlDeviceGetFanSpeed, 
+  nvmlDeviceGetTemperature,
+)
 import time
 
 
