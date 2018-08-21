@@ -44,7 +44,7 @@ class LmSensorsMetrics(object):
           amdgpu_count += 1
         elif chip.prefix == 'coretemp':
           self._collect_cpu_metrics(chip)
-      time.sleep(self._EPOC_SLEEP_SECONDS)
+      time.sleep(self._EPOCH_SLEEP_SECONDS)
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
     """
