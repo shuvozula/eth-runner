@@ -23,13 +23,166 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": null,
+      "fill": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 19,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "cpu_Core_0",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "cpu_Core_1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "cpu_Core_2",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "cpu_Core_3",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "cpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "CPU Core Activity",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": "influxdb",
       "fill": 0,
       "gridPos": {
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 5
       },
       "id": 11,
       "legend": {
@@ -58,7 +211,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "gpu0power",
+          "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -67,7 +220,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -77,7 +230,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu1power",
+          "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -86,7 +239,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -96,7 +249,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu2power",
+          "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -105,7 +258,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -115,7 +268,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu3power",
+          "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -124,7 +277,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -134,7 +287,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu4power",
+          "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -143,7 +296,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -153,7 +306,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu5power",
+          "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "F",
@@ -162,7 +315,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -172,7 +325,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu6power",
+          "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "G",
@@ -181,7 +334,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -191,7 +344,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu7power",
+          "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "H",
@@ -200,7 +353,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -212,7 +365,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA All Power (8)",
+      "title": "NVIDIA GPU Power Consumption (Watts)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -228,7 +381,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:2058",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -237,7 +389,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:2059",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -262,7 +413,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 5
       },
       "id": 9,
       "legend": {
@@ -288,9 +439,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:2292",
           "groupBy": [],
-          "measurement": "gpu0heat",
+          "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -299,7 +449,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -308,9 +458,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2293",
           "groupBy": [],
-          "measurement": "gpu1heat",
+          "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -319,7 +468,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -328,9 +477,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2294",
           "groupBy": [],
-          "measurement": "gpu2heat",
+          "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -339,7 +487,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -348,9 +496,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2295",
           "groupBy": [],
-          "measurement": "gpu3heat",
+          "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -359,7 +506,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -368,9 +515,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2296",
           "groupBy": [],
-          "measurement": "gpu4heat",
+          "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -379,7 +525,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -388,9 +534,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2297",
           "groupBy": [],
-          "measurement": "gpu5heat",
+          "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "F",
@@ -399,7 +544,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -408,9 +553,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2298",
           "groupBy": [],
-          "measurement": "gpu6heat",
+          "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "G",
@@ -419,7 +563,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -428,9 +572,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2299",
           "groupBy": [],
-          "measurement": "gpu7heat",
+          "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "H",
@@ -439,7 +582,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -448,7 +591,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2348",
           "groupBy": [],
           "measurement": "amd_0_temp1",
           "orderByTime": "ASC",
@@ -468,7 +610,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2373",
           "groupBy": [],
           "measurement": "amd_1_temp1",
           "orderByTime": "ASC",
@@ -488,7 +629,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2398",
           "groupBy": [],
           "measurement": "amd_2_temp1",
           "orderByTime": "ASC",
@@ -508,7 +648,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2423",
           "groupBy": [],
           "measurement": "amd_3_temp1",
           "orderByTime": "ASC",
@@ -531,7 +670,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "All Heat (NVIDIA + AMD = 12)",
+      "title": "All GPU Temperatures (℉)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -579,7 +718,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 5
       },
       "id": 12,
       "legend": {
@@ -605,9 +744,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:2187",
           "groupBy": [],
-          "measurement": "gpu0fanspeed",
+          "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -616,7 +754,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -625,9 +763,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2188",
           "groupBy": [],
-          "measurement": "gpu1fanspeed",
+          "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -636,7 +773,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -645,9 +782,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2189",
           "groupBy": [],
-          "measurement": "gpu2fanspeed",
+          "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -656,7 +792,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -665,9 +801,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2190",
           "groupBy": [],
-          "measurement": "gpu3fanspeed",
+          "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -676,7 +811,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -685,9 +820,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2191",
           "groupBy": [],
-          "measurement": "gpu4fanspeed",
+          "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -696,7 +830,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -705,9 +839,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2192",
           "groupBy": [],
-          "measurement": "gpu5fanspeed",
+          "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "F",
@@ -716,7 +849,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -725,9 +858,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2193",
           "groupBy": [],
-          "measurement": "gpu6fanspeed",
+          "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "G",
@@ -736,7 +868,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -745,9 +877,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2194",
           "groupBy": [],
-          "measurement": "gpu7fanspeed",
+          "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "H",
@@ -756,7 +887,83 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "amd_0_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "amd_1_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "amd_2_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [],
+          "measurement": "amd_3_fan1",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gpu"
                 ],
                 "type": "field"
               }
@@ -768,7 +975,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "All NVIDIA Fans (8) (unit=%)",
+      "title": "All GPU Fan-Speeds   (unit=%)",
       "tooltip": {
         "shared": true,
         "sort": 2,
@@ -816,7 +1023,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 8
+        "y": 13
       },
       "id": 2,
       "legend": {
@@ -842,9 +1049,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:2485",
           "groupBy": [],
-          "measurement": "gpu0power",
+          "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -853,7 +1059,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -862,9 +1068,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2486",
           "groupBy": [],
-          "measurement": "gpu0heat",
+          "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -873,7 +1078,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -882,9 +1087,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2487",
           "groupBy": [],
-          "measurement": "gpu0fanspeed",
+          "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -893,7 +1097,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -905,7 +1109,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 0",
+      "title": "NVIDIA  1",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -954,9 +1158,9 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 8
+        "y": 13
       },
-      "id": 3,
+      "id": 25,
       "legend": {
         "avg": false,
         "current": false,
@@ -981,7 +1185,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "gpu1power",
+          "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -990,7 +1194,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1000,7 +1204,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu1heat",
+          "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1009,7 +1213,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1019,7 +1223,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu1fanspeed",
+          "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1028,7 +1232,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1040,7 +1244,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 1",
+      "title": "NVIDIA  2",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1058,10 +1262,10 @@
         {
           "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": "130",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1089,9 +1293,9 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 8
+        "y": 13
       },
-      "id": 4,
+      "id": 22,
       "legend": {
         "avg": false,
         "current": false,
@@ -1115,9 +1319,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:2634",
           "groupBy": [],
-          "measurement": "gpu2power",
+          "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1126,7 +1329,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1135,9 +1338,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2635",
           "groupBy": [],
-          "measurement": "gpu2heat",
+          "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1146,7 +1348,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1155,9 +1357,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2636",
           "groupBy": [],
-          "measurement": "gpu2fanspeed",
+          "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1166,7 +1367,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1178,7 +1379,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 2",
+      "title": "NVIDIA  3",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1199,7 +1400,7 @@
           "label": "",
           "logBase": 1,
           "max": "130",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1227,9 +1428,9 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 8
+        "y": 13
       },
-      "id": 5,
+      "id": 26,
       "legend": {
         "avg": false,
         "current": false,
@@ -1254,7 +1455,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "gpu3power",
+          "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1263,7 +1464,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1273,7 +1474,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu3heat",
+          "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1282,7 +1483,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1292,7 +1493,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu3fanspeed",
+          "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1301,7 +1502,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1313,7 +1514,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA  GPU 3",
+      "title": "NVIDIA  4",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1331,10 +1532,10 @@
         {
           "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": "130",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1362,9 +1563,9 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 15
+        "y": 20
       },
-      "id": 6,
+      "id": 24,
       "legend": {
         "avg": false,
         "current": false,
@@ -1388,9 +1589,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:2781",
           "groupBy": [],
-          "measurement": "gpu4power",
+          "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1399,7 +1599,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1408,9 +1608,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2782",
           "groupBy": [],
-          "measurement": "gpu4heat",
+          "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1419,7 +1618,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1428,9 +1627,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2783",
           "groupBy": [],
-          "measurement": "gpu4fanspeed",
+          "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1439,7 +1637,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1451,7 +1649,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 4",
+      "title": "NVIDIA  5",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1469,10 +1667,10 @@
         {
           "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": "130",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1500,9 +1698,9 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 15
+        "y": 20
       },
-      "id": 7,
+      "id": 21,
       "legend": {
         "avg": false,
         "current": false,
@@ -1527,7 +1725,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "gpu5power",
+          "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1536,7 +1734,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1546,7 +1744,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu5heat",
+          "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1555,7 +1753,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1565,7 +1763,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu5fanspeed",
+          "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1574,7 +1772,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1586,7 +1784,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 5",
+      "title": "NVIDIA  6",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1602,11 +1800,12 @@
       },
       "yaxes": [
         {
+          "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": "130",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1634,9 +1833,9 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 15
+        "y": 20
       },
-      "id": 8,
+      "id": 27,
       "legend": {
         "avg": false,
         "current": false,
@@ -1660,9 +1859,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:2928",
           "groupBy": [],
-          "measurement": "gpu6power",
+          "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1671,7 +1869,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1680,9 +1878,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2929",
           "groupBy": [],
-          "measurement": "gpu6heat",
+          "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1691,7 +1888,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1700,9 +1897,8 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:2930",
           "groupBy": [],
-          "measurement": "gpu6fanspeed",
+          "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1711,7 +1907,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1723,7 +1919,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 6",
+      "title": "NVIDIA  7",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1741,10 +1937,10 @@
         {
           "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
           "max": "130",
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1772,9 +1968,9 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 15
+        "y": 20
       },
-      "id": 10,
+      "id": 23,
       "legend": {
         "avg": false,
         "current": false,
@@ -1799,7 +1995,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "gpu7power",
+          "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1808,7 +2004,7 @@
             [
               {
                 "params": [
-                  "power"
+                  "power_usage"
                 ],
                 "type": "field"
               }
@@ -1818,7 +2014,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu7heat",
+          "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1827,7 +2023,7 @@
             [
               {
                 "params": [
-                  "heat"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -1837,7 +2033,7 @@
         },
         {
           "groupBy": [],
-          "measurement": "gpu7fanspeed",
+          "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1846,7 +2042,7 @@
             [
               {
                 "params": [
-                  "fanspeed"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -1858,7 +2054,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "NVIDIA GPU 7",
+      "title": "NVIDIA  8",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1874,11 +2070,12 @@
       },
       "yaxes": [
         {
+          "decimals": null,
           "format": "short",
-          "label": null,
+          "label": "",
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "130",
+          "min": "0",
           "show": true
         },
         {
@@ -1906,7 +2103,7 @@
         "h": 7,
         "w": 6,
         "x": 0,
-        "y": 22
+        "y": 27
       },
       "id": 14,
       "legend": {
@@ -1932,7 +2129,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1008",
           "groupBy": [],
           "measurement": "amd_0_fan1",
           "orderByTime": "ASC",
@@ -1952,7 +2148,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:1245",
           "groupBy": [],
           "measurement": "amd_0_temp1",
           "orderByTime": "ASC",
@@ -1975,10 +2170,10 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "AMD0",
+      "title": "AMD 1",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -1991,16 +2186,14 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1747",
           "format": "short",
           "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "60",
+          "min": "0",
           "show": true
         },
         {
-          "$$hashKey": "object:1748",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -2025,7 +2218,7 @@
         "h": 7,
         "w": 6,
         "x": 6,
-        "y": 22
+        "y": 27
       },
       "id": 15,
       "legend": {
@@ -2051,7 +2244,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1008",
           "groupBy": [],
           "measurement": "amd_1_fan1",
           "orderByTime": "ASC",
@@ -2071,7 +2263,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:1245",
           "groupBy": [],
           "measurement": "amd_1_temp1",
           "orderByTime": "ASC",
@@ -2094,10 +2285,10 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "AMD1",
+      "title": "AMD 2",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2113,8 +2304,8 @@
           "format": "short",
           "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "60",
+          "min": "0",
           "show": true
         },
         {
@@ -2142,7 +2333,7 @@
         "h": 7,
         "w": 6,
         "x": 12,
-        "y": 22
+        "y": 27
       },
       "id": 16,
       "legend": {
@@ -2168,7 +2359,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1008",
           "groupBy": [],
           "measurement": "amd_2_fan1",
           "orderByTime": "ASC",
@@ -2188,7 +2378,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:1245",
           "groupBy": [],
           "measurement": "amd_2_temp1",
           "orderByTime": "ASC",
@@ -2211,10 +2400,10 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "AMD2",
+      "title": "AMD 3",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2230,8 +2419,8 @@
           "format": "short",
           "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "60",
+          "min": "0",
           "show": true
         },
         {
@@ -2259,7 +2448,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 22
+        "y": 27
       },
       "id": 17,
       "legend": {
@@ -2285,7 +2474,6 @@
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:1008",
           "groupBy": [],
           "measurement": "amd_3_fan1",
           "orderByTime": "ASC",
@@ -2305,7 +2493,6 @@
           "tags": []
         },
         {
-          "$$hashKey": "object:1245",
           "groupBy": [],
           "measurement": "amd_3_temp1",
           "orderByTime": "ASC",
@@ -2328,10 +2515,10 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "AMD3",
+      "title": "AMD 4",
       "tooltip": {
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -2344,11 +2531,12 @@
       },
       "yaxes": [
         {
+          "decimals": null,
           "format": "short",
           "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
+          "max": "60",
+          "min": "0",
           "show": true
         },
         {
@@ -2374,7 +2562,7 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
@@ -2403,7 +2591,7 @@
     ]
   },
   "timezone": "",
-  "title": "Miner Stats",
+  "title": "Minar Health Stats (Power, Temperature, Fan-Speed)",
   "uid": "4-pN6Dciz",
-  "version": 9
+  "version": 22
 }
