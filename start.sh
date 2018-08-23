@@ -2,7 +2,7 @@
 
 my_dir="$(dirname $0)"
 
-start_pause=30
+start_pause=60
 echo "Sleeping for $start_pause seconds before starting mining...."
 
 echo "Enabling Nvidia cards...."
