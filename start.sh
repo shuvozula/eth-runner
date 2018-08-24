@@ -2,13 +2,15 @@
 
 my_dir="$(dirname $0)"
 
-start_pause=30
+start_pause=60
 echo "Sleeping for $start_pause seconds before starting mining...."
+
+sleep $start_pause
 
 echo "Enabling Nvidia cards...."
 sudo sh $my_dir/nvidia/enable_nvidia.sh
 
-sleep 2
+sleep 15
 
 echo "Tuning Nvidia cards...."
 sudo sh $my_dir/nvidia/tune_nvidia.sh
