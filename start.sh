@@ -27,9 +27,8 @@ sleep 10
 
 # start watchdog
 echo "Starting watchdog...."
-sudo sh $my_dir/miner_watchdog.sh &
+sudo python $my_dir/watchdog/miner_watchdog.py --collect-metrics &
 sleep 10
-
 watchdogpid=$(ps -eaf | grep "[m]iner_watchdog" | awk {'print$2'})
 echo $watchdogpid > /var/log/miner_watchdog.pid
 
