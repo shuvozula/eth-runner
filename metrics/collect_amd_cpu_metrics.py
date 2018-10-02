@@ -23,8 +23,11 @@ class LmSensorsMetrics(object):
     sensors.init()
     with open('/var/log/amd_cpu_metrics_collector.pid', 'w') as f:
       f.write(str(os.getpid()))
-    metrics_host, metrics_port = os.environ['METRICS_DB_URL'].split(':')
-    influxdb_client = InfluxDBClient(metrics_host, metrics_port, 'root', 'root', _METRICS_DB)
+    self.metrics_host, self.metrics_port = os.environ['METRICS_DB_URL'].split(':')
+    self.influxdb_client = InfluxDBClient(
+            self.metrics_host, self.metrics_port, 
+            'root', 'root', self._METRICS_DB
+    )
 
   def __enter__(self):
     return self
