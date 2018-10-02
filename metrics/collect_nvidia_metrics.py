@@ -24,7 +24,6 @@ class NvidiaMetrics(object):
   """
   _EPOCH_SLEEP_SECONDS = 5
   _METRICS_DB = 'ethmetrics'
-  _influxdb_client = InfluxDBClient('localhost', 8086, 'root', 'root', _METRICS_DB)
 
   def __init__(self):
     """
@@ -33,6 +32,8 @@ class NvidiaMetrics(object):
     nvmlInit()
     with open('/var/log/nvidia_metrics_collector.pid', 'w') as f:
       f.write(str(os.getpid()))
+    metrics_host, metrics_port = os.environ['METRICS_DB_URL'].split(':')
+    influxdb_client = InfluxDBClient(metrics_host, metrics_port, 'root', 'root', _METRICS_DB)
 
   def __enter__(self):
     return self
@@ -70,7 +71,7 @@ class NvidiaMetrics(object):
         }
         json_body.append(data)
         time.sleep(0.5)
-      self._influxdb_client.write_points(json_body)
+      self.influxdb_client.write_points(json_body)
       time.sleep(self._EPOCH_SLEEP_SECONDS)
 
 
