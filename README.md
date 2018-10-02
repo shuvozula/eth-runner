@@ -19,6 +19,17 @@ Note: AMD GPUs were recorded as opencl-platform with value `0`. It could be diff
 - nvidia-xconfig (comes with Nvidia drivers)
 - Install [ethminer](https://github.com/ethereum-mining/ethminer). Make sure `ethminer --list-devices` recognizes all your GPUs and lists them. Pay attention to the platform-IDs for AMD cards as that's required in the `amd/run_amd.sh` script.
 
+## Quickstart
+To just start the miners, without any monitoring:
+```
+$ ./start.sh
+```
+To start the miners with monitoring, do the following:
+```
+$ ./start.sh --metrics
+```
+Disclaimer: For default data-polling period (5 seconds), not recommended for leaving on long-term, like overnight. It can be taxing on the GPUs, but helpful for debugging/monitoring. If required for long-term, better to dial down the pings to periods of 3-5 seconds, or even 1 minute. More about metrics below.
+
 ## Usage:
 - Clone the repo.
 - Edit `init.sh` and add the location for Ethminer in `ETHMINER_PATH`, eg: `/home/foobar/.ethminer/bin`
