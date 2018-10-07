@@ -46,11 +46,8 @@ for arg in "$@"; do
           echo "ERROR: No Docker installed! Can't start Metrics server..."
           exit 1
         fi
-        echo 'Starting Nvidia metrics collection....'
-        sudo python $my_dir/metrics/collect_nvidia_metrics.py &
         sleep 10
-        echo 'Starting AMD + CPU metrics collection....'
-        sudo python $my_dir/metrics/collect_amd_cpu_metrics.py &
+        sudo sh $my_dir/metrics/start_metrics.sh
         ;;
   esac
 done

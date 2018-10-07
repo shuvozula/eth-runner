@@ -22,7 +22,7 @@ class NvidiaMetrics(object):
   available via pynvml. Power usage, Temperature and Fan-Speed are reported for each
   GPU to InfluxDB
   """
-  _EPOCH_SLEEP_SECONDS = 5
+  _EPOCH_SLEEP_SECONDS = 60
   _METRICS_DB = 'ethmetrics'
 
   def __init__(self):

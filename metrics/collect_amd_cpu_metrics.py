@@ -13,7 +13,7 @@ class LmSensorsMetrics(object):
   Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
-  _EPOCH_SLEEP_SECONDS = 5
+  _EPOCH_SLEEP_SECONDS = 60
   _METRICS_DB = 'ethmetrics'
 
   def __init__(self):
