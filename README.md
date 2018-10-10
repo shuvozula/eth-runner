@@ -28,7 +28,6 @@ To start the miners with monitoring, do the following:
 ```
 $ ./start.sh --metrics
 ```
-> NOTE: For default data-polling period (5 seconds), not recommended for leaving on long-term, like overnight. It can be taxing on the GPUs, but helpful for debugging/monitoring. If required for long-term, better to use higher ping-intervals of 1-2 minutes, or even 1 hour.
 
 ## Usage:
 - Clone the repo.
@@ -58,3 +57,6 @@ A prepackaged Grafana + InfluxDB + StatsD Docker container is used help store an
 A Snapshot of the sample Grafana dashboard looks like below:
 
 ![Grafana Miner Stats](/img/grafana_metrics.png)
+
+> NOTE: For default data-polling period (5 seconds), not recommended for leaving on long-term, like overnight. It can be taxing on the GPUs, but helpful for debugging/monitoring. If required for long-term, better to use higher ping-intervals of 1-2 minutes, or even 1 hour.
+
