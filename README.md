@@ -28,7 +28,7 @@ To start the miners with monitoring, do the following:
 ```
 $ ./start.sh --metrics
 ```
-Disclaimer: For default data-polling period (5 seconds), not recommended for leaving on long-term, like overnight. It can be taxing on the GPUs, but helpful for debugging/monitoring. If required for long-term, better to dial down the pings to periods of 3-5 seconds, or even 1 minute. More about metrics below.
+> NOTE: For default data-polling period (5 seconds), not recommended for leaving on long-term, like overnight. It can be taxing on the GPUs, but helpful for debugging/monitoring. If required for long-term, better to use higher ping-intervals of 1-2 minutes, or even 1 hour.
 
 ## Usage:
 - Clone the repo.
