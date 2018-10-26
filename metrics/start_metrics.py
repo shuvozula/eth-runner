@@ -43,7 +43,7 @@ class MetricsRunner(object):
     self.nvidia_gpu_metrics_thread.start()
 
   def _kill_callback(self, signum, frame):
-    LOG.info('Stopping all miners gracefully...')
+    LOG.info('Stopping all metrics-collectors gracefully...')
     self.exit_flag_event.set()
     time.sleep(10)
 
