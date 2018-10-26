@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from influxdb import InfluxDBClient
+from log import LOG
 from pynvml import (
   nvmlInit, 
   nvmlShutdown, 
@@ -12,7 +13,6 @@ from pynvml import (
   NVML_TEMPERATURE_GPU,
 )
 
-import logging
 import os
 import threading
 import time
@@ -23,9 +23,6 @@ _EPOCH_SLEEP_SECONDS = 60
 _PERIOD_SECS = 0.5
 _METRICS_DB = 'ethmetrics'
 _PID_FILE_LOCATION = '/var/log/nvidia_metrics_collector.pid'
-
-
-logger = logging.getLogger()
 
 
 class NvidiaMetrics(threading.Thread):
@@ -40,10 +37,10 @@ class NvidiaMetrics(threading.Thread):
     """
     threading.Thread.__init__(self)
 
-    logger.info('Initializing NVML sensors....')
+    LOG.info('Initializing NVML sensors....')
     nvmlInit()
 
-    logger.info('creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
+    LOG.info('creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
     with open(_PID_FILE_LOCATION, 'w') as f:
       f.write(str(os.getpid()))
 
@@ -61,7 +58,7 @@ class NvidiaMetrics(threading.Thread):
     """
     Start the NVIDIA GPU data collection
     """
-    logger.info('Collecting NVIDIA GPU metrics....')
+    LOG.info('Collecting NVIDIA GPU metrics....')
     while not self._exit_flag_event.is_set():
       json_body = []
       for gpu_num in range(nvmlDeviceGetCount()):
@@ -86,4 +83,4 @@ class NvidiaMetrics(threading.Thread):
         time.sleep(_PERIOD_SECS)
       self.influxdb_client.write_points(json_body)
       time.sleep(_EPOCH_SLEEP_SECONDS)
-    logger.info("Exiting Nvidia GPU metrics collection....")
+    LOG.info("Exiting Nvidia GPU metrics collection....")
