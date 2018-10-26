@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 from influxdb import InfluxDBClient
+from log import LOG
 
 import datetime
-import logging
 import os
 import sensors
 import threading
@@ -14,9 +14,6 @@ _EPOCH_SLEEP_SECONDS = 60
 _PERIOD_SECONDS = 0.5
 _METRICS_DB = 'ethmetrics'
 _PID_FILE_LOCATION = '/var/log/amd_cpu_metrics_collector.pid'
-
-
-logger = logging.getLogger()
 
 
 class LmSensorsMetrics(threading.Thread):
@@ -30,10 +27,10 @@ class LmSensorsMetrics(threading.Thread):
     """
     threading.Thread.__init__(self)
 
-    logger.info('initializing Lm-sensors...')
+    LOG.info('initializing Lm-sensors...')
     sensors.init()
 
-    logger.info('creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
+    LOG.info('creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
     with open(_PID_FILE_LOCATION, 'w') as f:
       f.write(str(os.getpid()))
 
@@ -48,7 +45,7 @@ class LmSensorsMetrics(threading.Thread):
     """
     Starts the data collection
     """
-    logger.info("Collecting AMD and CPU metrics....")
+    LOG.info("Collecting AMD and CPU metrics....")
     while not self._exit_flag_event.is_set():
       amdgpu_count = 0
       for chip in sensors.iter_detected_chips():
@@ -58,7 +55,7 @@ class LmSensorsMetrics(threading.Thread):
         elif chip.prefix == 'coretemp':
           self._collect_cpu_metrics(chip)
       time.sleep(_EPOCH_SLEEP_SECONDS)
-    logger.info("Exiting AMD GPU + CPU metrics collection....")
+    LOG.info("Exiting AMD GPU + CPU metrics collection....")
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
     """

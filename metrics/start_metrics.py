@@ -8,6 +8,7 @@ import log
 import coloredlogs
 import signal
 import threading
+import time
 
 
 METRICS_HOST = '10.0.0.3'
@@ -44,6 +45,7 @@ class MetricsRunner(object):
   def _kill_callback(self, signum, frame):
     LOG.info('Stopping all miners gracefully...')
     self.exit_flag_event.set()
+    time.sleep(10)
 
     while self.lmsensors_metrics_thread.is_alive() and \
           self.nvidia_gpu_metrics_thread.is_alive():
