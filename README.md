@@ -11,7 +11,7 @@ Note: AMD GPUs were recorded as opencl-platform with value `0`. It could be diff
 
 ## Features:
 - For Nvidia cards, tunes them by undervolting GPU and increasing memory frequency, increasing mining to 30MH/s+ for Eth
-- For AMD cards, the BIOS need to be flashed using [Polaris Bios Editor](https://github.com/jaschaknack/PolarisBiosEditor).
+- For AMD cards, the BIOS need to be flashed using [Polaris Bios Editor](https://github.com/caa82437/PolarisBiosEditor) in Windows, on the same machine as the miner (use a stick).
 
 ## Prerequisites:
 - Create a `.account` file that contains the Ethereum account alphanumeric string and nickname, like this: `<account-address>.<nickname>` and put it in the root folder of this project.
