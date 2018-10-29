@@ -6,7 +6,7 @@ import logging.handlers
 LOG = logging.getLogger()
 LOG.setLevel(logging.DEBUG)
 
-LOG_MAX_BYTES = 1000000000
+LOG_MAX_BYTES = 100000000  # max log-file size of 100MB, until its rotated
 LOG_BACKUP_COUNT = 5
 
 
