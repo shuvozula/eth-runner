@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 from influxdb import InfluxDBClient
-from log.log import LOG, file_logging_handler
-from log.filters import ThreadLoggingFilter
-
+from log.log import LOG
 from pynvml import (
   nvmlInit, 
   nvmlShutdown, 
@@ -38,7 +36,6 @@ class NvidiaMetrics(threading.Thread):
     Initialize NVML and create a .pid file
     """
     threading.Thread.__init__(self)
-    file_logging_handler.addFilter(ThreadLoggingFilter(self))
 
     LOG.info('Initializing NVML sensors....')
     nvmlInit()
