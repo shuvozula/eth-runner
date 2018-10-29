@@ -51,6 +51,8 @@ class MetricsRunner(object):
   def _kill_callback(self, signum, frame):
     LOG.info('Stopping all metrics-collectors gracefully...')
     self.exit_flag_event.set()
+
+    LOG.info('waiting for threads to die...')
     time.sleep(5)
 
     while self.lmsensors_metrics_thread.is_alive() and \
