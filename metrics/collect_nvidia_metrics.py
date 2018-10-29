@@ -31,11 +31,12 @@ class NvidiaMetrics(threading.Thread):
   available via pynvml. Power usage, Temperature and Fan-Speed are reported for each
   GPU to InfluxDB
   """
-  def __init__(self, metrics_host, metrics_port, exit_flag_event):
+  def __init__(self, metrics_host, metrics_port, exit_flag_event, thread_name):
     """
     Initialize NVML and create a .pid file
     """
     threading.Thread.__init__(self)
+    self.name = thread_name
 
     LOG.info('Initializing NVML sensors....')
     nvmlInit()

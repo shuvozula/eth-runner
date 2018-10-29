@@ -21,11 +21,12 @@ class LmSensorsMetrics(threading.Thread):
   Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
-  def __init__(self, metrics_host, metrics_port, exit_flag_event):
+  def __init__(self, metrics_host, metrics_port, exit_flag_event, thread_name):
     """
     Initilialize PySensors(lm-sensors) and InfluxDB clent
     """
     threading.Thread.__init__(self)
+    self.name = thread_name
 
     LOG.info('Initializing Lm-sensors...')
     sensors.init()
