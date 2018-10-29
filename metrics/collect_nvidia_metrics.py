@@ -52,6 +52,7 @@ class NvidiaMetrics(threading.Thread):
     """
     Cleans up the NVML internal state for all GPUs
     """
+    LOG.info("Shutting down NVIDA metrics collection....")
     nvmlShutdown()
 
   def run(self):

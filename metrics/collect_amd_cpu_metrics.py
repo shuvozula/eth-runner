@@ -39,6 +39,7 @@ class LmSensorsMetrics(threading.Thread):
       'root', 'root', _METRICS_DB)
     
   def __del__(self):
+    LOG.info("Shutting down AMD + CPU metrics collection....")
     sensors.cleanup()
 
   def run(self):

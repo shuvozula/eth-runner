@@ -29,7 +29,6 @@ class MetricsRunner(object):
   def __init__(self):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
-    signal.signal(signal.CTRL_C_EVENT, self._kill_callback)
 
     LoggingInit(LOG_PATH, LOG_FILE_NAME)
     coloredlogs.install()
@@ -47,6 +46,7 @@ class MetricsRunner(object):
   def start_metrics_collection(self):
     self.lmsensors_metrics_thread.start()
     self.nvidia_gpu_metrics_thread.start()
+    signal.pause()
 
   def _kill_callback(self, signum, frame):
     LOG.info('Stopping all metrics-collectors gracefully...')
@@ -61,6 +61,8 @@ class MetricsRunner(object):
 
       self.nvidia_gpu_metrics_thread.join()
       LOG.info('Killed NvidiaMetrics thread...')
+
+    sys.exit(0)
 
 if __name__ == '__main__':
     with MetricsRunner() as metrics_runner:
