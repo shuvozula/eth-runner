@@ -13,7 +13,6 @@ import time
 _EPOCH_SLEEP_SECONDS = 60
 _PERIOD_SECONDS = 0.5
 _METRICS_DB = 'ethmetrics'
-_PID_FILE_LOCATION = '/var/log/amd_cpu_metrics_collector.pid'
 
 
 class LmSensorsMetrics(threading.Thread):
@@ -30,10 +29,6 @@ class LmSensorsMetrics(threading.Thread):
 
     LOG.info('Initializing Lm-sensors...')
     sensors.init()
-
-    LOG.info('Creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
-    with open(_PID_FILE_LOCATION, 'w') as f:
-      f.write(str(os.getpid()))
 
     self._exit_flag_event = exit_flag_event
     self.influxdb_client = InfluxDBClient(metrics_host, metrics_port, 
