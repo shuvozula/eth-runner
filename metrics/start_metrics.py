@@ -1,9 +1,15 @@
 #!/usr/bin/env python
 
+import sys
+import os.path
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from collect_amd_cpu_metrics import LmSensorsMetrics
 from collect_nvidia_metrics import NvidiaMetrics
 
-import log
+from log.log import LoggingInit
+from log.log import LOG
 
 import coloredlogs
 import signal
@@ -24,7 +30,7 @@ class MetricsRunner(object):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
 
-    log.LoggingInit(LOG_PATH, LOG_FILE_NAME)
+    LoggingInit(LOG_PATH, LOG_FILE_NAME)
     coloredlogs.install()
 
     self.exit_flag_event = threading.Event()
