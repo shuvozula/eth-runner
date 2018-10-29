@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 from influxdb import InfluxDBClient
-from log.log import LOG
+from log.log import LOG, file_logging_handler
+from log.filters import ThreadLoggingFilter
 
 import datetime
 import os
@@ -26,6 +27,7 @@ class LmSensorsMetrics(threading.Thread):
     Initilialize PySensors(lm-sensors) and InfluxDB clent
     """
     threading.Thread.__init__(self)
+    file_logging_handler.addFilter(ThreadLoggingFilter(self))
 
     LOG.info('Initializing Lm-sensors...')
     sensors.init()
