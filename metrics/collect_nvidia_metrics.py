@@ -40,7 +40,7 @@ class NvidiaMetrics(threading.Thread):
     LOG.info('Initializing NVML sensors....')
     nvmlInit()
 
-    LOG.info('creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
+    LOG.info('Creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
     with open(_PID_FILE_LOCATION, 'w') as f:
       f.write(str(os.getpid()))
 

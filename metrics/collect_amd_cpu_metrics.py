@@ -27,10 +27,10 @@ class LmSensorsMetrics(threading.Thread):
     """
     threading.Thread.__init__(self)
 
-    LOG.info('initializing Lm-sensors...')
+    LOG.info('Initializing Lm-sensors...')
     sensors.init()
 
-    LOG.info('creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
+    LOG.info('Creating pid file at %s with PID=[%s]...', _PID_FILE_LOCATION, os.getpid())
     with open(_PID_FILE_LOCATION, 'w') as f:
       f.write(str(os.getpid()))
 
