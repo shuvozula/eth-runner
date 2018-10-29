@@ -36,10 +36,10 @@ class MetricsRunner(object):
   def __enter__(self):
     self.exit_flag_event = threading.Event()
     self.exit_flag_event.clear()
-    self.lmsensors_metrics_thread = LmSensorsMetrics(name='AMD+GPU-Thread', 
-      METRICS_HOST, METRICS_PORT, self.exit_flag_event)
-    self.nvidia_gpu_metrics_thread = NvidiaMetrics(name='Nvidia-Thread',
-      METRICS_HOST, METRICS_PORT, self.exit_flag_event)
+    self.lmsensors_metrics_thread = LmSensorsMetrics(METRICS_HOST, METRICS_PORT, self.exit_flag_event,
+      name='AMD+GPU-Thread')
+    self.nvidia_gpu_metrics_thread = NvidiaMetrics(METRICS_HOST, METRICS_PORT, self.exit_flag_event,
+      name='Nvidia-Thread')
     return self
 
   def __exit__(self, exc_type, exc_val, exc_tb):
