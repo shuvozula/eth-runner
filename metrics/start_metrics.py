@@ -33,20 +33,25 @@ class MetricsRunner(object):
     LoggingInit(LOG_PATH, LOG_FILE_NAME)
     coloredlogs.install()
 
+  def __enter__(self):
     self.exit_flag_event = threading.Event()
     self.exit_flag_event.clear()
     self.lmsensors_metrics_thread = LmSensorsMetrics(METRICS_HOST, METRICS_PORT, self.exit_flag_event)
     self.nvidia_gpu_metrics_thread = NvidiaMetrics(METRICS_HOST, METRICS_PORT, self.exit_flag_event)
+    return self
 
   def __exit__(self, exc_type, exc_val, exc_tb):
     pass
 
-  def start_metrics_collection(self):     
-    LOG.info('Starting AMD GPU + CPU metrics collection thread...')
-    self.lmsensors_metrics_thread.start()
+  def start_metrics_collection(self):
+    try:
+      LOG.info('Starting AMD GPU + CPU metrics collection thread...')
+      self.lmsensors_metrics_thread.start()
 
-    LOG.info('Starting NVIDIA GPU metrics collection thread...')
-    self.nvidia_gpu_metrics_thread.start()
+      LOG.info('Starting NVIDIA GPU metrics collection thread...')
+      self.nvidia_gpu_metrics_thread.start()
+    except KeyboardInterrupt:
+      self._kill_callback(None, None)
 
   def _kill_callback(self, signum, frame):
     LOG.info('Stopping all metrics-collectors gracefully...')
