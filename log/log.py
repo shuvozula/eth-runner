@@ -28,3 +28,4 @@ def LoggingInit(log_path, log_filename, html=False):
   file_logging_handler.setFormatter(log_formatter)
 
   LOG.addHandler(file_logging_handler)
+

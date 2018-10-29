@@ -47,7 +47,7 @@ for arg in "$@"; do
           exit 1
         fi
         sleep 10
-        sudo sh $my_dir/metrics/start_metrics.sh
+        sudo python $my_dir/metrics/start_metrics.sh &
         ;;
   esac
 done

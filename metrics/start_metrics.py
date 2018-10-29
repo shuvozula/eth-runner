@@ -22,6 +22,7 @@ METRICS_PORT = '8086'
 
 LOG_PATH = '/var/log/'
 LOG_FILE_NAME = 'metrics_runner'
+PID_FILE_LOCATION = '/var/log/metrics_collector.pid'
 
 
 class MetricsRunner(object):
@@ -32,6 +33,10 @@ class MetricsRunner(object):
 
     LoggingInit(LOG_PATH, LOG_FILE_NAME)
     coloredlogs.install()
+
+    LOG.info('Creating pid file at %s with PID=[%s]...', PID_FILE_LOCATION, os.getpid())
+    with open(PID_FILE_LOCATION, 'w') as f:
+      f.write(str(os.getpid()))
 
   def __enter__(self):
     self.exit_flag_event = threading.Event()
