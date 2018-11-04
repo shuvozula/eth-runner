@@ -18,7 +18,7 @@ class LmSensorsWatchdog(Watchdog):
   """
 
   def __init__(self, exit_flag_event):
-    Watchdog.__init__(exit_flag_event)
+    Watchdog.__init__(self, exit_flag_event)
     LOG.info("LmSensors-Watchdog started!")
 
   def do_monitor(self, data_list):
