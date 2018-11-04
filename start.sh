@@ -23,30 +23,12 @@ echo "Starting the Ethminers...."
 sudo sh $my_dir/amd/run_amd.sh
 sleep 30
 sudo sh $my_dir/nvidia/run_nvidia.sh
-sleep 10
-
-# # start watchdog
-# echo "Starting watchdog...."
-# sudo sh $my_dir/miner_watchdog.sh &
-# sleep 10
-
-watchdogpid=$(ps -eaf | grep "[m]iner_watchdog" | awk {'print$2'})
-echo $watchdogpid > /var/log/miner_watchdog.pid
+sleep 30
 
 for arg in "$@"; do
   case "$arg" in
-    '--start-clean')
-        echo "Cleaning up old containers..."
-        docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
-        ;;
-
     '--metrics')
         echo "Starting metrics services"
-        if [ -z $(which docker) ]; then
-          echo "ERROR: No Docker installed! Can't start Metrics server..."
-          exit 1
-        fi
-        sleep 10
         sudo python $my_dir/metrics/start_metrics.py &
         ;;
   esac
