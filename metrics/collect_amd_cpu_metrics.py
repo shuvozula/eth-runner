@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from influxdb import InfluxDBClient
 from log.log import LOG
 from watchdog.lmsensors_watchdog import LmSensorsWatchdog
 
@@ -13,7 +12,7 @@ import time
 
 _EPOCH_SLEEP_SECONDS = 60
 _PERIOD_SECONDS = 0.5
-_METRICS_DB = 'ethmetrics'
+
 
 
 class LmSensorsMetrics(threading.Thread):
@@ -22,7 +21,7 @@ class LmSensorsMetrics(threading.Thread):
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
 
-  def __init__(self, host, port, exit_flag_event, thread_name):
+  def __init__(self, influxdb_client, exit_flag_event, thread_name):
     """
     Initilialize PySensors(lm-sensors) and InfluxDB clent
     """
@@ -33,7 +32,7 @@ class LmSensorsMetrics(threading.Thread):
     sensors.init()
 
     self._exit_flag_event = exit_flag_event
-    self.influxdb_client = InfluxDBClient(host, port, 'root', 'root', _METRICS_DB)
+    self._influxdb_client = influxdb_client
 
     self._watchdog = LmSensorsWatchdog()
 
@@ -56,7 +55,7 @@ class LmSensorsMetrics(threading.Thread):
         elif chip.prefix == 'coretemp':
           json_body.append(self._collect_cpu_metrics(chip))
 
-      self.influxdb_client.write_points(json_body)
+      self._influxdb_client.write_points(json_body)
       self._watchdog.do_monitor(json_body)
       time.sleep(_EPOCH_SLEEP_SECONDS)
 

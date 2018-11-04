@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from influxdb import InfluxDBClient
 from log.log import LOG
 from watchdog.nvidia_watchdog import NvidiaWatchdog, HEATAGE_SLEEP_TIMEOUT_MINS
 from pynvml import (
@@ -32,7 +31,7 @@ class NvidiaMetrics(threading.Thread):
   GPU to InfluxDB
   """
 
-  def __init__(self, host, port, exit_flag_event, thread_name):
+  def __init__(self, influxdb_client, exit_flag_event, thread_name):
     """
     Initialize NVML and create a .pid file
     """
@@ -43,7 +42,7 @@ class NvidiaMetrics(threading.Thread):
     nvmlInit()
 
     self._exit_flag_event = exit_flag_event
-    self._influxdb_client = InfluxDBClient(host, port, 'root', 'root', METRICS_DB)
+    self._influxdb_client = influxdb_client
 
     self._watchdog = NvidiaWatchdog()
 

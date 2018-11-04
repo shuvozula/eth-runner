@@ -25,10 +25,10 @@ sleep 30
 sudo sh $my_dir/nvidia/run_nvidia.sh
 sleep 10
 
-# start watchdog
-echo "Starting watchdog...."
-sudo sh $my_dir/miner_watchdog.sh &
-sleep 10
+# # start watchdog
+# echo "Starting watchdog...."
+# sudo sh $my_dir/miner_watchdog.sh &
+# sleep 10
 
 watchdogpid=$(ps -eaf | grep "[m]iner_watchdog" | awk {'print$2'})
 echo $watchdogpid > /var/log/miner_watchdog.pid

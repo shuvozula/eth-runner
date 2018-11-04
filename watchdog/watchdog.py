@@ -3,6 +3,7 @@
 from log.log import LOG
 
 import os
+import time
 
 
 class Watchdog(object):
@@ -26,4 +27,5 @@ class Watchdog(object):
       wake_timeout_mins: Minutes to sleep before waking up the system. Used with rtcwake.
     """
     LOG.warn('Shutting down miner for {} minutes...', wake_timeout_mins)
+    time.sleep(10)
     os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins * 60))

@@ -17,6 +17,9 @@ class LmSensorsWatchdog(Watchdog):
   TODO: Add more checks as required, eg: CPU core temperatures, etc.
   """
 
+  def __init__(self):
+    LOG.info("LmSensors-Watchdog started!")
+
   def do_monitor(self, data_list):
     for data in data_list:
       if 'gpu' in data['tags'].keys():

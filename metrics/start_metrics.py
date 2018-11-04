@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from collect_amd_cpu_metrics import LmSensorsMetrics
 from collect_nvidia_metrics import NvidiaMetrics
+from influxdb import InfluxDBClient
 
 from log.log import LoggingInit
 from log.log import LOG
@@ -19,6 +20,9 @@ import time
 
 METRICS_HOST = '10.0.0.3'
 METRICS_PORT = '8086'
+METRICS_USER = 'root'
+METRICS_PASSWORD = 'root'
+METRICS_DB = 'ethmetrics'
 
 LOG_PATH = '/var/log/'
 LOG_FILE_NAME = 'metrics_runner'
@@ -41,14 +45,13 @@ class MetricsRunner(object):
   def __enter__(self):
     self.exit_flag_event = threading.Event()
     self.exit_flag_event.clear()
+    self.influxdb_client = InfluxDBClient(METRICS_HOST, METRICS_PORT, METRICS_USER, METRICS_PASSWORD, METRICS_DB)
     self.lmsensors_metrics_thread = LmSensorsMetrics(
-      host=METRICS_HOST,
-      port=METRICS_PORT,
+      influxdb_client=influxdb_client,
       exit_flag_event = self.exit_flag_event,
       thread_name='AMD+GPU-Thread')
     self.nvidia_gpu_metrics_thread = NvidiaMetrics(
-      host=METRICS_HOST,
-      port=METRICS_PORT,
+      influxdb_client=influxdb_client,
       exit_flag_event = self.exit_flag_event,
       thread_name='Nvidia-Thread')
     return self
