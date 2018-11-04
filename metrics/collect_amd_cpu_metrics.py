@@ -34,7 +34,7 @@ class LmSensorsMetrics(threading.Thread):
     self._exit_flag_event = exit_flag_event
     self._influxdb_client = influxdb_client
 
-    self._watchdog = LmSensorsWatchdog()
+    self._watchdog = LmSensorsWatchdog(exit_flag_event)
 
   def __del__(self):
     LOG.info('Shutting down AMD + CPU metrics collection....')

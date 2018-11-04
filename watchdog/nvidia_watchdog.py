@@ -23,7 +23,8 @@ class NvidiaWatchdog(Watchdog):
   the power drops below a certain threshold, stop the miners.
   """
 
-  def __init__(self):
+  def __init__(self, exit_flag_event):
+    Watchdog.__init__(exit_flag_event)
     LOG.info("Nvidia-Watchdog started!")
 
   def do_monitor(self, data_list):

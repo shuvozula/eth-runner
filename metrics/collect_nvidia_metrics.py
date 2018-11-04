@@ -44,7 +44,7 @@ class NvidiaMetrics(threading.Thread):
     self._exit_flag_event = exit_flag_event
     self._influxdb_client = influxdb_client
 
-    self._watchdog = NvidiaWatchdog()
+    self._watchdog = NvidiaWatchdog(exit_flag_event)
 
   def __del__(self):
     """

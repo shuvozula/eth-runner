@@ -17,7 +17,8 @@ class LmSensorsWatchdog(Watchdog):
   TODO: Add more checks as required, eg: CPU core temperatures, etc.
   """
 
-  def __init__(self):
+  def __init__(self, exit_flag_event):
+    Watchdog.__init__(exit_flag_event)
     LOG.info("LmSensors-Watchdog started!")
 
   def do_monitor(self, data_list):
