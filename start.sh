@@ -35,19 +35,19 @@ echo $watchdogpid > /var/log/miner_watchdog.pid
 
 for arg in "$@"; do
   case "$arg" in
-    '--start-clean') 
+    '--start-clean')
         echo "Cleaning up old containers..."
         docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
         ;;
 
-    '--metrics') 
+    '--metrics')
         echo "Starting metrics services"
         if [ -z $(which docker) ]; then
           echo "ERROR: No Docker installed! Can't start Metrics server..."
           exit 1
         fi
         sleep 10
-        sudo python $my_dir/metrics/start_metrics.sh &
+        sudo python $my_dir/metrics/start_metrics.py &
         ;;
   esac
 done
