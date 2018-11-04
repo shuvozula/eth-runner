@@ -14,7 +14,6 @@ _EPOCH_SLEEP_SECONDS = 60
 _PERIOD_SECONDS = 0.5
 
 
-
 class LmSensorsMetrics(threading.Thread):
   """
   Used for collecting metrics as discovered by PySensors(ln-sensors), such as

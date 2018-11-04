@@ -21,7 +21,6 @@ import time
 DEVICE_NAME_FORMAT = 'nvidia.gpu.%d'
 EPOCH_SLEEP_SECONDS = 60
 PERIOD_SECS = 0.5
-METRICS_DB = 'ethmetrics'
 
 
 class NvidiaMetrics(threading.Thread):
