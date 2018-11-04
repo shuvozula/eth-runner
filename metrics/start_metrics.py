@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
+# TODO:Remove this block later
 import sys
 import os.path
-
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from collect_amd_cpu_metrics import LmSensorsMetrics
@@ -41,9 +41,15 @@ class MetricsRunner(object):
   def __enter__(self):
     self.exit_flag_event = threading.Event()
     self.exit_flag_event.clear()
-    self.lmsensors_metrics_thread = LmSensorsMetrics(METRICS_HOST, METRICS_PORT, self.exit_flag_event,
+    self.lmsensors_metrics_thread = LmSensorsMetrics(
+      host=METRICS_HOST,
+      port=METRICS_PORT,
+      exit_flag_event = self.exit_flag_event,
       thread_name='AMD+GPU-Thread')
-    self.nvidia_gpu_metrics_thread = NvidiaMetrics(METRICS_HOST, METRICS_PORT, self.exit_flag_event,
+    self.nvidia_gpu_metrics_thread = NvidiaMetrics(
+      host=METRICS_HOST,
+      port=METRICS_PORT,
+      exit_flag_event = self.exit_flag_event,
       thread_name='Nvidia-Thread')
     return self
 

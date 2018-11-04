@@ -2,6 +2,7 @@
 
 from influxdb import InfluxDBClient
 from log.log import LOG
+from watchdog.lmsensors_watchdog import LmSensorsWatchdog
 
 import datetime
 import os
@@ -17,10 +18,11 @@ _METRICS_DB = 'ethmetrics'
 
 class LmSensorsMetrics(threading.Thread):
   """
-  Used for collecting metrics as discovered by PySensors(ln-sensors), such as 
+  Used for collecting metrics as discovered by PySensors(ln-sensors), such as
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
-  def __init__(self, metrics_host, metrics_port, exit_flag_event, thread_name):
+
+  def __init__(self, host, port, exit_flag_event, thread_name):
     """
     Initilialize PySensors(lm-sensors) and InfluxDB clent
     """
@@ -31,70 +33,71 @@ class LmSensorsMetrics(threading.Thread):
     sensors.init()
 
     self._exit_flag_event = exit_flag_event
-    self.influxdb_client = InfluxDBClient(metrics_host, metrics_port, 
-      'root', 'root', _METRICS_DB)
-    
+    self.influxdb_client = InfluxDBClient(host, port, 'root', 'root', _METRICS_DB)
+
+    self._watchdog = LmSensorsWatchdog()
+
   def __del__(self):
-    LOG.info("Shutting down AMD + CPU metrics collection....")
+    LOG.info('Shutting down AMD + CPU metrics collection....')
     sensors.cleanup()
 
   def run(self):
     """
     Starts the data collection
     """
-    LOG.info("Collecting AMD and CPU metrics....")
+    LOG.info('Collecting AMD and CPU metrics....')
     while not self._exit_flag_event.is_set():
       amdgpu_count = 0
+      json_body = []
       for chip in sensors.iter_detected_chips():
         if chip.prefix == 'amdgpu':
-          self._collect_amd_gpu_metrics(chip, amdgpu_count)
+          json_body.append(self._collect_amd_gpu_metrics(chip, amdgpu_count))
           amdgpu_count += 1
         elif chip.prefix == 'coretemp':
-          self._collect_cpu_metrics(chip)
+          json_body.append(self._collect_cpu_metrics(chip))
+
+      self.influxdb_client.write_points(json_body)
+      self._watchdog.do_monitor(json_body)
       time.sleep(_EPOCH_SLEEP_SECONDS)
-    LOG.info("Exiting AMD GPU + CPU metrics collection....")
+
+    LOG.info('Exiting AMD GPU + CPU metrics collection....')
 
   def _collect_amd_gpu_metrics(self, chip, amdgpu_count):
     """
     Collects AMD GPU metrics that are available via lm-sensors, such as heat and fan rpm.
-    """  
-    json_body = []
+    """
+    device_name = 'amd_%s' % amdgpu_count
+    data = {
+      'measurement': device_name,
+      'tags': {
+        'host': 'minar',
+        'gpu': device_name
+      },
+      'fields': {}
+    }
     for feature in chip:
       if feature.label.startswith('fan'):
-        val = float(feature.get_value()) * 100.0 / 3200.0
-      else:
-        val = feature.get_value()
-      data = {
-        "measurement": "amd_%s_%s" % (amdgpu_count, feature.label.replace(' ', '_')),
-        "tags": {
-          "host": "minar",
-          "gpu": amdgpu_count
-        },
-        "fields": {
-          "gpu": val
-        }
-      }
-      json_body.append(data)
-      time.sleep(_PERIOD_SECONDS)
-    self.influxdb_client.write_points(json_body)
+        data['fields']['fan_speed'] = float(feature.get_value()) * 100.0 / 3200.0
+      elif feature.label.startswith('temp'):
+        data['fields']['temperature'] = feature.get_value()
+
+    return data
 
   def _collect_cpu_metrics(self, chip):
     """
     Collects CPU heat from each core, as available from lm-sensors
     """
-    json_body = []
+    core_name = feature.label.replace(' ', '_')
+    data = {
+      'measurement': 'cpu_temp_' % core_name,
+      'tags': {
+        'host': 'minar',
+        'cpu': core_name
+      },
+      'fields': {}
+    }
     for feature in chip:
       if feature.label.startswith('Core'):
-        data = {
-          "measurement": "cpu_%s" % (feature.label.replace(' ', '_')),
-          "tags": {
-            "host": "minar",
-            "cpu": feature.label.replace(' ', '_')
-          },
-          "fields": {
-            "cpu": feature.get_value()
-          }
-        }
-        json_body.append(data)
-        time.sleep(_PERIOD_SECONDS)
-    self.influxdb_client.write_points(json_body)
+        data['fields']['cpu_temp_%s' % core_name] = feature.get_value()
+
+    return data

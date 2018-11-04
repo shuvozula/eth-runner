@@ -23,9 +23,8 @@ def LoggingInit(log_path, log_filename, html=False):
   log_formatter = logging.Formatter(log_format)
 
   file_logging_handler = logging.handlers.RotatingFileHandler(file_name,
-    maxBytes=LOG_MAX_BYTES, 
+    maxBytes=LOG_MAX_BYTES,
     backupCount=LOG_BACKUP_COUNT)
   file_logging_handler.setFormatter(log_formatter)
 
   LOG.addHandler(file_logging_handler)
-
