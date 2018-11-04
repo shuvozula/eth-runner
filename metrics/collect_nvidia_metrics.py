@@ -2,7 +2,7 @@
 
 from influxdb import InfluxDBClient
 from log.log import LOG
-from watchdog.nvidia_watchdog import NvidiaWatchdog, HEATAGE_SLEEP_TIMEOUT_SECONDS
+from watchdog.nvidia_watchdog import NvidiaWatchdog, HEATAGE_SLEEP_TIMEOUT_MINS
 from pynvml import (
   nvmlInit,
   nvmlShutdown,
@@ -95,5 +95,5 @@ class NvidiaMetrics(threading.Thread):
 
     except Exception as e:
       LOG.error('Suffered a critical error: {}', e)
-      self._watchdog.stop_miner(HEATAGE_SLEEP_TIMEOUT_SECONDS)
+      self._watchdog.stop_miner(HEATAGE_SLEEP_TIMEOUT_MINS * 60)
 

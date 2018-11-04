@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from watchdog.watchdog import Watchdog
+from watchdog import Watchdog
 from log.log import LOG
 
 
@@ -12,8 +12,8 @@ POWER_LIMIT = 55
 HEAT_LIMIT = 78
 
 # Minutes to sleep if either of the following (wattage, heat, etc.) send out alarms
-HEATAGE_SLEEP_TIMEOUT_MINS=20
-WATTAGE_SLEEP_TIMEOUT_MINS=5
+HEATAGE_SLEEP_TIMEOUT_MINS = 20
+WATTAGE_SLEEP_TIMEOUT_MINS = 5
 
 
 class NvidiaWatchdog(Watchdog):

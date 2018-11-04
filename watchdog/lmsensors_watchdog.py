@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from watchdog.watchdog import Watchdog
-from log.log import log
+from watchdog import Watchdog
+from log import log
 
 
 # Maximum heat limit per AMD GPU allowed
@@ -24,7 +24,7 @@ class LmSensorsWatchdog(Watchdog):
         amd_gpu_temperature = data['fields']['temperature']
         fan_speed = data['fields']['fan_speed']
 
-        if amd_gpu_temperature > HEAT_LIMIT
+        if amd_gpu_temperature > HEAT_LIMIT:
           LOG.error('Current temperature of AMD GPU-{} is {} > {}! Killing all miners...',
             device_name, temperature, HEAT_LIMIT)
           self.switch_off_miner(SLEEP_TIMEOUT_MINS)

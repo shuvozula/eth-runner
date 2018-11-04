@@ -87,17 +87,16 @@ class LmSensorsMetrics(threading.Thread):
     """
     Collects CPU heat from each core, as available from lm-sensors
     """
-    core_name = feature.label.replace(' ', '_')
     data = {
-      'measurement': 'cpu_temp_' % core_name,
+      'measurement': 'cpu_temp',
       'tags': {
         'host': 'minar',
-        'cpu': core_name
+        'cpu': 'cpu'
       },
       'fields': {}
     }
     for feature in chip:
       if feature.label.startswith('Core'):
-        data['fields']['cpu_temp_%s' % core_name] = feature.get_value()
+        data['fields']['core_temp_%s' % feature.label.replace(' ', '_')] = feature.get_value()
 
     return data
