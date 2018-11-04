@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from watchdog import Watchdog
-from log import log
+from log.log import LOG
 
 
 # Maximum heat limit per AMD GPU allowed

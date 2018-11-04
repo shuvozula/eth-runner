@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import coloredlogs
 import logging
 import logging.handlers
 
@@ -12,6 +13,8 @@ LOG_BACKUP_COUNT = 5
 
 def LoggingInit(log_path, log_filename, html=False):
   global LOG
+
+  coloredlogs.install()
 
   log_format = "[%(asctime)s %(threadName)s, %(levelname)s] %(message)s"
   file_name = "{0}/{1}.log".format(log_path, log_filename)

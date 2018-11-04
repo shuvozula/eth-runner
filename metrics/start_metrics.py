@@ -12,7 +12,6 @@ from influxdb import InfluxDBClient
 from log.log import LoggingInit
 from log.log import LOG
 
-import coloredlogs
 import signal
 import threading
 import time
@@ -36,7 +35,6 @@ class MetricsRunner(object):
     signal.signal(signal.SIGTERM, self._kill_callback)
 
     LoggingInit(LOG_PATH, LOG_FILE_NAME)
-    coloredlogs.install()
 
     LOG.info('Creating pid file at %s with PID=[%s]...', PID_FILE_LOCATION, os.getpid())
     with open(PID_FILE_LOCATION, 'w') as f:
@@ -47,11 +45,11 @@ class MetricsRunner(object):
     self.exit_flag_event.clear()
     self.influxdb_client = InfluxDBClient(METRICS_HOST, METRICS_PORT, METRICS_USER, METRICS_PASSWORD, METRICS_DB)
     self.lmsensors_metrics_thread = LmSensorsMetrics(
-      influxdb_client=influxdb_client,
+      influxdb_client=self.influxdb_client,
       exit_flag_event = self.exit_flag_event,
       thread_name='AMD+GPU-Thread')
     self.nvidia_gpu_metrics_thread = NvidiaMetrics(
-      influxdb_client=influxdb_client,
+      influxdb_client=self.influxdb_client,
       exit_flag_event = self.exit_flag_event,
       thread_name='Nvidia-Thread')
     return self
