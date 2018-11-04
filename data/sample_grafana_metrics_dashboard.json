@@ -23,7 +23,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "influxdb",
       "fill": 0,
       "gridPos": {
         "h": 5,
@@ -55,8 +55,9 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:750",
           "groupBy": [],
-          "measurement": "cpu_Core_0",
+          "measurement": "cpu_temp",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -65,7 +66,7 @@
             [
               {
                 "params": [
-                  "cpu"
+                  "core_temp_Core_0"
                 ],
                 "type": "field"
               }
@@ -74,8 +75,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:751",
           "groupBy": [],
-          "measurement": "cpu_Core_1",
+          "measurement": "cpu_temp",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -84,7 +86,7 @@
             [
               {
                 "params": [
-                  "cpu"
+                  "core_temp_Core_1"
                 ],
                 "type": "field"
               }
@@ -93,8 +95,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:752",
           "groupBy": [],
-          "measurement": "cpu_Core_2",
+          "measurement": "cpu_temp",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -103,7 +106,7 @@
             [
               {
                 "params": [
-                  "cpu"
+                  "core_temp_Core_2"
                 ],
                 "type": "field"
               }
@@ -112,8 +115,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:753",
           "groupBy": [],
-          "measurement": "cpu_Core_3",
+          "measurement": "cpu_temp",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -122,7 +126,7 @@
             [
               {
                 "params": [
-                  "cpu"
+                  "core_temp_Core_3"
                 ],
                 "type": "field"
               }
@@ -439,6 +443,7 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:1461",
           "groupBy": [],
           "measurement": "nvidia.gpu.0",
           "orderByTime": "ASC",
@@ -458,6 +463,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1462",
           "groupBy": [],
           "measurement": "nvidia.gpu.1",
           "orderByTime": "ASC",
@@ -477,6 +483,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1463",
           "groupBy": [],
           "measurement": "nvidia.gpu.2",
           "orderByTime": "ASC",
@@ -496,6 +503,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1464",
           "groupBy": [],
           "measurement": "nvidia.gpu.3",
           "orderByTime": "ASC",
@@ -515,6 +523,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1465",
           "groupBy": [],
           "measurement": "nvidia.gpu.4",
           "orderByTime": "ASC",
@@ -534,6 +543,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1466",
           "groupBy": [],
           "measurement": "nvidia.gpu.5",
           "orderByTime": "ASC",
@@ -553,6 +563,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1467",
           "groupBy": [],
           "measurement": "nvidia.gpu.6",
           "orderByTime": "ASC",
@@ -572,6 +583,7 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1468",
           "groupBy": [],
           "measurement": "nvidia.gpu.7",
           "orderByTime": "ASC",
@@ -591,8 +603,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1469",
           "groupBy": [],
-          "measurement": "amd_0_temp1",
+          "measurement": "amd_0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "I",
@@ -601,7 +614,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -610,8 +623,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1470",
           "groupBy": [],
-          "measurement": "amd_1_temp1",
+          "measurement": "amd_1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "J",
@@ -620,7 +634,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -629,8 +643,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1471",
           "groupBy": [],
-          "measurement": "amd_2_temp1",
+          "measurement": "amd_2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "K",
@@ -639,7 +654,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -648,8 +663,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1472",
           "groupBy": [],
-          "measurement": "amd_3_temp1",
+          "measurement": "amd_3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "L",
@@ -658,7 +674,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -2129,8 +2145,9 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:1141",
           "groupBy": [],
-          "measurement": "amd_0_fan1",
+          "measurement": "amd_0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2139,7 +2156,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -2148,8 +2165,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1142",
           "groupBy": [],
-          "measurement": "amd_0_temp1",
+          "measurement": "amd_0",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -2158,7 +2176,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -2244,8 +2262,9 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:1220",
           "groupBy": [],
-          "measurement": "amd_1_fan1",
+          "measurement": "amd_1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2254,7 +2273,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -2263,8 +2282,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1221",
           "groupBy": [],
-          "measurement": "amd_1_temp1",
+          "measurement": "amd_1",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -2273,7 +2293,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -2359,8 +2379,9 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:1299",
           "groupBy": [],
-          "measurement": "amd_2_fan1",
+          "measurement": "amd_2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2369,7 +2390,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -2378,8 +2399,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1300",
           "groupBy": [],
-          "measurement": "amd_2_temp1",
+          "measurement": "amd_2",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -2388,7 +2410,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -2474,8 +2496,9 @@
       "steppedLine": false,
       "targets": [
         {
+          "$$hashKey": "object:1378",
           "groupBy": [],
-          "measurement": "amd_3_fan1",
+          "measurement": "amd_3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -2484,7 +2507,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "fan_speed"
                 ],
                 "type": "field"
               }
@@ -2493,8 +2516,9 @@
           "tags": []
         },
         {
+          "$$hashKey": "object:1379",
           "groupBy": [],
-          "measurement": "amd_3_temp1",
+          "measurement": "amd_3",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -2503,7 +2527,7 @@
             [
               {
                 "params": [
-                  "gpu"
+                  "temperature"
                 ],
                 "type": "field"
               }
@@ -2554,7 +2578,7 @@
       }
     }
   ],
-  "refresh": "5s",
+  "refresh": "30s",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -2593,5 +2617,5 @@
   "timezone": "",
   "title": "Minar Health Stats (Power, Temperature, Fan-Speed)",
   "uid": "4-pN6Dciz",
-  "version": 22
+  "version": 6
 }
