@@ -26,8 +26,6 @@ def logging_init(log_path, log_filename, html=False):
     log_format = "<p>" + log_format + "</p>"
     file_name = "{0}/{1}.html".format(log_path, log_filename)
 
-  coloredlogs.install(level='DEBUG', logger=LOG)
-
   log_formatter = logging.Formatter(log_format)
 
   file_logging_handler = logging.handlers.RotatingFileHandler(file_name,
@@ -36,3 +34,5 @@ def logging_init(log_path, log_filename, html=False):
   file_logging_handler.setFormatter(log_formatter)
 
   LOG.addHandler(file_logging_handler)
+
+  coloredlogs.install(logger=LOG)
