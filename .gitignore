@@ -2,3 +2,5 @@
 .account
 .dropbox.attr
 logs/*.log
+.idea/
+venv/

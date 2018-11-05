@@ -12,6 +12,11 @@ LOG_BACKUP_COUNT = 5
 
 
 def LoggingInit(log_path, log_filename, html=False):
+  """
+  Initializes the LOG object for global logging, which is a rotating log-handler:
+  creates max of LOG_BACK_COUNT log files; older ones are deleted, with each log
+  file of size LOG_MAX_BYTES. Can be configured to log HTML or text, defaults to text.
+  """
   global LOG
 
   coloredlogs.install()
