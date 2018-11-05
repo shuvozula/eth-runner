@@ -24,7 +24,7 @@ class NvidiaWatchdog(Watchdog):
   """
 
   def __init__(self, exit_flag_event):
-    Watchdog.__init__(self, exit_flag_event)
+    super(NvidiaWatchdog, self).__init__(exit_flag_event)
     LOG.info("Nvidia-Watchdog started!")
 
   def do_monitor(self, data_list):

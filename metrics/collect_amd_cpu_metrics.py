@@ -19,12 +19,12 @@ class LmSensorsMetrics(AbstractMetricsCollector):
 
   def __init__(self, influxdb_client, exit_flag_event):
     """
-    Initilialize PySensors(lm-sensors)
+    Initialize PySensors(lm-sensors)
     """
     super(LmSensorsMetrics, self).__init__(
-      influxdb_client = influxdb_client,
-      watchdog = LmSensorsWatchdog(exit_flag_event),
-      exit_flag_event = exit_flag_event
+      influxdb_client=influxdb_client,
+      watchdog=LmSensorsWatchdog(exit_flag_event),
+      exit_flag_event=exit_flag_event
     )
 
     LOG.info('Initializing Lm-sensors...')
