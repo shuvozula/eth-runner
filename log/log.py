@@ -26,11 +26,7 @@ def logging_init(log_path, log_filename, html=False):
     log_format = "<p>" + log_format + "</p>"
     file_name = "{0}/{1}.html".format(log_path, log_filename)
 
-  coloredlogs.install(
-    level='DEBUG',
-    logger=LOG,
-    fmt=log_format
-  )
+  coloredlogs.install(level='DEBUG', logger=LOG)
 
   log_formatter = logging.Formatter(log_format)
 
