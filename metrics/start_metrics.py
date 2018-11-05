@@ -23,9 +23,9 @@ METRICS_USER = 'root'
 METRICS_PASSWORD = 'root'
 METRICS_DB = 'ethmetrics'
 
-LOG_PATH = '/tmp/'
+LOG_PATH = '/var/log/'
 LOG_FILE_NAME = 'metrics_runner'
-PID_FILE_LOCATION = '/tmp/metrics_collector.pid'
+PID_FILE_LOCATION = '/var/log/metrics_collector.pid'
 
 
 class MetricsRunner(object):
