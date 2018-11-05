@@ -34,12 +34,11 @@ class NvidiaWatchdog(Watchdog):
       power_usage = int(data['fields']['power_usage'])
 
       if temperature > HEAT_LIMIT:
-        LOG.error('Current temperature of Nvidia GPU-{} is {} > {}! Killing all miners...',
-          device_name, temperature, HEAT_LIMIT)
+        LOG.error('Current temperature of Nvidia GPU-%s is %d > %d! Killing all miners...',
+            device_name, temperature, HEAT_LIMIT)
         self.switch_off_miner(HEATAGE_SLEEP_TIMEOUT_MINS)
 
       if power_usage < POWER_LIMIT:
-        LOG.error('Current power usage from Nvidia GPU-{} is {} < {}! Killing all miners...',
-          device_name, power_usage, POWER_LIMIT)
+        LOG.error('Current power usage from Nvidia GPU-%s is %d < %d! Killing all miners...',
+            device_name, power_usage, POWER_LIMIT)
         self.switch_off_miner(WATTAGE_SLEEP_TIMEOUT_MINS)
-

@@ -25,14 +25,14 @@ class Watchdog(object):
     of `wake_timeout_mins` seconds.
 
     Args:
-      wake_timeout_mins: Minutes to sleep before waking up the system. Used with rtcwake.
+      wake_timeout_mins: Minutes to sleep before waking up the system. Used with rtc-wake.
     """
     LOG.warn('Abnormality found!! Shutting down miner!')
 
     LOG.warn('Signalling metrics-threads for shutdown sequence...')
     self._exit_flag_event.set()
-    time.sleep(65)
+    time.sleep(90)
 
-    LOG.warn('Going to sleep for {} minutes...', wake_timeout_mins)
+    LOG.warn('Going to sleep for %d minutes...', wake_timeout_mins)
     time.sleep(30)
     os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins * 60))

@@ -43,15 +43,21 @@ class MetricsRunner(object):
   def __enter__(self):
     self.exit_flag_event = threading.Event()
     self.exit_flag_event.clear()
-    self.influxdb_client = InfluxDBClient(METRICS_HOST, METRICS_PORT, METRICS_USER, METRICS_PASSWORD, METRICS_DB)
+    self.influx_db_client = InfluxDBClient(
+      METRICS_HOST,
+      METRICS_PORT,
+      METRICS_USER,
+      METRICS_PASSWORD,
+      METRICS_DB
+    )
     self.lmsensors_metrics_thread = LmSensorsMetrics(
-      influxdb_client=self.influxdb_client,
-      exit_flag_event = self.exit_flag_event,
-      thread_name='AMD+GPU-Thread')
+      influxdb_client=self.influx_db_client,
+      exit_flag_event=self.exit_flag_event
+    )
     self.nvidia_gpu_metrics_thread = NvidiaMetrics(
-      influxdb_client=self.influxdb_client,
-      exit_flag_event = self.exit_flag_event,
-      thread_name='Nvidia-Thread')
+      influxdb_client=self.influx_db_client,
+      exit_flag_event=self.exit_flag_event
+    )
     return self
 
   def __exit__(self, exc_type, exc_val, exc_tb):
@@ -77,6 +83,7 @@ class MetricsRunner(object):
       LOG.info('Killed NvidiaMetrics thread...')
 
     sys.exit(0)
+
 
 if __name__ == '__main__':
     with MetricsRunner() as metrics_runner:

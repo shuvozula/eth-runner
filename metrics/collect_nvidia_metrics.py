@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from log.log import LOG
-from watchdog.nvidia_watchdog import NvidiaWatchdog, HEATAGE_SLEEP_TIMEOUT_MINS
+from metrics_collector import AbstractMetricsCollector
 from pynvml import (
   nvmlInit,
   nvmlShutdown,
@@ -12,38 +12,37 @@ from pynvml import (
   nvmlDeviceGetTemperature,
   NVML_TEMPERATURE_GPU,
 )
+from watchdog.nvidia_watchdog import NvidiaWatchdog
 
-import os
-import threading
 import time
 
 
 DEVICE_NAME_FORMAT = 'nvidia.gpu.%d'
-EPOCH_SLEEP_SECONDS = 60
 PERIOD_SECS = 0.5
 
 
-class NvidiaMetrics(threading.Thread):
+class NvidiaMetrics(AbstractMetricsCollector):
   """
   Used for collecting NVIDIA GPU metrics, by tapping into the underlying NVML library
   available via pynvml. Power usage, Temperature and Fan-Speed are reported for each
   GPU to InfluxDB
   """
 
-  def __init__(self, influxdb_client, exit_flag_event, thread_name):
+  def __init__(self, influxdb_client, exit_flag_event):
     """
-    Initialize NVML and create a .pid file
+    Initialize NVML
     """
-    threading.Thread.__init__(self)
-    self.name = thread_name
+    super(NvidiaMetrics, self).__init__(
+      influxdb_client = influxdb_client,
+      watchdog = NvidiaWatchdog(exit_flag_event),
+      exit_flag_event = exit_flag_event
+    )
 
     LOG.info('Initializing NVML sensors....')
     nvmlInit()
 
-    self._exit_flag_event = exit_flag_event
-    self._influxdb_client = influxdb_client
-
-    self._watchdog = NvidiaWatchdog(exit_flag_event)
+  def __str__(self):
+    return 'NVIDIA GPU metrics'
 
   def __del__(self):
     """
@@ -52,46 +51,31 @@ class NvidiaMetrics(threading.Thread):
     LOG.info('Shutting down NVIDA metrics collection....')
     nvmlShutdown()
 
-  def run(self):
+  def collect_metrics(self):
     """
-    Start the NVIDIA GPU data collection
+    Collect NVIDIA GPU metrics (eg: Temperature, Power-Consumption, fan-speed, etc.)
     """
-    LOG.info('Collecting NVIDIA GPU metrics....')
-    try:
-      while not self._exit_flag_event.is_set():
-        data_list = []
-        for gpu_num in range(nvmlDeviceGetCount()):
-          handle = nvmlDeviceGetHandleByIndex(gpu_num)
-          device_name = DEVICE_NAME_FORMAT % gpu_num
-          power_usage = float(nvmlDeviceGetPowerUsage(handle)) / 1000.0
-          fan_speed = nvmlDeviceGetFanSpeed(handle)
-          temperature = nvmlDeviceGetTemperature(handle, NVML_TEMPERATURE_GPU)
-          data = {
-            'measurement': device_name,
-            'tags': {
-              'host': 'minar',
-              'gpu': device_name
-            },
-            'fields': {
-              'power_usage': power_usage,
-              'fan_speed': fan_speed,
-              'temperature': temperature
-            }
-          }
-          data_list.append(data)
-          time.sleep(PERIOD_SECS)
+    data_list = []
+    for gpu_num in range(nvmlDeviceGetCount()):
+      handle = nvmlDeviceGetHandleByIndex(gpu_num)
+      device_name = DEVICE_NAME_FORMAT % gpu_num
+      power_usage = float(nvmlDeviceGetPowerUsage(handle)) / 1000.0
+      fan_speed = nvmlDeviceGetFanSpeed(handle)
+      temperature = nvmlDeviceGetTemperature(handle, NVML_TEMPERATURE_GPU)
+      data = {
+        'measurement': device_name,
+        'tags': {
+          'host': 'minar',
+          'gpu': device_name
+        },
+        'fields': {
+          'power_usage': power_usage,
+          'fan_speed': fan_speed,
+          'temperature': temperature
+        }
+      }
+      data_list.append(data)
+      time.sleep(PERIOD_SECS)
 
-        # Write metrics to InfluxDB
-        self._influxdb_client.write_points(data_list)
-
-        # Monitor the data for any abnormalities and accordingly take precationary measures
-        self._watchdog.do_monitor(data_list)
-
-        time.sleep(EPOCH_SLEEP_SECONDS)
-
-      LOG.info('Exiting Nvidia GPU metrics collection....')
-
-    except Exception as e:
-      LOG.error('Suffered a critical error: {}', e)
-      self._watchdog.stop_miner(HEATAGE_SLEEP_TIMEOUT_MINS * 60)
+    return data_list
 

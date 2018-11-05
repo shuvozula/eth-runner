@@ -2,8 +2,10 @@
 
 my_dir="$(dirname $0)"
 
-sh $my_dir/stop_watchdog.sh
-sh $my_dir/stop_miners.sh
+# Kill the miners by their PIDs
+echo "Killing all Ethminers....."
+sudo kill -9 $(cat /var/log/ati_miner.pid)
+sudo kill -9 $(cat /var/log/nvidia_miner.pid)
 
 if [[ $1 == --metrics ]]; then
   echo 'Killing metrics data collection...'
