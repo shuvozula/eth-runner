@@ -33,9 +33,9 @@ class NvidiaMetrics(AbstractMetricsCollector):
     Initialize NVML
     """
     super(NvidiaMetrics, self).__init__(
-      influxdb_client = influxdb_client,
-      watchdog = NvidiaWatchdog(exit_flag_event),
-      exit_flag_event = exit_flag_event
+      influxdb_client=influxdb_client,
+      watchdog=NvidiaWatchdog(exit_flag_event),
+      exit_flag_event=exit_flag_event
     )
 
     LOG.info('Initializing NVML sensors....')
@@ -78,4 +78,3 @@ class NvidiaMetrics(AbstractMetricsCollector):
       time.sleep(PERIOD_SECS)
 
     return data_list
-
