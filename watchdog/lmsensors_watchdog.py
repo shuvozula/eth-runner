@@ -29,7 +29,7 @@ class LmSensorsWatchdog(Watchdog):
         fan_speed = data['fields']['fan_speed']
 
         if amd_gpu_temperature > HEAT_LIMIT:
-          LOG.error('Current temperature of AMD GPU-{} is {} > {}! Killing all miners...',
+          LOG.error('Current temperature of AMD GPU-%s is %d > %d! Killing all miners...',
             device_name, temperature, HEAT_LIMIT)
           self.switch_off_miner(SLEEP_TIMEOUT_MINS)
 

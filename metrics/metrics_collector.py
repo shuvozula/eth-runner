@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import threading
+import time
+
 from log.log import LOG
 
 _EPOCH_SLEEP_SECONDS = 60
@@ -30,9 +33,9 @@ class AbstractMetricsCollector(threading.Thread):
 
   def run(self):
     """
-    Starts the data collection
+    Starts the data collection,
     """
-    LOG.info('Collecting {}...', str(self))
+    LOG.info('Collecting %s...', self)
     try:
       while not self._exit_flag_event.is_set():
 
@@ -47,9 +50,8 @@ class AbstractMetricsCollector(threading.Thread):
 
         time.sleep(_EPOCH_SLEEP_SECONDS)
 
-      LOG.info('Exiting {} data collection...', str(self))
+      LOG.info('Exiting %s data collection...', self)
 
-    except Exception as e:
-      LOG.error('Suffered a critical error: {}', e)
-      self._watchdog.stop_miner(_WAKEUP_SLEEP_SECONDS)
-
+    except Exception:
+      LOG.exception('Suffered a critical error while collecting metrics and monitoring!')
+      self._watchdog.switch_off_miner(_WAKEUP_SLEEP_SECONDS)

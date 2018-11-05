@@ -33,6 +33,6 @@ class Watchdog(object):
     self._exit_flag_event.set()
     time.sleep(65)
 
-    LOG.warn('Going to sleep for {} minutes...', wake_timeout_mins)
+    LOG.warn('Going to sleep for %d minutes...', wake_timeout_mins)
     time.sleep(30)
-    os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins * 60))
+    # os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins * 60))
