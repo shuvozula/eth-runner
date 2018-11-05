@@ -19,14 +19,18 @@ def logging_init(log_path, log_filename, html=False):
   """
   global LOG
 
-  coloredlogs.install()
-
   log_format = "[%(asctime)s %(threadName)s, %(levelname)s] %(message)s"
   file_name = "{0}/{1}.log".format(log_path, log_filename)
 
   if html:
     log_format = "<p>" + log_format + "</p>"
     file_name = "{0}/{1}.html".format(log_path, log_filename)
+
+  coloredlogs.install(
+    level='DEBUG',
+    logger=LOG,
+    fmt=log_format
+  )
 
   log_formatter = logging.Formatter(log_format)
 
