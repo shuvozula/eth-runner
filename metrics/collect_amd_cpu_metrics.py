@@ -17,12 +17,11 @@ class LmSensorsMetrics(AbstractMetricsCollector):
   AMD-GPU (heat, fan RPM) and CPU Core-Temperature data.
   """
 
-  def __init__(self, influxdb_client, exit_flag_event, thread_name):
+  def __init__(self, influxdb_client, exit_flag_event):
     """
     Initilialize PySensors(lm-sensors)
     """
     super(LmSensorsMetrics, self).__init__(
-      thread_name = thread_name,
       influxdb_client = influxdb_client,
       watchdog = LmSensorsWatchdog(exit_flag_event),
       exit_flag_event = exit_flag_event

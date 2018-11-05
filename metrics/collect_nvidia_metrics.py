@@ -28,12 +28,11 @@ class NvidiaMetrics(AbstractMetricsCollector):
   GPU to InfluxDB
   """
 
-  def __init__(self, influxdb_client, exit_flag_event, thread_name):
+  def __init__(self, influxdb_client, exit_flag_event):
     """
     Initialize NVML
     """
     super(NvidiaMetrics, self).__init__(
-      thread_name = thread_name,
       influxdb_client = influxdb_client,
       watchdog = NvidiaWatchdog(exit_flag_event),
       exit_flag_event = exit_flag_event

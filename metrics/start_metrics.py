@@ -46,12 +46,10 @@ class MetricsRunner(object):
     self.influxdb_client = InfluxDBClient(METRICS_HOST, METRICS_PORT, METRICS_USER, METRICS_PASSWORD, METRICS_DB)
     self.lmsensors_metrics_thread = LmSensorsMetrics(
       influxdb_client=self.influxdb_client,
-      exit_flag_event = self.exit_flag_event,
-      thread_name='AMD+GPU-Thread')
+      exit_flag_event = self.exit_flag_event)
     self.nvidia_gpu_metrics_thread = NvidiaMetrics(
       influxdb_client=self.influxdb_client,
-      exit_flag_event = self.exit_flag_event,
-      thread_name='Nvidia-Thread')
+      exit_flag_event = self.exit_flag_event)
     return self
 
   def __exit__(self, exc_type, exc_val, exc_tb):

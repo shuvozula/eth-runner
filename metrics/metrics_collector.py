@@ -6,7 +6,7 @@ import time
 from log.log import LOG
 
 _EPOCH_SLEEP_SECONDS = 60
-_WAKEUP_SLEEP_SECONDS = 20 * 60  # 20 mins
+_WAKEUP_SLEEP_SECONDS = 10 * 60  # 10 mins
 
 
 class AbstractMetricsCollector(threading.Thread):
@@ -14,7 +14,7 @@ class AbstractMetricsCollector(threading.Thread):
   Base class for metrics collection. Encapsulates the behavior of data-collection, reporting and monitoring (Command pattern)
   """
 
-  def __init__(self, thread_name, influxdb_client, watchdog, exit_flag_event):
+  def __init__(self, influxdb_client, watchdog, exit_flag_event):
     """
     """
     threading.Thread.__init__(self)
@@ -22,7 +22,7 @@ class AbstractMetricsCollector(threading.Thread):
     if type(self) is AbstractMetricsCollector:
       raise NotImplementedError('Abstract class cannot be directly instantiated!')
 
-    self.name = thread_name
+    self.name = str(self)
 
     self._influxdb_client = influxdb_client
     self._watchdog = watchdog
