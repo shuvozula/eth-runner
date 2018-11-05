@@ -34,7 +34,8 @@ class AbstractMetricsCollector(threading.Thread):
 
   def run(self):
     """
-    Starts the data collection,
+    Starts the data collection, calls collect_metrics() for data and then inserts into InfluxDB and
+    monitors it for abnormalities using the provided Watchdog
     """
     LOG.info('Collecting %s...', self)
     try:
