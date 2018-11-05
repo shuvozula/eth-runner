@@ -11,7 +11,7 @@ LOG_MAX_BYTES = 100000000  # max log-file size of 100MB, until its rotated
 LOG_BACKUP_COUNT = 5
 
 
-def LoggingInit(log_path, log_filename, html=False):
+def logging_init(log_path, log_filename, html=False):
   """
   Initializes the LOG object for global logging, which is a rotating log-handler:
   creates max of LOG_BACK_COUNT log files; older ones are deleted, with each log

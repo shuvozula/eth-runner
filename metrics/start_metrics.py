@@ -9,7 +9,7 @@ from collect_amd_cpu_metrics import LmSensorsMetrics
 from collect_nvidia_metrics import NvidiaMetrics
 from influxdb import InfluxDBClient
 
-from log.log import LoggingInit
+from log.log import logging_init
 from log.log import LOG
 
 import signal
@@ -23,9 +23,9 @@ METRICS_USER = 'root'
 METRICS_PASSWORD = 'root'
 METRICS_DB = 'ethmetrics'
 
-LOG_PATH = '/var/log/'
+LOG_PATH = '/tmp/'
 LOG_FILE_NAME = 'metrics_runner'
-PID_FILE_LOCATION = '/var/log/metrics_collector.pid'
+PID_FILE_LOCATION = '/tmp/metrics_collector.pid'
 
 
 class MetricsRunner(object):
@@ -34,7 +34,7 @@ class MetricsRunner(object):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
 
-    LoggingInit(LOG_PATH, LOG_FILE_NAME)
+    logging_init(LOG_PATH, LOG_FILE_NAME)
 
     LOG.info('Creating pid file at %s with PID=[%s]...', PID_FILE_LOCATION, os.getpid())
     with open(PID_FILE_LOCATION, 'w') as f:
