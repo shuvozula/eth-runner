@@ -25,7 +25,7 @@ class Watchdog(object):
     of `wake_timeout_mins` seconds.
 
     Args:
-      wake_timeout_mins: Minutes to sleep before waking up the system. Used with rtcwake.
+      wake_timeout_mins: Minutes to sleep before waking up the system. Used with rtc-wake.
     """
     LOG.warn('Abnormality found!! Shutting down miner!')
 

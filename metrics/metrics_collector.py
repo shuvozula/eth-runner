@@ -11,7 +11,8 @@ _WAKEUP_SLEEP_SECONDS = 10 * 60  # 10 mins
 
 class AbstractMetricsCollector(threading.Thread):
   """
-  Base class for metrics collection. Encapsulates the behavior of data-collection, reporting and monitoring (Command pattern)
+  Base class for metrics collection. Encapsulates the behavior of data-collection, reporting and
+  monitoring (Command pattern)
   """
 
   def __init__(self, influxdb_client, watchdog, exit_flag_event):
