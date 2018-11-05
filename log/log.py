@@ -19,8 +19,6 @@ def logging_init(log_path, log_filename, html=False):
   """
   global LOG
 
-  coloredlogs.install()
-
   log_format = "[%(asctime)s %(threadName)s, %(levelname)s] %(message)s"
   file_name = "{0}/{1}.log".format(log_path, log_filename)
 
@@ -36,3 +34,5 @@ def logging_init(log_path, log_filename, html=False):
   file_logging_handler.setFormatter(log_formatter)
 
   LOG.addHandler(file_logging_handler)
+
+  coloredlogs.install(logger=LOG)
