@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+coloredlogs = ">=10.0"
+influxdb = ">=5.2.0"
+nvidia-ml-py = "==375.53"
+PySensors = "==0.0.3"
+PyYAML = ">=3.13"
+
+[requires]
+python_version = "2.7"
