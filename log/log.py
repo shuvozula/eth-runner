@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import coloredlogs
 import logging
 import logging.handlers
 
