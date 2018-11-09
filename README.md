@@ -24,7 +24,16 @@ To just start the miners, without any monitoring:
 ```
 $ ./start.sh
 ```
-To start the miners with monitoring, do the following:
+
+## Start with monitoring
+
+Monitoring requires a Python virtual-environment. So, to get started, install `pipenv`,  which wraps `pip` and `virtualenv` and setup all the required python dependencies (check `Pipfile` for an overview) NOTE: do not directly edit `Pipfile.lock` :
+```bash
+$ pip install pipenv
+$ pipenv install
+```
+
+Now start the miners with monitoring:
 ```
 $ ./start.sh --metrics
 ```
