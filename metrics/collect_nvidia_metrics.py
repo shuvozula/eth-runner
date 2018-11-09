@@ -62,7 +62,7 @@ class NvidiaMetrics(AbstractMetricsCollector):
       power_usage = float(nvmlDeviceGetPowerUsage(handle)) / 1000.0
       fan_speed = nvmlDeviceGetFanSpeed(handle)
       temperature = nvmlDeviceGetTemperature(handle, NVML_TEMPERATURE_GPU)
-      data = {
+      data_list.append({
         'measurement': device_name,
         'tags': {
           'host': 'minar',
@@ -73,8 +73,7 @@ class NvidiaMetrics(AbstractMetricsCollector):
           'fan_speed': fan_speed,
           'temperature': temperature
         }
-      }
-      data_list.append(data)
+      })
       time.sleep(PERIOD_SECS)
 
     return data_list
