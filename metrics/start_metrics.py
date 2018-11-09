@@ -20,7 +20,6 @@ import yaml
 
 PROPS = 'app.yml'
 
-
 class MetricsRunner(object):
 
   def __init__(self):
