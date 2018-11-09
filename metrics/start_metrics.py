@@ -15,18 +15,10 @@ from log.log import LOG
 import signal
 import threading
 import time
+import yaml
 
 
-METRICS_HOST = '10.0.0.3'
-METRICS_PORT = '8086'
-METRICS_USER = 'root'
-METRICS_PASSWORD = 'root'
-METRICS_DB = 'ethmetrics'
-
-LOG_PATH = '/var/log/'
-LOG_FILE_NAME = 'metrics_runner'
-PID_FILE_LOCATION = '/var/log/metrics_collector.pid'
-
+PROPS = 'app.yml'
 
 class MetricsRunner(object):
 
@@ -34,21 +26,26 @@ class MetricsRunner(object):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
 
-    logging_init(LOG_PATH, LOG_FILE_NAME)
+    with open(PROPS, 'r') as f:
+      self.props = yaml.safe_load(f)
 
-    LOG.info('Creating pid file at %s with PID=[%s]...', PID_FILE_LOCATION, os.getpid())
-    with open(PID_FILE_LOCATION, 'w') as f:
+    logging_init(self.props['logs']['location'], self.props['logs']['file_name'])
+
+    pid_file = os.path.join(self.props['pid_file']['location'],
+                            self.props['pid_file']['file_name'])
+    LOG.info('Creating pid file at %s with PID=[%s]...', pid_file, os.getpid())
+    with open(pid_file, 'w') as f:
       f.write(str(os.getpid()))
 
   def __enter__(self):
     self.exit_flag_event = threading.Event()
     self.exit_flag_event.clear()
     self.influx_db_client = InfluxDBClient(
-      METRICS_HOST,
-      METRICS_PORT,
-      METRICS_USER,
-      METRICS_PASSWORD,
-      METRICS_DB
+      self.props['metrics']['host'],
+      self.props['metrics']['port'],
+      self.props['metrics']['user'],
+      self.props['metrics']['password'],
+      self.props['metrics']['db']
     )
     self.lmsensors_metrics_thread = LmSensorsMetrics(
       influxdb_client=self.influx_db_client,
