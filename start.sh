@@ -29,7 +29,7 @@ for arg in "$@"; do
   case "$arg" in
     '--metrics')
         echo "Starting metrics services"
-        sudo python $my_dir/metrics/start_metrics.py &
+        sudo python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
         ;;
   esac
 done
