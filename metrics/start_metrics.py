@@ -12,13 +12,12 @@ from influxdb import InfluxDBClient
 from log.log import logging_init
 from log.log import LOG
 
+import argparse
 import signal
 import threading
 import time
 import yaml
 
-
-PROPS = 'app.yml'
 
 class MetricsRunner(object):
 
@@ -26,7 +25,14 @@ class MetricsRunner(object):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
 
-    with open(PROPS, 'r') as f:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--props', type=basestring, help="""
+        Specify the path to where the app.yml configuration-file exists. Use the 
+        metrics/apps.yml.sample to create an app.yml
+        """)
+    args = parser.parse_args()
+
+    with open(args.props, 'r') as f:
       self.props = yaml.safe_load(f)
 
     logging_init(self.props['logs']['location'], self.props['logs']['file_name'])
