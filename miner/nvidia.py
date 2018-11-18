@@ -24,11 +24,11 @@ class NvidiaEthMiner(EthMiner):
   def _enable_nvidia_gpus(self, tuner_props):
     LOG.info('Enabling Nvidia cards...')
 
-    self._run_subprocess('nvidia-xconfig --enable-all-gpus', LOG)
+    self._run_subprocess('nvidia-xconfig --enable-all-gpus')
 
-    tune_script = 'nvidia-xconfig -a --cool-bits={cool_bits} --allow-empty-initial-configuration'.format(
-      cool_bits=tuner_props['cool_bits'])
-    self._run_subprocess(tune_script, LOG)
+    self._run_subprocess("""nvidia-xconfig -a \
+        --cool-bits={cool_bits} \
+        --allow-empty-initial-configuration""".format(cool_bits=tuner_props['cool_bits']))
 
   def _tune_nvidia_gpus(self, tuner_props):
     LOG.info('Tuning Nvidia GPUs...')
@@ -46,8 +46,7 @@ class NvidiaEthMiner(EthMiner):
       # underclock the GPU power
       self._run_subprocess('nvidia-smi -i {gpu_num} -pl {power}'.format(
           gpu_num=gpu_num,
-          power=tuner_props['power_underclock']),
-        LOG)
+          power=tuner_props['power_underclock']))
 
       gpu_overclock_args += ' \
         --assign [gpu:{gpu_num}]/GPUGraphicsClockOffset[3]={gpu_overclock} \
@@ -62,8 +61,7 @@ class NvidiaEthMiner(EthMiner):
     self._run_subprocess('DISPLAY=:0 \
       XAUTHORITY=/var/run/lightdm/root/:0 \
       nvidia-settings {overclock_args}'.format(
-          overclock_args=gpu_overclock_args),
-      LOG)
+          overclock_args=gpu_overclock_args))
 
   def _tune_gpus(self):
     tuner_props = self.props['ethminer']['nvidia']['tuner']

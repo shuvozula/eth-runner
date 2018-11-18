@@ -31,7 +31,7 @@ class EthMiner(threading.Thread):
   def _get_logger(self):
     raise NotImplementedError('Define the logger for the ethminer process.')
 
-  def _run_subprocess(self, run_script, logger):
+  def _run_subprocess(self, run_script, logger=LOG):
     """
     Creates a subprocess.Popen() and logs the output to the provided logger. If the exit-flag-event
     gets set, then the subprocess is killed, otherwise keep logging until the subprocess finishes
