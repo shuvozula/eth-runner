@@ -2,7 +2,7 @@
 ethrunner:
   start_pause_seconds: 60
   kill_timeout_seconds: 65
-  logs: /var/log/ethrunner
+  logs: /var/log/ethrunner.log
   pid_file: /var/log/ethrunner.pid
 
 ethminer:

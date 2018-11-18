@@ -36,7 +36,7 @@ class EthRunner(object):
     with open(props, 'r') as f:
       self.props = yaml.safe_load(f)
 
-    logging_init(self.props['logs']['location'], self.props['logs']['file_name'])
+    logging_init(self.props['ethrunner']['logs'])
 
     self._create_pid()
 
