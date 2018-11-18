@@ -1,14 +1,37 @@
+
+ethrunner:
+  start_pause_seconds: 60
+  kill_timeout_seconds: 65
+  logs: /var/log/ethrunner
+  pid_file: /var/log/ethrunner.pid
+
+ethminer:
+  account_file: .account
+  path: /home/root/.ethminer/bin/
+  stratum: us2.ethermine.org:4444
+  stratum_failover: us1.ethermine.org:4444
+  stratum_client_version: 2
+  farm_recheck: 15000
+  nvidia:
+    miner_logs: /var/log/nvidia_miner.log
+    miner_pid: /var/log/nvidia_miner.pid
+    tuner:
+      cool_bits: 31
+      gpu_overclock: 0
+      mem_overclock: 1000
+      power_underclock: 110   # default: 150 (Watts)
+    run:
+      cuda_parallel_hash: 4
+      cuda_schedule: sync     # positively do not mess with this
+  amd:
+    miner_logs: /var/log/amd_miner.log
+    miner_pid: /var/log/amd_miner.pid
+    opencl_platform_id: 0
+
 metrics:
+  enabled: true
   host: 0.0.0.0
   port: 8086
   user: root
   password: root
   db: ethmetrics
-
-logs:
-  location: /var/log
-  file_name: metrics_runner
-
-pid_file:
-  location: /var/log
-  file_name: metrics_collector.pid
