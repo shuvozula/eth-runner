@@ -13,8 +13,8 @@ from log.log import logging_init
 from log.log import LOG
 from miner.nvidia import NvidiaEthMiner
 from miner.amd import AmdEthMiner
-from metrics.collect_amd_cpu_metrics import LmSensorsMetrics
-from metrics.collect_nvidia_metrics import NvidiaMetrics
+from metrics.lmsensors import LmSensorsMetrics
+from metrics.nvml import NvidiaMetrics
 
 
 class EthRunner(object):
