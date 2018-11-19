@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 
-from log.log import LOG
 from metrics_collector import AbstractMetricsCollector
 from pynvml import (
-  nvmlInit,
-  nvmlShutdown,
   nvmlDeviceGetCount,
   nvmlDeviceGetHandleByIndex,
   nvmlDeviceGetPowerUsage,
@@ -38,18 +35,8 @@ class NvidiaMetrics(AbstractMetricsCollector):
       exit_flag_event=exit_flag_event
     )
 
-    LOG.info('Initializing NVML sensors....')
-    nvmlInit()
-
   def __str__(self):
     return 'NVIDIA GPU metrics'
-
-  def __del__(self):
-    """
-    Cleans up the NVML internal state for all GPUs
-    """
-    LOG.info('Shutting down NVIDA metrics collection....')
-    nvmlShutdown()
 
   def collect_metrics(self):
     """

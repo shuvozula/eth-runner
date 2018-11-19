@@ -15,6 +15,10 @@ from miner.nvidia import NvidiaEthMiner
 from miner.amd import AmdEthMiner
 from metrics.lmsensors import LmSensorsMetrics
 from metrics.nvml import NvidiaMetrics
+from pynvml import (
+  nvmlInit,
+  nvmlShutdown
+)
 
 
 class EthRunner(object):
@@ -31,6 +35,9 @@ class EthRunner(object):
     # register the kill handlers
     signal.signal(signal.SIGINT, self.stop)
     signal.signal(signal.SIGTERM, self.stop)
+
+    LOG.info('Initializing NVML sensors....')
+    nvmlInit()
 
     # load the props
     with open(props, 'r') as f:
@@ -60,6 +67,10 @@ class EthRunner(object):
     if bool(self.props['metrics']['enabled']):
       self.nvidia_metrics = NvidiaMetrics(self.influx_db_client, self.exit_flag_event)
       self.lmsensors_metrics = LmSensorsMetrics(self.influx_db_client, self.exit_flag_event)
+
+  def __del__(self):
+    LOG.info('Cleaning up NVML internal state...')
+    nvmlShutdown()
 
   def _create_pid(self):
     pid_file = self.props['ethrunner']['pid_file']
