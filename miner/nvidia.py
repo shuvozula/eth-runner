@@ -38,7 +38,7 @@ class NvidiaEthMiner(EthMiner):
     LOG.info('Under-powering to .................. {power_underclock}Watts'.format(**tuner_props))
     LOG.info(''.join(['='] * 43))
 
-    gpu_overclock_args = ''
+    gpu_overclock_args = []
 
     LOG.info('Tuning down power consumption...')
     for gpu_num in iter(nvmlDeviceGetCount()):
@@ -48,20 +48,20 @@ class NvidiaEthMiner(EthMiner):
           gpu_num=gpu_num,
           power=tuner_props['power_underclock']))
 
-      gpu_overclock_args += ' \
+      gpu_overclock_args.append(' \
         --assign [gpu:{gpu_num}]/GPUGraphicsClockOffset[3]={gpu_overclock} \
         --assign [gpu:{gpu_num}]/GPUMemoryTransferRateOffset[3]={mem_overclock}'.format(
             gpu_num=gpu_num,
             gpu_overclock=tuner_props['gpu_overclock'],
             mem_overclock=tuner_props['mem_overclock']
-          )
+          ))
 
     # overclock the memory and underclock the processor
     LOG.info('Overclocking Nvidia GPU memory & processor...')
     self._run_subprocess('DISPLAY=:0 \
       XAUTHORITY=/var/run/lightdm/root/:0 \
       nvidia-settings {overclock_args}'.format(
-          overclock_args=gpu_overclock_args))
+          overclock_args=''.join(gpu_overclock_args)))
 
   def _tune_gpus(self):
     tuner_props = self.props['ethminer']['nvidia']['tuner']
