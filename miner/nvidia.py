@@ -27,16 +27,15 @@ class NvidiaEthMiner(EthMiner):
         self._run_subprocess('nvidia-xconfig --enable-all-gpus')
 
         self._run_subprocess("""nvidia-xconfig -a \
-        --cool-bits={cool_bits} \
-        --allow-empty-initial-configuration""".format(cool_bits=tuner_props['cool_bits']))
+                --cool-bits={cool_bits} \
+                --allow-empty-initial-configuration""".format(cool_bits=tuner_props['cool_bits']))
 
     def _tune_nvidia_gpus(self, tuner_props):
         LOG.info('Tuning Nvidia GPUs...')
         LOG.info(''.join(['='] * 43))
         LOG.info('Overclocking GPU Memory to ......... {mem_overclock}MHz'.format(**tuner_props))
         LOG.info('Overclocking GPU Processor to ...... {gpu_overclock}MHz'.format(**tuner_props))
-        LOG.info(
-            'Under-powering to .................. {power_underclock}Watts'.format(**tuner_props))
+        LOG.info('Under-powering to .................. {power_underclock}Watts'.format(**tuner_props))
         LOG.info(''.join(['='] * 43))
 
         gpu_overclock_args = []
@@ -45,23 +44,22 @@ class NvidiaEthMiner(EthMiner):
         for gpu_num in iter(nvmlDeviceGetCount()):
             # underclock the GPU power
             self._run_subprocess('nvidia-smi -i {gpu_num} -pl {power}'.format(
-                gpu_num=gpu_num,
-                power=tuner_props['power_underclock']))
+                    gpu_num=gpu_num,
+                    power=tuner_props['power_underclock']))
 
             gpu_overclock_args.append(' \
-        --assign [gpu:{gpu_num}]/GPUGraphicsClockOffset[3]={gpu_overclock} \
-        --assign [gpu:{gpu_num}]/GPUMemoryTransferRateOffset[3]={mem_overclock}'.format(
-                gpu_num=gpu_num,
-                gpu_overclock=tuner_props['gpu_overclock'],
-                mem_overclock=tuner_props['mem_overclock']
-            ))
+                --assign [gpu:{gpu_num}]/GPUGraphicsClockOffset[3]={gpu_overclock} \
+                --assign [gpu:{gpu_num}]/GPUMemoryTransferRateOffset[3]={mem_overclock}'.format(
+                        gpu_num=gpu_num,
+                        gpu_overclock=tuner_props['gpu_overclock'],
+                        mem_overclock=tuner_props['mem_overclock']))
 
         # overclock the memory and underclock the processor
         LOG.info('Overclocking Nvidia GPU memory & processor...')
         self._run_subprocess('DISPLAY=:0 \
-      XAUTHORITY=/var/run/lightdm/root/:0 \
-      nvidia-settings {overclock_args}'.format(
-            overclock_args=''.join(gpu_overclock_args)))
+              XAUTHORITY=/var/run/lightdm/root/:0 \
+              nvidia-settings {overclock_args}'.format(
+                    overclock_args=''.join(gpu_overclock_args)))
 
     def _tune_gpus(self):
         tuner_props = self.props['ethminer']['nvidia']['tuner']
