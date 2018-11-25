@@ -1,4 +1,3 @@
-
 ethrunner:
   start_pause_seconds: 60
   kill_timeout_seconds: 65
