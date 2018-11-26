@@ -68,23 +68,23 @@ class NvidiaEthMiner(EthMiner):
 
     def _get_run_script(self):
         return """nohup {path}/ethminer \
-      --farm-recheck {farm_recheck} \
-      -SC {stratum_client_version} \
-      -RH \
-      --cuda-parallel-hash {cuda_parallel_hash} \
-      --cuda-schedule {cuda_schedule} \
-      --cuda-devices {cuda_devices} \
-      -U \
-      -S {stratum} \
-      -FS {stratum_failover} \
-      -O {account}
-    """.format(
-            path=self.props['ethminer']['path'],
-            farm_recheck=self.props['ethminer']['farm_recheck'],
-            stratum_client_version=self.props['ethminer']['stratum_client_version'],
-            cuda_parallel_hash=self.props['ethminer']['nvidia']['run']['cuda_parallel_hash'],
-            cuda_schedule=self.props['ethminer']['nvidia']['run']['cuda_schedule'],
-            cuda_devices=' '.join(iter(nvmlDeviceGetCount())),
-            stratum=self.props['ethminer']['stratum'],
-            stratum_failover=self.props['ethminer']['stratum_failover'],
-            account=self._get_account_id())
+              --farm-recheck {farm_recheck} \
+              -SC {stratum_client_version} \
+              -RH \
+              --cuda-parallel-hash {cuda_parallel_hash} \
+              --cuda-schedule {cuda_schedule} \
+              --cuda-devices {cuda_devices} \
+              -U \
+              -S {stratum} \
+              -FS {stratum_failover} \
+              -O {account}
+            """.format(
+                    path=self.props['ethminer']['path'],
+                    farm_recheck=self.props['ethminer']['farm_recheck'],
+                    stratum_client_version=self.props['ethminer']['stratum_client_version'],
+                    cuda_parallel_hash=self.props['ethminer']['nvidia']['run']['cuda_parallel_hash'],
+                    cuda_schedule=self.props['ethminer']['nvidia']['run']['cuda_schedule'],
+                    cuda_devices=' '.join(iter(nvmlDeviceGetCount())),
+                    stratum=self.props['ethminer']['stratum'],
+                    stratum_failover=self.props['ethminer']['stratum_failover'],
+                    account=self._get_account_id())
