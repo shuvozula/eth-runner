@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
-import logging
-
 from miner.ethminer import EthMiner
-from log.log import LOG, create_rotating_log_handler
+from log.log import LOG
 
 
 class AmdEthMiner(EthMiner):
@@ -14,11 +12,8 @@ class AmdEthMiner(EthMiner):
     def __str__(self):
         return 'Ethminer-AMD'
 
-    def _get_logger(self):
-        return create_rotating_log_handler(
-            log_file_location=self.props['ethminer']['amd']['miner_logs'],
-            log_format=None,
-            logger=logging.getLogger())
+    def _get_log_file_location(self):
+        return self.props['ethminer']['amd']['miner_logs']
 
     def _tune_gpus(self):
         LOG.info("Nothing to tune for AMD GPUs as its already flashed with overclocked ROM...")

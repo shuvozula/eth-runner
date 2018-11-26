@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
+import logging
 import subprocess
 import threading
 
-from log.log import LOG
+from log.log import LOG, create_rotating_log_handler
 
 
 class EthMiner(threading.Thread):
@@ -28,8 +29,8 @@ class EthMiner(threading.Thread):
     def _get_run_script(self):
         raise NotImplementedError('Define the run-script for the ethminer process.')
 
-    def _get_logger(self):
-        raise NotImplementedError('Define the logger for the ethminer process.')
+    def _get_log_file_location(self):
+        raise NotImplementedError('Define the log-file location for the ethminer process.')
 
     def _run_subprocess(self, run_script, logger=LOG):
         """
@@ -44,10 +45,11 @@ class EthMiner(threading.Thread):
         LOG.debug('Launching subprocess "%s"', run_script)
         proc = subprocess.Popen(run_script,
                                 stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT)
+                                stderr=subprocess.STDOUT,
+                                shell=True)
 
         # keep running until the process has exited by itself, or the exit-flag-event is set
-        LOG.debug('Logging output to %s', logger.baseFilename)
+        LOG.debug('Logging output to %s', self._get_log_file_location())
         while proc.poll() is None and not self.exit_flag_event.is_set():
             logger.info(proc.stdout.readline())
 
@@ -63,7 +65,11 @@ class EthMiner(threading.Thread):
         self._tune_gpus()
 
         # Fetch the individual logger for the ethminer process
-        ethminer_logger = self._get_logger()
+        ethminer_logger = create_rotating_log_handler(
+            log_file_location=self._get_log_file_location(),
+            log_format=None,
+            logger=logging.getLogger())
 
         LOG.info('Launching %s...', str(self))
+
         self._run_subprocess(self._get_run_script(), ethminer_logger)  # blocking call

@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
-import logging
-
 from miner.ethminer import EthMiner
-from log.log import LOG, create_rotating_log_handler
+from log.log import LOG
 from pynvml import nvmlDeviceGetCount
 
 
@@ -15,11 +13,8 @@ class NvidiaEthMiner(EthMiner):
     def __str__(self):
         return 'Ethminer-Nvidia'
 
-    def _get_logger(self):
-        return create_rotating_log_handler(
-            log_file_location=self.props['ethminer']['nvidia']['miner_logs'],
-            log_format=None,
-            logger=logging.getLogger())
+    def _get_log_file_location(self):
+        return self.props['ethminer']['nvidia']['miner_logs']
 
     def _enable_nvidia_gpus(self, tuner_props):
         LOG.info('Enabling Nvidia cards...')

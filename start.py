@@ -36,14 +36,14 @@ class EthRunner(object):
         signal.signal(signal.SIGINT, self.stop)
         signal.signal(signal.SIGTERM, self.stop)
 
-        LOG.info('Initializing NVML sensors....')
-        nvmlInit()
-
         # load the props
         with open(props, 'r') as f:
             self.props = yaml.safe_load(f)
 
         logging_init(self.props['ethrunner']['logs'])
+
+        LOG.info('Initializing NVML sensors....')
+        nvmlInit()
 
         self._create_pid()
 
@@ -60,8 +60,8 @@ class EthRunner(object):
         self.exit_flag_event.clear()
 
         # create the miner threads and share the exit-event handler
-        self.nvidia_miner = NvidiaEthMiner(props, self.influx_db_client, self.exit_flag_event)
-        self.amd_miner = AmdEthMiner(props, self.influx_db_client, self.exit_flag_event)
+        self.nvidia_miner = NvidiaEthMiner(self.props, self.influx_db_client, self.exit_flag_event)
+        self.amd_miner = AmdEthMiner(self.props, self.influx_db_client, self.exit_flag_event)
 
         # create the metrics collection threads
         if bool(self.props['metrics']['enabled']):
@@ -80,6 +80,9 @@ class EthRunner(object):
 
     def __enter__(self):
         return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
 
     def start(self):
         """
@@ -106,8 +109,8 @@ class EthRunner(object):
         # wait for a kill event
         signal.pause()
 
-    def stop(self):
-        LOG.info('Stopping all metrics-collectors gracefully...')
+    def stop(self, signum, frame):
+        LOG.info('Stopping all miners and metrics-collectors gracefully...')
         self.exit_flag_event.set()
         kill_timeout = float(self.props['ethrunner']['kill_timeout_seconds'])
         time.sleep(kill_timeout)
