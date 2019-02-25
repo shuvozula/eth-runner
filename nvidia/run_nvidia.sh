@@ -23,15 +23,13 @@ else
 
   # Use the Cuda drivers for mining
   nohup $ETHMINER_PATH/ethminer \
+    --pool stratum://$ACCOUNT.miner@us2.ethermine.org:4444 \
+    --report-hashrate \
+    --dag-load-mode 1 \
     --farm-recheck 15000 \
-    -SC 2 \
-    -RH \
+    --cuda \
     --cuda-parallel-hash 4 \
     --cuda-schedule sync \
     --cuda-devices $GPUS \
-    -U \
-    -S us2.ethermine.org:4444 \
-    -FS us1.ethermine.org:4444 \
-    -O $ACCOUNT \
     >> /var/log/nvidia_miner.log 2>&1 </dev/null & echo $! > /var/log/nvidia_miner.pid & sleep 2
 fi

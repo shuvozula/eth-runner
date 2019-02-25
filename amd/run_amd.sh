@@ -22,13 +22,12 @@ else
   echo "Launching Ethminer-ATI...."
 
   nohup $ETHMINER_PATH/ethminer \
+    --pool stratum://$ACCOUNT.miner@us2.ethermine.org:4444 \
+    --dag-load-mode 1 \
+    --report-hashrate \
     --farm-recheck 15000 \
-    -SC 2 \
+    --opencl \
     --opencl-platform $AMD_OPENCL_PLATFORM_ID \
-    -RH \
-    -G \
-    -S us2.ethermine.org:4444 \
-    -FS us1.ethermine.org:4444 \
-    -O $ACCOUNT \
+    --cl-parallel-hash 8 \
     >> /var/log/ati_miner.log 2>&1 </dev/null & echo $! > /var/log/ati_miner.pid & sleep 2
 fi
