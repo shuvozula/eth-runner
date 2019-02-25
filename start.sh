@@ -7,15 +7,15 @@ install_pipenv() {
 
 my_dir="$(dirname $0)"
 
-start_pause=60
+start_pause=0
 echo "Sleeping for $start_pause seconds before starting mining...."
 
 sleep $start_pause
 
 if ! grep -q Screen7 /etc/X11/xorg.conf; then
-	echo "Enabling Nvidia cards...."
-	sudo sh $my_dir/nvidia/enable_nvidia.sh
-	sleep 15
+  echo "Enabling Nvidia cards...."
+  sudo sh $my_dir/nvidia/enable_nvidia.sh
+  sleep 15
 fi
 
 echo "Tuning Nvidia cards...."
