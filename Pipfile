@@ -10,7 +10,7 @@ coloredlogs = ">=10.0"
 influxdb = ">=5.2.0"
 nvidia-ml-py = "==375.53"
 PySensors = "==0.0.3"
-PyYAML = ">=3.13"
+PyYAML = ">=4.2b1"
 
 [requires]
 python_version = "2.7"
