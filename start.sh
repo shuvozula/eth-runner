@@ -1,5 +1,11 @@
 #!/bin/bash
 
+
+install_pipenv() {
+  sudo apt install python python-pip
+  pip install pipenv
+}
+
 my_dir="$(dirname $0)"
 
 start_pause=0
@@ -28,6 +34,7 @@ for arg in "$@"; do
   case "$arg" in
     '--metrics')
         echo "Starting metrics services"
+        install_pipenv
         pipenv install
         pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
         ;;
