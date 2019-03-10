@@ -28,6 +28,8 @@ else
      sudo nvidia-smi -i ${GPU_NUM} -pl ${POWER}
   done
 
+  sleep 2
+
   echo "Applying overclock settings...."
   sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 nvidia-settings ${OVERCLOCK_ARGS}
 fi
