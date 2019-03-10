@@ -71,6 +71,8 @@ class LmSensorsMetrics(AbstractMetricsCollector):
         data['fields']['fan_speed'] = float(feature.get_value()) * 100.0 / 3200.0
       elif feature.label.startswith('temp'):
         data['fields']['temperature'] = feature.get_value()
+      elif feature.label.startswith('power'):
+        data['fields']['power'] = feature.get_value()
 
     return data
 
