@@ -1,6 +1,6 @@
 #!/bin/bash
 
-AMD_OPENCL_PLATFORM_ID=0
+AMD_OPENCL_PLATFORM_ID=1
 
 # ----------------------- Do not edit below this line --------------------------
 

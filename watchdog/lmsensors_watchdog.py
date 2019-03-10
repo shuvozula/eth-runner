@@ -5,7 +5,7 @@ from log.log import LOG
 
 
 # Maximum heat limit per AMD GPU allowed
-HEAT_LIMIT = 70
+HEAT_LIMIT = 78
 
 # Minutes to sleep after killing the miners if something is found wrong with the GPUs
 SLEEP_TIMEOUT_MINS = 20
