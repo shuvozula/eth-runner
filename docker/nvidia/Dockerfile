@@ -1,7 +1,7 @@
 FROM nvidia/cuda:10.0-base
 
-ADD docker/
-ADD nvidia/
+ADD docker/ /docker
+ADD nvidia/ /nvidia
 
 # Enable Xorg with nvidia gpus and tune their memory and power clocks
 RUN nvidia/enable_nvidia.sh
