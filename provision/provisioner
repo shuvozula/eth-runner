@@ -1,0 +1,15 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          myupdate
+### END INIT INFO
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+case "$1" in
+    start)
+        /home/shuvo/projects/eth-runner/provision/machine-provision.sh
+        ;;
+    stop|restart|reload)
+        ;;
+esac
