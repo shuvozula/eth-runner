@@ -14,8 +14,8 @@ if [ -f /home/root/init-install ]; then
     pip install pipenv
 
     mkdir -p ~/projects/nvidia-downloads ~/projects/amd-downloads
-    sudo touch /var/log/nvidia_miner.log
-    sudo touch /var/log/ati_miner.log
+    sudo touch ../logs/nvidia_miner.log
+    sudo touch ../logs/ati_miner.log
 
     # Download eth-runner
     cd projects/
