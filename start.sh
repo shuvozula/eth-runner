@@ -7,7 +7,7 @@ install_pipenv() {
 
 my_dir="$(dirname $0)"
 
-start_pause=0
+start_pause=30
 echo "Sleeping for $start_pause seconds before starting mining...."
 
 sleep $start_pause
