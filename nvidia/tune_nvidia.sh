@@ -38,8 +38,13 @@ else
   OVERCLOCK_ARGS=""
   for GPU_NUM in $(echo $GPUS | grep -o "\[[0-9]*\]" | grep -o "[0-9]*");
   do
-     OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${DEFAULT_GPU_OVERCLOCK} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${DEFAULT_MEM_OVERCLOCK}"
-
+     if [ ${TUNE_MAP[${GPU_NUM}]+ispresent} ]; then
+        OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${TUNE_MAP[${GPU_NUM}]}[GPU] --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${TUNE_MAP[${GPU_NUM}]}[MEM]"
+        POW="${TUNE_MAP[${GPU_NUM}]}[POW]"
+     else
+        OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${DEFAULT_GPU_OVERCLOCK} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${DEFAULT_MEM_OVERCLOCK}"
+        POW=${DEFAULT_POWER}
+     fi
      echo "Applying underpower-limit to Nvidia GPU-$GPU_NUM...."
      sudo nvidia-smi -i ${GPU_NUM} -pl ${DEFAULT_POWER}
   done
