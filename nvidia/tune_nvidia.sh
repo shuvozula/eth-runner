@@ -39,9 +39,8 @@ else
   for GPU_NUM in $(echo $GPUS | grep -o "\[[0-9]*\]" | grep -o "[0-9]*");
   do
      if [ ${TUNE_MAP[${GPU_NUM}]+ispresent} ]; then
-        GPU_VALS=${TUNE_MAP[${GPU_NUM}]}
-        OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${GPU_VALS[GPU]} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${GPU_VALS[MEM]}"
-        POW="${GPU_VALS[POW]}"
+        OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${TUNE_MAP[${GPU_NUM}][GPU]} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${TUNE_MAP[${GPU_NUM}][MEM]}"
+        POW="${TUNE_MAP[${GPU_NUM}][POW]}"
      else
         OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${DEFAULT_GPU_OVERCLOCK} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${DEFAULT_MEM_OVERCLOCK}"
         POW=${DEFAULT_POWER}
