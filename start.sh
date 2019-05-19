@@ -6,6 +6,7 @@ install_pipenv() {
 }
 
 my_dir="$(dirname $0)"
+pipenv_home="/home/shuvo/.local/bin"
 
 start_pause=30
 echo "Sleeping for $start_pause seconds before starting mining...."
@@ -34,8 +35,8 @@ for arg in "$@"; do
     '--metrics')
         echo "Starting metrics services"
         install_pipenv
-        pipenv install
-        pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
+        $pipenv_home/pipenv install
+        $pipenv_home/pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
         ;;
   esac
 done
