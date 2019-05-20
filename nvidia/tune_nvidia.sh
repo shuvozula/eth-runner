@@ -4,16 +4,11 @@ DEFAULT_GPU_OVERCLOCK=0
 DEFAULT_MEM_OVERCLOCK=1000
 DEFAULT_POWER=110
 
-# Declare separate settings for individual GPUs here
-
-# declare GPU settings for 1060 6GB GPU
-declare -A GPU_1060_TUNE_MAP
-GPU_1060_TUNE_MAP[GPU]=0
-GPU_1060_TUNE_MAP[MEM]=1200
-GPU_1060_TUNE_MAP[POW]=110
-
-TUNE_MAP[2]=GPU_1060_TUNE_MAP
-
+# each Map index is the GPU index as discovered by "ethminer --list-devices -G".
+# Tune parameter values are stored in the order: GPU_OVERCLOCK;MEMORY_OVERCLOCK;POWER_UNDERCLOCK
+declare -A TUNE_MAP_OVERRIDE=(
+    [2]='0;1200;110'
+)
 
 # ----------------------- Do not edit below this line --------------------------
 
@@ -27,20 +22,16 @@ else
   echo "Default Overclocking GPU Memory to ......... ${DEFAULT_MEM_OVERCLOCK}MHz"
   echo "Default Underclocking GPU Processor to ..... ${DEFAULT_GPU_OVERCLOCK}MHz"
   echo "Default Under-powering to .................. ${DEFAULT_POWER}W"
-  echo ""
-  echo "<<1060 Tune Settings>>"
-  echo "1060 Overclocking GPU Memory to ......... ${GPU_1060_TUNE_MAP[GPU]}MHz"
-  echo "1060 Underclocking GPU Processor to ..... ${GPU_1060_TUNE_MAP[MEM]}MHz"
-  echo "1060 Under-powering to .................. ${GPU_1060_TUNE_MAP[POW]}W"
   echo "=================================================="
 
   GPUS=$(sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 nvidia-settings -c :0 -q gpus)
   OVERCLOCK_ARGS=""
   for GPU_NUM in $(echo $GPUS | grep -o "\[[0-9]*\]" | grep -o "[0-9]*");
   do
-     if [ ${TUNE_MAP[${GPU_NUM}]+ispresent} ]; then
-        OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${TUNE_MAP[${GPU_NUM}][GPU]} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${TUNE_MAP[${GPU_NUM}][MEM]}"
-        POW="${TUNE_MAP[${GPU_NUM}][POW]}"
+     if [[ ${TUNE_MAP_OVERRIDE[${GPU_NUM}]+ispresent} ]]; then
+        IFS=';' read -r -a TUNE_PARAMS <<< "${TUNE_MAP_OVERRIDE[$GPU_NUM]}"
+        OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${TUNE_PARAMS[0]} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${TUNE_PARAMS[1]}"
+        POW="${TUNE_PARAMS[2]}"
      else
         OVERCLOCK_ARGS="$OVERCLOCK_ARGS --assign [gpu:${GPU_NUM}]/GPUGraphicsClockOffset[3]=${DEFAULT_GPU_OVERCLOCK} --assign [gpu:${GPU_NUM}]/GPUMemoryTransferRateOffset[3]=${DEFAULT_MEM_OVERCLOCK}"
         POW=${DEFAULT_POWER}
