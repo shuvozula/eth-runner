@@ -37,7 +37,7 @@ else
         POW=${DEFAULT_POWER}
      fi
      echo "Applying underpower-limit to Nvidia GPU-$GPU_NUM...."
-     sudo nvidia-smi -i ${GPU_NUM} -pl ${DEFAULT_POWER}
+     sudo nvidia-smi -i ${GPU_NUM} -pl ${POW}
   done
 
   echo "Applying overclock settings...."
