@@ -39,6 +39,7 @@ for arg in "$@"; do
         $pipenv_home/pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
 
         echo "Starting FluentD collector..."
+        docker stop fluent-logger
         docker build -t fluentd fluentd/.
         docker run -it -d --rm --name fluent-logger -v /var/log:/fluentd/log fluentd:latest
         ;;
