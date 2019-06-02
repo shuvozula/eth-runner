@@ -37,6 +37,7 @@ for arg in "$@"; do
         install_pipenv
         $pipenv_home/pipenv install
         $pipenv_home/pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
+        docker run -it -d --rm --name fluent-logger -v /var/log:/fluentd/log fluentd:latest
         ;;
   esac
 done

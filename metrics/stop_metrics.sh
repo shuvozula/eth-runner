@@ -6,3 +6,6 @@ METRICS_SERVER_NAME=eth-metrics-influx
 echo "Stopping metrics collectors..."
 sudo kill $(cat /var/log/metrics_collector.pid)
 
+echo "Stopping Fluentd container..."
+docker stop fluent-logger
+
