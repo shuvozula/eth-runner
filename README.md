@@ -45,6 +45,7 @@ $ ./start.sh --metrics
 - No AMD tuning is provided here, you have to use [Polaris Bios Editor](https://github.com/jaschaknack/PolarisBiosEditor) to flash the ROM and get your optimal hashrate. A list of available pre-tested ROMS for MSI RX580 8GB cards are provided in `rom/` for use, *but use it at your own risk as not every GPU is the same*.
 - Edit `amd/run_amd.sh` and set the platform-ID for AMD cards fetched using `ethminer --list-devices`
 - Start mining by runing `sudo start.sh`, which will first enable and tune your Nvidia cards and then will run ethminer on all available Nvidia and AMD GPUs.
+- Fluentd daemon will run as a docker container collecting nvidia and amd hash-rates and reporting that to Influxdb/Grafana.
 
 ## Crontab
 The `start.sh`, `stop.sh` and `switchoff_until.sh` scripts can be used with crontab as shown below:
