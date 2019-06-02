@@ -6,6 +6,7 @@ install_pipenv() {
 }
 
 my_dir="$(dirname $0)"
+pipenv_home="/home/shuvo/.local/bin"
 
 start_pause=30
 echo "Sleeping for $start_pause seconds before starting mining...."
@@ -32,10 +33,15 @@ sudo sh $my_dir/nvidia/run_nvidia.sh && sleep 120
 for arg in "$@"; do
   case "$arg" in
     '--metrics')
-        echo "Starting metrics services"
+        echo "Starting metrics services..."
         install_pipenv
-        pipenv install
-        pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
+        $pipenv_home/pipenv install
+        $pipenv_home/pipenv run python $my_dir/metrics/start_metrics.py --props metrics/app.yml &
+
+        echo "Starting FluentD collector..."
+        docker stop fluent-logger
+        docker build -t fluentd fluentd/.
+        docker run -it -d --rm --name fluent-logger -v /var/log:/fluentd/log fluentd:latest
         ;;
   esac
 done
