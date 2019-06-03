@@ -26,6 +26,7 @@ else
     --opencl \
     --report-hashrate \
     --farm-recheck 15000 \
+    --display-interval 10 \
     --opencl-platform $AMD_OPENCL_PLATFORM_ID \
     --cl-parallel-hash 8 \
     --dag-load-mode 1 \
