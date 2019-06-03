@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-from log.log import LOG
-
 import os
 import time
+
+from datetime import datetime, timedelta
+from log.log import LOG
 
 
 class Watchdog(object):
@@ -11,10 +12,15 @@ class Watchdog(object):
   Abstract base class for Watchdogs. Cannot be instantiated directly
   """
 
-  def __init__(self, exit_flag_event):
+  def __init__(self, exit_flag_event, timeout_seconds=120):
     if type(self) is Watchdog:
       raise NotImplementedError('Abstract class cannot be directly instantiated!')
     self._exit_flag_event = exit_flag_event
+    self.expire_time = datetime.now() + timedelta(0, timeout_seconds)
+
+  def monitor(self, data):
+    if datetime.now() > self.expire_time:
+      self.do_monitor(data)
 
   def do_monitor(self, data):
     raise NotImplementedError('Abstract method needs to be overriden by derived class!')
