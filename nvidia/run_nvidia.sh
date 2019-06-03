@@ -27,7 +27,7 @@ else
     --cuda \
     --report-hashrate \
     --farm-recheck 15000 \
-    --display-interval 10 \
+    --display-interval 30 \
     --cuda-parallel-hash 4 \
     --cuda-schedule sync \
     --cuda-devices $GPUS \
