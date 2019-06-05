@@ -48,7 +48,7 @@ class AbstractMetricsCollector(threading.Thread):
         self._influxdb_client.write_points(json_body)
 
         # monitor the data for any abnormalities in the AMD GPUs
-        self._watchdog.do_monitor(json_body)
+        self._watchdog.monitor(json_body)
 
         time.sleep(_EPOCH_SLEEP_SECONDS)
 

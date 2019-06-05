@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import coloredlogs
 import logging
 import logging.handlers
 
@@ -34,5 +33,3 @@ def logging_init(log_path, log_filename, html=False):
   file_logging_handler.setFormatter(log_formatter)
 
   LOG.addHandler(file_logging_handler)
-
-  coloredlogs.install(logger=LOG)
