@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "cb7bc2bf2d100aff5f95eb8b3f5717e89d15d2fcdc378afc42b3896eec77d580"
+            "sha256": "e90b83ccbb0d54c3e03c18073e11b92f44175f1b2359c39189ae683c3b964535"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -11,7 +11,7 @@
             {
                 "name": "pypi",
                 "url": "https://pypi.org/simple",
-                "verify_ssl": false
+                "verify_ssl": true
             }
         ]
     },
@@ -30,21 +30,6 @@
             ],
             "version": "==3.0.4"
         },
-        "coloredlogs": {
-            "hashes": [
-                "sha256:34fad2e342d5a559c31b6c889e8d14f97cb62c47d9a2ae7b5ed14ea10a79eff8",
-                "sha256:b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
-            ],
-            "index": "pypi",
-            "version": "==10.0"
-        },
-        "humanfriendly": {
-            "hashes": [
-                "sha256:23057b10ad6f782e7bc3a20e3cb6768ab919f619bbdc0dd75691121bbde5591d",
-                "sha256:33ee8ceb63f1db61cce8b5c800c531e1a61023ac5488ccde2ba574a85be00a85"
-            ],
-            "version": "==4.18"
-        },
         "idna": {
             "hashes": [
                 "sha256:c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407",
@@ -59,14 +44,6 @@
             ],
             "index": "pypi",
             "version": "==5.2.2"
-        },
-        "monotonic": {
-            "hashes": [
-                "sha256:23953d55076df038541e648a53676fb24980f7a1be290cdda21300b3bc21dfb0",
-                "sha256:552a91f381532e33cbd07c6a2655a21908088962bb8fa7239ecbcc6ad1140cc7"
-            ],
-            "markers": "python_version == '2.6' or python_version == '2.7' or python_version == '3.0' or python_version == '3.1' or python_version == '3.2'",
-            "version": "==1.5"
         },
         "nvidia-ml-py": {
             "hashes": [
