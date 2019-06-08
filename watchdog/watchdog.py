@@ -37,7 +37,7 @@ class Watchdog(object):
 
     LOG.warn('Signalling metrics-threads for shutdown sequence...')
     self._exit_flag_event.set()
-    time.sleep(90)
+    time.sleep(65)
 
     LOG.warn('Going to sleep for %d minutes...', wake_timeout_mins)
     time.sleep(30)
