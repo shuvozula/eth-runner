@@ -12,7 +12,7 @@ class Watchdog(object):
   Abstract base class for Watchdogs. Cannot be instantiated directly
   """
 
-  def __init__(self, exit_flag_event, timeout_seconds=120):
+  def __init__(self, exit_flag_event, timeout_seconds):
     if type(self) is Watchdog:
       raise NotImplementedError('Abstract class cannot be directly instantiated!')
     self._exit_flag_event = exit_flag_event
