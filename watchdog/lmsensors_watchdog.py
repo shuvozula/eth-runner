@@ -17,7 +17,7 @@ class LmSensorsWatchdog(Watchdog):
   TODO: Add more checks as required, eg: CPU core temperatures, etc.
   """
 
-  def __init__(self, exit_flag_event, timeout_seconds=120):
+  def __init__(self, exit_flag_event, timeout_seconds):
     super(LmSensorsWatchdog, self).__init__(exit_flag_event, timeout_seconds)
     LOG.info("LmSensors-Watchdog started!")
 
@@ -30,4 +30,4 @@ class LmSensorsWatchdog(Watchdog):
         if amd_gpu_temperature > HEAT_LIMIT:
           LOG.error('Current temperature of AMD GPU-%s is %d > %d! Killing all miners...',
             device_name, amd_gpu_temperature, HEAT_LIMIT)
-          self.switch_off_miner(SLEEP_TIMEOUT_MINS)
+          self.switch_off_miner_overheat(SLEEP_TIMEOUT_MINS)
