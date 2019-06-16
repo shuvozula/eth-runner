@@ -23,7 +23,7 @@ class NvidiaWatchdog(Watchdog):
   the power drops below a certain threshold, stop the miners.
   """
 
-  def __init__(self, exit_flag_event, timeout_seconds=120):
+  def __init__(self, exit_flag_event, timeout_seconds):
     super(NvidiaWatchdog, self).__init__(exit_flag_event, timeout_seconds)
     LOG.info("Nvidia-Watchdog started!")
 
@@ -36,9 +36,9 @@ class NvidiaWatchdog(Watchdog):
       if temperature > HEAT_LIMIT:
         LOG.error('Current temperature of Nvidia GPU-%s is %d > %d! Killing all miners...',
             device_name, temperature, HEAT_LIMIT)
-        self.switch_off_miner(HEATAGE_SLEEP_TIMEOUT_MINS)
+        self.switch_off_miner_overheat(HEATAGE_SLEEP_TIMEOUT_MINS)
 
       if power_usage < POWER_LIMIT:
         LOG.error('Current power usage from Nvidia GPU-%s is %d < %d! Killing all miners...',
             device_name, power_usage, POWER_LIMIT)
-        self.switch_off_miner(WATTAGE_SLEEP_TIMEOUT_MINS)
+        self.switch_off_miner_underpowered(WATTAGE_SLEEP_TIMEOUT_MINS)
