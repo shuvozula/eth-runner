@@ -17,7 +17,7 @@ class LmSensorsWatchdog(Watchdog):
   TODO: Add more checks as required, eg: CPU core temperatures, etc.
   """
 
-  def __init__(self, exit_flag_event, timeout_seconds):
+  def __init__(self, exit_flag_event, timeout_seconds=60):
     super(LmSensorsWatchdog, self).__init__(exit_flag_event, timeout_seconds)
     LOG.info("LmSensors-Watchdog started!")
 
