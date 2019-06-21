@@ -22,7 +22,7 @@ else
   echo "Launching Ethminer-ATI...."
 
   nohup $ETHMINER_PATH/ethminer \
-    --pool stratum://$ACCOUNT.miner@us1.ethpool.org:3333 \
+    --pool stratum://$ACCOUNT.miner@us2.ethermine.org:4444 \
     --opencl \
     --report-hashrate \
     --farm-recheck 15000 \

@@ -23,7 +23,7 @@ else
 
   # Use the Cuda drivers for mining
   nohup $ETHMINER_PATH/ethminer \
-    --pool stratum://$ACCOUNT.miner@us1.ethpool.org:3333 \
+    --pool stratum://$ACCOUNT.miner@us2.ethermine.org:4444 \
     --cuda \
     --report-hashrate \
     --farm-recheck 15000 \
