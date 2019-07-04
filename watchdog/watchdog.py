@@ -33,7 +33,7 @@ class Watchdog(object):
       self.switch_off_miner(wake_timeout_mins)
 
   def switch_off_miner_underpowered(self, wake_timeout_mins):
-    self.power_switchoff_threshold -=1
+    self.power_switchoff_threshold -= 1
     if self.power_switchoff_threshold <= 0:
       self.switch_off_miner(wake_timeout_mins)
 
@@ -53,4 +53,4 @@ class Watchdog(object):
 
     LOG.warn('Going to sleep for %d minutes...', wake_timeout_mins)
     time.sleep(30)
-    os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins * 60))
+    os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins))
