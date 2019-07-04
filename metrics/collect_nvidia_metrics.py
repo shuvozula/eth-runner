@@ -18,7 +18,7 @@ import time
 
 
 DEVICE_NAME_FORMAT = 'nvidia.gpu.%d'
-PERIOD_SECS = 0.5
+PERIOD_SECS = 30
 
 
 class NvidiaMetrics(AbstractMetricsCollector):
