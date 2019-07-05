@@ -54,6 +54,7 @@ class AbstractMetricsCollector(threading.Thread):
 
       LOG.info('Exiting %s data collection...', self)
 
-    except Exception:
-      LOG.exception('Suffered a critical error while collecting metrics and monitoring!')
+    except Exception as e:
+      LOG.exception('Suffered a critical error! Switching off miner for {} seconds\n{}'.format(
+        _WAKEUP_SLEEP_SECONDS, e))
       self._watchdog.switch_off_miner(_WAKEUP_SLEEP_SECONDS)

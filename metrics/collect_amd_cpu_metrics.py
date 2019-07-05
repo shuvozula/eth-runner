@@ -8,7 +8,7 @@ import sensors
 import time
 
 
-_PERIOD_SECONDS = 0.5
+_PERIOD_SECONDS = 30
 
 
 class LmSensorsMetrics(AbstractMetricsCollector):
