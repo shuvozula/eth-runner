@@ -53,4 +53,4 @@ class Watchdog(object):
 
     LOG.warn('Going to sleep for %d minutes...', wake_timeout_mins)
     time.sleep(30)
-    os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins))
+    os.system('sudo rtcwake -m off -s {}'.format(wake_timeout_mins * 60))
