@@ -1,0 +1,13 @@
+FROM nvidia/cuda:10.0-base
+
+ADD docker/ /docker
+ADD nvidia/ /nvidia
+
+# Enable Xorg with nvidia gpus and tune their memory and power clocks
+RUN nvidia/enable_nvidia.sh
+RUN nvidia/tune_nvidia.sh
+
+# Install the ethminer binary
+RUN docker/ethminer-install.sh
+
+ENTRYPOINT ["nvidia/run_nvidia.sh"]
