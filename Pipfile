@@ -8,8 +8,8 @@ name = "pypi"
 [packages]
 influxdb = ">=5.2.0"
 nvidia-ml-py = "==375.53"
-PySensors = "==0.0.3"
+PySensors = "==0.0.4"
 PyYAML = ">=3.13"
 
 [requires]
-python_version = "2.7"
+python_version = "3.8.5"
