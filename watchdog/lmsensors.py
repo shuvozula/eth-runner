@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from watchdog import Watchdog
 from log.log import LOG
+from watchdog import Watchdog
+
 
 # Maximum heat limit per AMD GPU allowed
 HEAT_LIMIT = 70
@@ -10,14 +11,14 @@ HEAT_LIMIT = 70
 SLEEP_TIMEOUT_MINS = 20
 
 
-class LmSensorsWatchdog(Watchdog):
+class LmSensors(Watchdog):
     """
     Monitors the AMD GPUs and their temperatures to make sure they dont overheat.
     TODO: Add more checks as required, eg: CPU core temperatures, etc.
     """
 
     def __init__(self, exit_flag_event):
-        super(LmSensorsWatchdog, self).__init__(exit_flag_event)
+        super(LmSensors, self).__init__(exit_flag_event)
         LOG.info("LmSensors-Watchdog started!")
 
     def do_monitor(self, data_list):

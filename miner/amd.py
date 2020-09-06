@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from miner.ethminer import EthMiner
 from log.log import LOG
+from miner import EthMiner
 
 
 class AmdEthMiner(EthMiner):
@@ -19,20 +19,13 @@ class AmdEthMiner(EthMiner):
         LOG.info("Nothing to tune for AMD GPUs as its already flashed with overclocked ROM...")
 
     def _get_run_script(self):
-        return """nohup {path}/ethminer \
-              --farm-recheck {farm_recheck} \
-              -SC {stratum_client_version} \
-              --opencl-platform {opencl_platform_id} \
+        return f"""nohup {self.props['ethminer']['path']}/ethminer \
+              --farm-recheck {self.props['ethminer']['farm_recheck']} \
+              -SC {self.props['ethminer']['stratum_client_version']} \
+              --opencl-platform {self.props['ethminer']['amd']['opencl_platform_id']} \
               -RH \
               -G \
-              -S {stratum} \
-              -FS {stratum_failover} \
-              -O {account}
-            """.format(
-                    path=self.props['ethminer']['path'],
-                    farm_recheck=self.props['ethminer']['farm_recheck'],
-                    stratum_client_version=self.props['ethminer']['stratum_client_version'],
-                    opencl_platform_id=self.props['ethminer']['amd']['opencl_platform_id'],
-                    stratum=self.props['ethminer']['stratum'],
-                    stratum_failover=self.props['ethminer']['stratum_failover'],
-                    account=self._get_account_id())
+              -S {self.props['ethminer']['stratum']} \
+              -FS {self.props['ethminer']['stratum_failover']} \
+              -O {self._get_account_id()}
+            """

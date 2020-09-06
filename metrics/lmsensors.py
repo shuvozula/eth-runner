@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
-from log.log import LOG
-from metrics_collector import AbstractMetricsCollector
-from watchdog.lmsensors_watchdog import LmSensorsWatchdog
+import time
 
 import sensors
-import time
+
+from log.log import LOG
+from metrics import AbstractMetricsCollector
+from watchdog.lmsensors import LmSensors
+
 
 _PERIOD_SECONDS = 0.5
 
@@ -22,7 +24,7 @@ class LmSensorsMetrics(AbstractMetricsCollector):
         """
         super(LmSensorsMetrics, self).__init__(
             influxdb_client=influxdb_client,
-            watchdog=LmSensorsWatchdog(exit_flag_event),
+            watchdog=LmSensors(exit_flag_event),
             exit_flag_event=exit_flag_event
         )
 

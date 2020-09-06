@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
-import coloredlogs
 import logging
 import logging.handlers
+
+import coloredlogs
+
 
 LOG = logging.getLogger()
 LOG.setLevel(logging.DEBUG)

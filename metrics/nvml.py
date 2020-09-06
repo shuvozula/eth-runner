@@ -1,17 +1,19 @@
 #!/usr/bin/env python
 
-from metrics_collector import AbstractMetricsCollector
+import time
+
 from pynvml import (
+    NVML_TEMPERATURE_GPU,
     nvmlDeviceGetCount,
+    nvmlDeviceGetFanSpeed,
     nvmlDeviceGetHandleByIndex,
     nvmlDeviceGetPowerUsage,
-    nvmlDeviceGetFanSpeed,
     nvmlDeviceGetTemperature,
-    NVML_TEMPERATURE_GPU,
 )
-from watchdog.nvidia_watchdog import NvidiaWatchdog
 
-import time
+from metrics import AbstractMetricsCollector
+from watchdog.nvidia import Nvidia
+
 
 DEVICE_NAME_FORMAT = 'nvidia.gpu.%d'
 PERIOD_SECS = 0.5
@@ -30,7 +32,7 @@ class NvidiaMetrics(AbstractMetricsCollector):
         """
         super(NvidiaMetrics, self).__init__(
             influxdb_client=influxdb_client,
-            watchdog=NvidiaWatchdog(exit_flag_event),
+            watchdog=Nvidia(exit_flag_event),
             exit_flag_event=exit_flag_event
         )
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-from miner.ethminer import EthMiner
-from log.log import LOG
 from pynvml import nvmlDeviceGetCount
+
+from log.log import LOG
+from miner import EthMiner
 
 
 class NvidiaEthMiner(EthMiner):
@@ -21,16 +22,16 @@ class NvidiaEthMiner(EthMiner):
 
         self._run_subprocess('nvidia-xconfig --enable-all-gpus')
 
-        self._run_subprocess("""nvidia-xconfig -a \
-                --cool-bits={cool_bits} \
-                --allow-empty-initial-configuration""".format(cool_bits=tuner_props['cool_bits']))
+        self._run_subprocess(f"""nvidia-xconfig -a \
+                --cool-bits={tuner_props['cool_bits']} \
+                --allow-empty-initial-configuration""")
 
     def _tune_nvidia_gpus(self, tuner_props):
         LOG.info('Tuning Nvidia GPUs...')
         LOG.info(''.join(['='] * 43))
-        LOG.info('Overclocking GPU Memory to ......... {mem_overclock}MHz'.format(**tuner_props))
-        LOG.info('Overclocking GPU Processor to ...... {gpu_overclock}MHz'.format(**tuner_props))
-        LOG.info('Under-powering to .................. {power_underclock}Watts'.format(**tuner_props))
+        LOG.info(f"Overclocking GPU Memory to ........ {tuner_props['mem_overclock']}MHz")
+        LOG.info(f"Overclocking GPU Processor to ...... {tuner_props['gpu_overclock']}MHz")
+        LOG.info(f"Under-powering to .................. {tuner_props['power_underclock']}Watts")
         LOG.info(''.join(['='] * 43))
 
         gpu_overclock_args = []
@@ -38,23 +39,17 @@ class NvidiaEthMiner(EthMiner):
         LOG.info('Tuning down power consumption...')
         for gpu_num in iter(nvmlDeviceGetCount()):
             # underclock the GPU power
-            self._run_subprocess('nvidia-smi -i {gpu_num} -pl {power}'.format(
-                    gpu_num=gpu_num,
-                    power=tuner_props['power_underclock']))
+            self._run_subprocess(f"nvidia-smi -i {gpu_num} -pl {tuner_props['power_underclock']}")
 
-            gpu_overclock_args.append(' \
-                --assign [gpu:{gpu_num}]/GPUGraphicsClockOffset[3]={gpu_overclock} \
-                --assign [gpu:{gpu_num}]/GPUMemoryTransferRateOffset[3]={mem_overclock}'.format(
-                        gpu_num=gpu_num,
-                        gpu_overclock=tuner_props['gpu_overclock'],
-                        mem_overclock=tuner_props['mem_overclock']))
+            gpu_overclock_args.append(f" \
+                --assign [gpu:{gpu_num}]/GPUGraphicsClockOffset[3]={tuner_props['gpu_overclock']} \
+                --assign [gpu:{gpu_num}]/GPUMemoryTransferRateOffset[3]={tuner_props['mem_overclock']}")
 
         # overclock the memory and underclock the processor
         LOG.info('Overclocking Nvidia GPU memory & processor...')
-        self._run_subprocess('DISPLAY=:0 \
+        self._run_subprocess(f"DISPLAY=:0 \
               XAUTHORITY=/var/run/lightdm/root/:0 \
-              nvidia-settings {overclock_args}'.format(
-                    overclock_args=''.join(gpu_overclock_args)))
+              nvidia-settings {''.join(gpu_overclock_args)}")
 
     def _tune_gpus(self):
         tuner_props = self.props['ethminer']['nvidia']['tuner']
@@ -62,24 +57,20 @@ class NvidiaEthMiner(EthMiner):
         self._tune_nvidia_gpus(tuner_props)
 
     def _get_run_script(self):
-        return """nohup {path}/ethminer \
-              --farm-recheck {farm_recheck} \
-              -SC {stratum_client_version} \
+        return f"""nohup {self.props['ethminer']['path']}/ethminer \
+                --pool stratum://{self._get_account_id()}.miner@{self.props['ethminer']['stratum']} \
+                --cuda \
+                --report-hashrate \
+                --farm-recheck {self.props['ethminer']['farm_recheck']} \
+
+              --farm-recheck {self.props['ethminer']['farm_recheck']} \
+              -SC {self.props['ethminer']['stratum_client_version']} \
               -RH \
-              --cuda-parallel-hash {cuda_parallel_hash} \
-              --cuda-schedule {cuda_schedule} \
-              --cuda-devices {cuda_devices} \
+              --cuda-parallel-hash {self.props['ethminer']['nvidia']['run']['cuda_parallel_hash']} \
+              --cuda-schedule {self.props['ethminer']['nvidia']['run']['cuda_schedule']} \
+              --cuda-devices {' '.join(iter(nvmlDeviceGetCount()))} \
               -U \
-              -S {stratum} \
-              -FS {stratum_failover} \
-              -O {account}
-            """.format(
-                    path=self.props['ethminer']['path'],
-                    farm_recheck=self.props['ethminer']['farm_recheck'],
-                    stratum_client_version=self.props['ethminer']['stratum_client_version'],
-                    cuda_parallel_hash=self.props['ethminer']['nvidia']['run']['cuda_parallel_hash'],
-                    cuda_schedule=self.props['ethminer']['nvidia']['run']['cuda_schedule'],
-                    cuda_devices=' '.join(iter(nvmlDeviceGetCount())),
-                    stratum=self.props['ethminer']['stratum'],
-                    stratum_failover=self.props['ethminer']['stratum_failover'],
-                    account=self._get_account_id())
+              -S {self.props['ethminer']['stratum']} \
+              -FS {self.props['ethminer']['stratum_failover']} \
+              -O {self._get_account_id()}
+            """

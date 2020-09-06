@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from watchdog import Watchdog
 from log.log import LOG
+from watchdog import Watchdog
+
 
 # Minimum power consumed by Nvidia device (Watts), below which something suspicious
 # is happening and miners need to be rebooted
@@ -15,7 +16,7 @@ HEATAGE_SLEEP_TIMEOUT_MINS = 20
 WATTAGE_SLEEP_TIMEOUT_MINS = 5
 
 
-class NvidiaWatchdog(Watchdog):
+class Nvidia(Watchdog):
     """
     Monitors the NVIDIA GPU's temperature and power-consumption.
     The moment the temperature goes above the specified threshold or
@@ -23,7 +24,7 @@ class NvidiaWatchdog(Watchdog):
     """
 
     def __init__(self, exit_flag_event):
-        super(NvidiaWatchdog, self).__init__(exit_flag_event)
+        super(Nvidia, self).__init__(exit_flag_event)
         LOG.info("Nvidia-Watchdog started!")
 
     def do_monitor(self, data_list):

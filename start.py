@@ -1,24 +1,21 @@
 #!/usr/bin/env python
 
 import argparse
-import signal
-import threading
 import os
+import signal
 import sys
+import threading
 import time
-import yaml
 
+import yaml
 from influxdb import InfluxDBClient
-from log.log import logging_init
-from log.log import LOG
-from miner.nvidia import NvidiaEthMiner
-from miner.amd import AmdEthMiner
+from pynvml import nvmlInit, nvmlShutdown
+
+from log.log import LOG, logging_init
 from metrics.lmsensors import LmSensorsMetrics
 from metrics.nvml import NvidiaMetrics
-from pynvml import (
-    nvmlInit,
-    nvmlShutdown
-)
+from miner.amd import AmdEthMiner
+from miner.nvidia import NvidiaEthMiner
 
 
 class EthRunner(object):
@@ -91,7 +88,7 @@ class EthRunner(object):
         2. Start the miner threads (ethminer) for all GPUs (Nvidia and AMD).
         3. Start the metrics collectors (NvidiaMetrics and LmSensorsMetrics).
         """
-        start_pause = long(self.props['ethrunner']['start_pause_seconds'])
+        start_pause = float(self.props['ethrunner']['start_pause_seconds'])
         LOG.info('Sleeping for %d seconds before mining...', start_pause)
         time.sleep(start_pause)
 
@@ -134,7 +131,7 @@ class EthRunner(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--props', help="""
-        Specify the path to where the app.yml configuration-file exists. Use the 
+        Specify the path to where the app.yml configuration-file exists. Use the
         metrics/apps.yml.sample to create an app.yml
         """)
     args = parser.parse_args()
