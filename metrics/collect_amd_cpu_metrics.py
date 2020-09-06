@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from log.log import LOG
-from metrics_collector import AbstractMetricsCollector
+from metrics.metrics_collector import AbstractMetricsCollector
 from watchdog.lmsensors_watchdog import LmSensorsWatchdog
 
 import sensors
