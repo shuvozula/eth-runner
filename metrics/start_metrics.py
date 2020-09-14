@@ -24,10 +24,11 @@ class MetricsRunner(object):
   def __init__(self):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
+    signal.signal(signal.SIGKILL, self._kill_callback)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--props', help="""
-        Specify the path to where the app.yml configuration-file exists. Use the 
+        Specify the path to where the app.yml configuration-file exists. Use the
         metrics/apps.yml.sample to create an app.yml
         """)
     args = parser.parse_args()
