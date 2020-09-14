@@ -5,8 +5,8 @@ import sys
 import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from collect_amd_cpu_metrics import LmSensorsMetrics
-from collect_nvidia_metrics import NvidiaMetrics
+from metrics.collect_amd_cpu_metrics import LmSensorsMetrics
+from metrics.collect_nvidia_metrics import NvidiaMetrics
 from influxdb import InfluxDBClient
 
 from log.log import logging_init
@@ -24,7 +24,6 @@ class MetricsRunner(object):
   def __init__(self):
     signal.signal(signal.SIGINT, self._kill_callback)
     signal.signal(signal.SIGTERM, self._kill_callback)
-    signal.signal(signal.SIGKILL, self._kill_callback)
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--props', help="""
