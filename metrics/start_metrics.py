@@ -5,8 +5,8 @@ import sys
 import os.path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from collect_amd_cpu_metrics import LmSensorsMetrics
-from collect_nvidia_metrics import NvidiaMetrics
+from metrics.collect_amd_cpu_metrics import LmSensorsMetrics
+from metrics.collect_nvidia_metrics import NvidiaMetrics
 from influxdb import InfluxDBClient
 
 from log.log import logging_init
@@ -27,7 +27,7 @@ class MetricsRunner(object):
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--props', help="""
-        Specify the path to where the app.yml configuration-file exists. Use the 
+        Specify the path to where the app.yml configuration-file exists. Use the
         metrics/apps.yml.sample to create an app.yml
         """)
     args = parser.parse_args()

@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e90b83ccbb0d54c3e03c18073e11b92f44175f1b2359c39189ae683c3b964535"
+            "sha256": "0bc6cd7983888e63d4303e7ecd4496d1df573ed98b911b82e231a766f204759c"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "2.7"
+            "python_version": "3.8.5"
         },
         "sources": [
             {
@@ -67,19 +67,19 @@
             ],
             "version": "==0.6.1"
         },
-        "nvidia-ml-py": {
+        "nvidia-ml-py3": {
             "hashes": [
-                "sha256:0167a6acff2cb8b21195685da1c4e862c73c5201d06e36f48d5eeb9d1868e28f"
+                "sha256:390f02919ee9d73fe63a98c73101061a6b37fa694a793abf56673320f1f51277"
             ],
             "index": "pypi",
-            "version": "==375.53"
+            "version": "==7.352.0"
         },
         "pysensors": {
             "hashes": [
-                "sha256:b735dada5318ce50f2d141d29b102e7a116a5934509583f86302d4b59399e961"
+                "sha256:beb0def410d29ee46fe196a7811124772abf84cbe3a0d8b01d80b81fba31dae5"
             ],
             "index": "pypi",
-            "version": "==0.0.3"
+            "version": "==0.0.4"
         },
         "python-dateutil": {
             "hashes": [
