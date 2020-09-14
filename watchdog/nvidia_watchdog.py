@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from watchdog.watchdog import Watchdog
+from watchdog import Watchdog
 from log.log import LOG
 
 

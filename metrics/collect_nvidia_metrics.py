@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from log.log import LOG
-from metrics_collector import AbstractMetricsCollector
+from metrics import AbstractMetricsCollector
 from pynvml import (
   nvmlInit,
   nvmlShutdown,
