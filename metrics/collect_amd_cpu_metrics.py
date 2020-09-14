@@ -44,10 +44,10 @@ class LmSensorsMetrics(AbstractMetricsCollector):
     amdgpu_count = 0
     json_body = []
     for chip in sensors.iter_detected_chips():
-      if str(chip.prefix) == 'amdgpu':
+      if chip.prefix == b'amdgpu':
         json_body.append(self._collect_amd_gpu_metrics(chip, amdgpu_count))
         amdgpu_count += 1
-      elif str(chip.prefix) == 'coretemp':
+      elif chip.prefix == b'coretemp':
         json_body.append(self._collect_cpu_metrics(chip))
       time.sleep(_PERIOD_SECONDS)
 
