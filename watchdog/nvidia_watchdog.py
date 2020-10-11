@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import time
+
 from watchdog import Watchdog
 from log.log import LOG
 
@@ -15,6 +17,11 @@ HEAT_LIMIT = 78
 HEATAGE_SLEEP_TIMEOUT_MINS = 20
 WATTAGE_SLEEP_TIMEOUT_MINS = 5
 
+PERIOD_SECS = 5  # seconds
+
+MAX_HEATAGE_TOLERANCE = 5
+MAX_POWER_TOLERANCE = 5
+
 
 class NvidiaWatchdog(Watchdog):
   """
@@ -26,6 +33,8 @@ class NvidiaWatchdog(Watchdog):
   def __init__(self, exit_flag_event, timeout_seconds=120):
     super(NvidiaWatchdog, self).__init__(exit_flag_event, timeout_seconds)
     LOG.info("Nvidia-Watchdog started!")
+    self.heatage_tolerance = 0
+    self.power_tolerance = 0
 
   def do_monitor(self, data_list):
     for data in data_list:
@@ -34,11 +43,21 @@ class NvidiaWatchdog(Watchdog):
       power_usage = int(data['fields']['power_usage'])
 
       if temperature > HEAT_LIMIT:
-        LOG.error('Current temperature of Nvidia GPU-%s is %d > %d! Killing all miners...',
-            device_name, temperature, HEAT_LIMIT)
-        self.switch_off_miner_overheat(HEATAGE_SLEEP_TIMEOUT_MINS)
+        if self.heatage_tolerance > MAX_HEATAGE_TOLERANCE:
+          LOG.error('Current temperature of Nvidia GPU-%s is %d > %d! Killing all miners...',
+              device_name, temperature, HEAT_LIMIT)
+          self.switch_off_miner_overheat(HEATAGE_SLEEP_TIMEOUT_MINS)
+        else:
+          self.heatage_tolerance += 1
 
       if power_usage < POWER_LIMIT:
-        LOG.error('Current power usage from Nvidia GPU-%s is %d < %d! Killing all miners...',
-            device_name, power_usage, POWER_LIMIT)
-        self.switch_off_miner_underpowered(WATTAGE_SLEEP_TIMEOUT_MINS)
+        if self.power_tolerance > MAX_POWER_TOLERANCE:
+          LOG.error('Current power usage from Nvidia GPU-%s is %d < %d! Killing all miners...',
+              device_name, power_usage, POWER_LIMIT)
+          self.switch_off_miner_underpowered(WATTAGE_SLEEP_TIMEOUT_MINS)
+        else:
+          self.power_tolerance += 1
+
+      time.sleep(PERIOD_SECS)
+
+
