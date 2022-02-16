@@ -1,7 +1,7 @@
 #!/bin/bash
 
-GPU_OVERCLOCK=0
-MEM_OVERCLOCK=1000
+GPU_OVERCLOCK=115
+MEM_OVERCLOCK=850
 POWER=110
 
 # ----------------------- Do not edit below this line --------------------------

@@ -20,6 +20,7 @@ else
   # For fetching list of Nvidia GPUs from headless Ubuntu server
   GPUS=$(sudo DISPLAY=:0 XAUTHORITY=/var/run/lightdm/root/:0 nvidia-settings -c :0 -q gpus)
   GPUS=$(echo $GPUS | grep -o "\[[0-9]*\]" | grep -o "[0-9]*" | tr '\n' ' ')
+  #GPUS=$(ethminer --list-devices | grep 1070 | awk '{print $1}' ORS=' ')
 
   # Use the Cuda drivers for mining
   nohup $ETHMINER_PATH/ethminer \
@@ -28,7 +29,6 @@ else
     --report-hashrate \
     --farm-recheck 15000 \
     --display-interval 30 \
-    --cuda-parallel-hash 4 \
     --cuda-schedule sync \
     --cuda-devices $GPUS \
     --dag-load-mode 1 \

@@ -10,7 +10,6 @@ pipenv_home="/home/shuvo/.local/bin"
 
 start_pause=30
 echo "Sleeping for $start_pause seconds before starting mining...."
-
 sleep $start_pause
 
 for arg in "$@"; do
@@ -23,8 +22,8 @@ for arg in "$@"; do
 
         echo "Starting FluentD collector..."
         docker stop fluent-logger
-        docker build -t fluentd fluentd/.
-        docker run -it -d --rm --name fluent-logger -v /var/log:/fluentd/log fluentd:latest
+        docker build -t fluent-logger-img fluentd/.
+        docker run -it -d --rm --name fluent-logger -v /var/log:/fluentd/log fluent-logger-img:latest
         ;;
   esac
 done
@@ -43,5 +42,5 @@ echo "Pausing...."
 sleep 2
 
 echo "Starting the Ethminers...."
-sudo sh $my_dir/amd/run_amd.sh && sleep 30
+sudo sh $my_dir/amd/run_amd.sh && sleep 60
 sudo sh $my_dir/nvidia/run_nvidia.sh && sleep 120

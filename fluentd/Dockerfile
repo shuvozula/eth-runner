@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v1.5-1
+FROM fluent/fluentd:v1.14-1
 MAINTAINER shuvozula@gmail.com
 
 USER root
