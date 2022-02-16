@@ -49,7 +49,7 @@ class AbstractMetricsCollector(threading.Thread):
         self._influxdb_client.write_points(json_body)
 
         # monitor the data for any abnormalities in the AMD GPUs
-        self._watchdog.monitor(json_body)
+        #self._watchdog.monitor(json_body)
 
         time.sleep(_EPOCH_SLEEP_SECONDS)
 
@@ -58,4 +58,4 @@ class AbstractMetricsCollector(threading.Thread):
     except Exception as e:
       LOG.exception('Suffered a critical error! Switching off miner for {} seconds\n{}'.format(
         _WAKEUP_SLEEP_SECONDS, e))
-      self._watchdog.switch_off_miner(_WAKEUP_SLEEP_SECONDS)
+      #self._watchdog.switch_off_miner(_WAKEUP_SLEEP_SECONDS)

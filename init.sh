@@ -2,6 +2,7 @@
 
 # Provide the absolute path to the ethminer bin/ directory, eg: /etc/ethminer/bin/
 ETHMINER_PATH=/usr/local/bin
+export NO_COLOR=1
 
 # ----------------------- Do not edit below this line --------------------------
 

@@ -27,8 +27,7 @@ else
     --report-hashrate \
     --farm-recheck 15000 \
     --display-interval 30 \
-    --opencl-platform $AMD_OPENCL_PLATFORM_ID \
-    --cl-parallel-hash 8 \
+    --cl-devices 1 3 6 10 \
     --dag-load-mode 1 \
     >> /var/log/ati_miner.log 2>&1 </dev/null & echo $! > /var/log/ati_miner.pid & sleep 2
 fi
